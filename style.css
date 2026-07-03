@@ -89,7 +89,18 @@ body{
     border: 3px solid #000;
 }
 
+.personality{
+    margin: 20px;
+    height: 50vh;
+    background-color: #71c6ff;
 
+    transition : all 0.3s ease
+}
+
+.personality:hover{
+    color: #71c6ff;
+    background-color: black;
+}
 
 .footer{
     background-color: #000;
