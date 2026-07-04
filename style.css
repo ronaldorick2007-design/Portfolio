@@ -103,9 +103,18 @@ body{
     transition : all 0.3s ease
 }
 
+.projects{
+    display: flex;
+    padding: 20px;
+    height: 50vh;
+    gap: 20px;
+    justify-content : space-between
+}
 
-
-
+.projects .project-card{
+    flex: 1;
+    background-color : #89FC00;
+}
 
 .Hover:hover{
     box-shadow: 10px 10px #000;
