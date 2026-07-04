@@ -9,6 +9,7 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: #fff8e8;
 }
 
 .header{
@@ -18,6 +19,10 @@ body{
     justify-content: space-between;
     align-items: center;
     padding: 10px;
+}
+
+.header #logo span{
+    color :aqua;
 }
 
 .header .nav{
@@ -49,15 +54,12 @@ body{
 }
 
 .intro .welcomeText{
-    flex: 3;
-    padding-right: 20px;
-    background-color: #fa6262;
+    flex: 6;
 }
-
 .intro .profileImage{
-    flex: 1;
+    flex: 4;
     padding-right: 20px;
-    background-color: #ff4a4a;
+    background-color: #ff0048;
 }
 
 .content{
@@ -70,36 +72,44 @@ body{
 .content #about{
     flex: 2;
     padding-right: 20px;
-    background-color: #faf762;
+    background-color: #f8ff2b;
 }
 
 .content .sidebar{
     flex: 2;
     padding-right: 20px;
-    background-color: #fdfa43;
+    background-color: #f8ff2b;
 }
 
 .alignText{
     padding: 20px;
     text-align: center;
     display: flex;
+    font-size: 1.2rem;
+    font-weight: 600;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border: 3px solid #000;
+
+    transition: all 0.3s ease;
 }
 
 .personality{
     margin: 20px;
     height: 50vh;
-    background-color: #71c6ff;
+    background-color: #36deff;
 
     transition : all 0.3s ease
 }
 
-.personality:hover{
-    color: #71c6ff;
-    background-color: black;
+
+
+
+
+.Hover:hover{
+    box-shadow: 10px 10px #000;
+    transform: scale(0.95);
 }
 
 .footer{
