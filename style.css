@@ -55,7 +55,36 @@ body{
 
 .intro .welcomeText{
     flex: 6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 3px solid #000;
+    background-color: #ff4974;
+    transition: all 0.3s ease;
 }
+
+.welcomeText h1, h2 span{
+    margin-top:-20px;
+    font-size: 3rem;
+    font-weight: 1000;
+}
+.welcomeText h2{
+    margin-top:-40px
+}
+
+.welcomeText button{
+    font-size: 32px;
+    background-color: #ff4974;
+    border:1px solid #000;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+.welcomeText button:hover{
+    background-color: #000;
+    color: #fff;
+}
+
 .intro .profileImage{
     flex: 4;
     padding-right: 20px;
