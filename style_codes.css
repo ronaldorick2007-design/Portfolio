@@ -46,60 +46,26 @@ body{
     background-color: #fff;
 }
 
-.intro{
-    display: flex;
-    padding: 20px;
-    gap: 20px;
-    height: 80vh;
-}
-
-.intro .welcomeText{
-    flex: 6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    border: 3px solid #000;
-    background-color: #ff4974;
-    transition: all 0.3s ease;
-}
-
-.welcomeText h1, h2 span{
-    margin-top:-20px;
-    font-size: 3rem;
-    font-weight: 1000;
-}
-.welcomeText h2{
-    margin-top:-40px
-}
-
-.welcomeText button{
-    font-size: 32px;
-    background-color: #ff4974;
-    border:1px solid #000;
-    transition: all 0.3s ease;
-    border-radius: 10px;
-}
-.welcomeText button:hover{
-    background-color: #000;
-    color: #fff;
-}
-
-.intro .profileImage{
-    flex: 4;
-    padding-right: 20px;
-    background-color: #ff0048;
-}
-
 .content{
-    display: flex;
-    padding: 20px;
-    gap: 20px;
+    display:flex;
+    flex-direction: column;
+    margin: 20px;
+    height: 82vh;
+
+    transition : all 0.3s ease;
+}
+#Title{
+    height:20px;
+    padding:10px;
+    background-color:#ffb52b
+}
+.content-inner{
+    display:flex;
     height: 82vh;
 }
 
 .content #about{
-    flex: 2;
+    flex: 1;
     padding-right: 20px;
     background-color: #f8ff2b;
 }
@@ -122,27 +88,6 @@ body{
     border: 3px solid #000;
 
     transition: all 0.3s ease;
-}
-
-.personality{
-    margin: 20px;
-    height: 50vh;
-    background-color: #36deff;
-
-    transition : all 0.3s ease
-}
-
-.projects{
-    display: flex;
-    padding: 20px;
-    height: 50vh;
-    gap: 20px;
-    justify-content : space-between
-}
-
-.projects .project-card{
-    flex: 1;
-    background-color : #89FC00;
 }
 
 .Hover:hover{
