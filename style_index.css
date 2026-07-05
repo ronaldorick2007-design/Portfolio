@@ -1,0 +1,157 @@
+html{
+    scroll-behavior: smooth;
+}
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'JetBrains Mono', monospace;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #fff8e8;
+}
+
+.header{
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.header #logo span{
+    color :aqua;
+}
+
+.header .nav{
+    margin-left: 20px;
+    display :flex;
+    gap: 20px;
+}
+
+.header .nav a{
+    color: #fff;
+    text-decoration: none;
+    border : 1px solid #fff;
+    padding: 5px 10px;
+    text-decoration: none;
+
+    transition: all 0.3s ease;
+}
+
+.header .nav a:hover{
+    color: #000;
+    background-color: #fff;
+}
+
+.intro{
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+    height: 80vh;
+}
+
+.intro .welcomeText{
+    flex: 6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 3px solid #000;
+    background-color: #ff4974;
+    transition: all 0.3s ease;
+}
+
+.welcomeText h1, h2 span{
+    margin-top:-20px;
+    font-size: 3rem;
+    font-weight: 1000;
+}
+.welcomeText h2{
+    margin-top:-40px
+}
+
+.welcomeText button{
+    font-size: 32px;
+    background-color: #ff4974;
+    border:1px solid #000;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+.welcomeText button:hover{
+    background-color: #000;
+    color: #fff;
+}
+
+.intro .profileImage{
+    flex: 4;
+    padding-right: 20px;
+    background-color: #ff0048;
+}
+
+.content{
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+    height: 82vh;
+}
+
+.content #about{
+    flex: 2;
+    padding-right: 20px;
+    background-color: #f8ff2b;
+}
+
+.content .sidebar{
+    flex: 2;
+    padding-right: 20px;
+    background-color: #f8ff2b;
+}
+
+.alignText{
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    font-size: 1.2rem;
+    font-weight: 600;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #000;
+
+    transition: all 0.3s ease;
+}
+
+.personality{
+    margin: 20px;
+    height: 50vh;
+    background-color: #36deff;
+
+    transition : all 0.3s ease
+}
+
+.projects{
+    display: flex;
+    padding: 20px;
+    height: 50vh;
+    gap: 20px;
+    justify-content : space-between
+}
+
+.projects .project-card{
+    flex: 1;
+    background-color : #89FC00;
+}
+
+.Hover:hover{
+    box-shadow: 10px 10px #000;
+    transform: scale(0.95);
+}
+
+.footer{
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+}
