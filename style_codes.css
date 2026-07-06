@@ -112,7 +112,15 @@ body{
     grid-template-columns: repeat(50, 18px);
     gap: 10px;
 }
-
+.Dot{
+    color: white;
+    text-align: center;
+    width: 18px;
+    height: 18px;
+    /* border-radius: 50%; */
+    transition: 0.25s;
+    background-color: #28c840;
+}
 
 
 .window{
