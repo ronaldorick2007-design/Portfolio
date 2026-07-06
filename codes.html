@@ -155,11 +155,28 @@ add(1,2);</code></pre>
   <div class="dotdisplay">
     <div id="dotgrid"></div>
   </div>
-
+  
   <footer class="footer">
     <h1 >Thank you</h1>
   </footer>
 
+  <script>
 
+    const dotgrid = document.getElementById("dotgrid");
+    for (let i = 0; i < 400; i++) {
+      dotgrid.innerHTML += "<div class='Dot'>0</div>"      
+    }
+    const dots = document.querySelectorAll(".Dot");
+    setInterval(() => {
+      dots.forEach(dot => {
+        if(Math.random() < 0.8){
+        dot.textContent = dot.textContent==="1" ? "0" : "1";
+        dot.style.background = dot.style.background==="green" ? "#27ff47" : "green";
+      }
+      })
+    }, 250);
+
+
+  </script> 
 </body>
 </html>
