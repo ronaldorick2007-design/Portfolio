@@ -93,7 +93,6 @@ add(1,2);</code></pre>
     <div class="content-inner">
       <div id="about" class="alignText">
         <div class="dotdisplay">
-    <h2>Linear Search</h2>
     <div id="dotgrid2"></div>
     <p id="dis"></p>
   </div>
@@ -188,8 +187,9 @@ add(1,2);</code></pre>
       })
     }, 250);
 
-    let A = [1, 2, 3, 4, 5]
+    let A = [1, 4, 2, 5, 3]
     const grid1 = document.getElementById("dotgrid2");
+    const p = document.getElementById("dis");
     grid1.style.gridTemplateColumns = `repeat(${A.length},1fr)`;
     const DotGrid = []
     for (let i = 0; i < A.length; i++) {
@@ -208,19 +208,20 @@ function sleep(ms){
 async function looper(target) {
   for (let i = 0; i < DotGrid.length; i++) {
     DotGrid[i].classList.add("active");
-    await sleep(100);
+    await sleep(1000);
     DotGrid[i].classList.remove("active");
 
     if(DotGrid[i].textContent === target){
       DotGrid[i].classList.add("match");
-    await sleep(500);
+      p.innerText = "Found!"
+    await sleep(1500);
     DotGrid[i].classList.remove("match");
     return
     }
   }
 }
 
-looper("3")
+looper("2")
 
   </script> 
 </body>
