@@ -88,12 +88,15 @@ add(1,2);</code></pre>
   
   <div class="content Hover">
     <div id="Title" class="alignText">
-      <h2>Hello World!</h2>
+      <h2>Linear Search</h2>
     </div>
     <div class="content-inner">
       <div id="about" class="alignText">
-      <h2>Code Snippets</h2>
-      <p>This section is for showcasing code snippets.</p>
+        <div class="dotdisplay">
+    <h2>Linear Search</h2>
+    <div id="dotgrid2"></div>
+    <p id="dis"></p>
+  </div>
     </div>
       <div class="sidebar alignText">
         <h3>Sidebar</h3>
@@ -108,10 +111,17 @@ add(1,2);</code></pre>
                 </div>
                 <button id="copy">Copy</button>
             </div>
-  <pre><code id="code">function hello(){
-    console.log("Hello World");
+  <pre><code id="code">function linearSearch(arr, target){
+    N = arr.length;
+    for(let i = 0; i < N; i++ ){
+      if(arr[i] == target){
+        return i;
+      }
+    return -1;
+    }
   }
-hello();</code></pre>
+A = [1, 4, 2, 5, 3]
+linearSearch(A, 2);</code></pre>
         </div>
 
       </div>
@@ -153,15 +163,17 @@ add(1,2);</code></pre>
   </div>
 
   <div class="dotdisplay">
-    <div id="dotgrid"></div>
+    <h2>Matrix</h2>
+    <div id="dotgrid">
+    </div>
   </div>
-  
+
+
   <footer class="footer">
     <h1 >Thank you</h1>
   </footer>
 
   <script>
-
     const dotgrid = document.getElementById("dotgrid");
     for (let i = 0; i < 400; i++) {
       dotgrid.innerHTML += "<div class='Dot'>0</div>"      
@@ -175,6 +187,9 @@ add(1,2);</code></pre>
       }
       })
     }, 250);
+
+
+
 
 
   </script> 
