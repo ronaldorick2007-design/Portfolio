@@ -188,7 +188,22 @@ add(1,2);</code></pre>
       })
     }, 250);
 
+    let A = [1, 2, 3, 4, 5]
+    const grid1 = document.getElementById("dotgrid2");
+    grid1.style.gridTemplateColumns = `repeat(${A.length},1fr)`;
+    const DotGrid = []
+    for (let i = 0; i < A.length; i++) {
+      const d = document.createElement("div");
+      d.className = "Dot1";
+      grid1.append(d);
+      d.textContent = `${A[i]}`;
+      
+      DotGrid[i] = d;
+    }
 
+function sleep(ms){
+    return new Promise(resolve=>setTimeout(resolve,ms));
+}
 
 
 
