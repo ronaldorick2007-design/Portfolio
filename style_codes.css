@@ -117,7 +117,6 @@ body{
     text-align: center;
     width: 18px;
     height: 18px;
-    /* border-radius: 50%; */
     transition: 0.25s;
     background-color: #28c840;
 }
@@ -158,8 +157,8 @@ body{
 .green{background:#28c840;animation: move 1s .4s infinite;}
 
 @keyframes move {
-    40% { transform: translateY(-4px);}
-    80% { transform: translateY(-4px);}
+    40% { transform: translateY(4px);}
+    80% { transform: translateY(4px);}
 
 }
 
@@ -182,3 +181,35 @@ pre{
 code{
     font-family:Consolas,monospace;
 }
+
+#dotgrid2{
+    display: grid;
+    gap: 10px;
+}
+
+.Dot1{
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    width: 36px;
+    height: 36px;
+    background: blue; 
+    transition: 0.2s;   
+}
+
+.active{
+    background:red;
+    transform:translate(-6px,-6px);
+    box-shadow:6px 6px black;
+}
+
+.match{
+    background:green;
+    transform:translate(-6px,-6px);
+    box-shadow:6px 6px black;
+}
+/* .active{
+    background:red;
+    transform:translate(-3px,-3px);
+    box-shadow:3px 3px black;
+} */
