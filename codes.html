@@ -205,7 +205,22 @@ function sleep(ms){
     return new Promise(resolve=>setTimeout(resolve,ms));
 }
 
+async function looper(target) {
+  for (let i = 0; i < DotGrid.length; i++) {
+    DotGrid[i].classList.add("active");
+    await sleep(100);
+    DotGrid[i].classList.remove("active");
 
+    if(DotGrid[i].textContent === target){
+      DotGrid[i].classList.add("match");
+    await sleep(500);
+    DotGrid[i].classList.remove("match");
+    return
+    }
+  }
+}
+
+looper("3")
 
   </script> 
 </body>
