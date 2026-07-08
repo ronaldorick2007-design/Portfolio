@@ -145,7 +145,7 @@ body{
     gap:8px;
 }
 
-.dot{
+.dot-terminal{
     width:12px;
     height:12px;
     border-radius:50%;
@@ -182,12 +182,23 @@ code{
     font-family:Consolas,monospace;
 }
 
-#dotgrid2{
+.dotGrid{
     display: grid;
     gap: 10px;
 }
 
+
 .Dot1{
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    width: 36px;
+    height: 36px;
+    background: blue; 
+    transition: 0.2s;   
+}
+
+.dot{
     color: #fff;
     font-size: 20px;
     text-align: center;
@@ -208,6 +219,8 @@ code{
     transform:translate(-6px,-6px);
     box-shadow:6px 6px black;
 }
+
+
 /* .active{
     background:red;
     transform:translate(-3px,-3px);
