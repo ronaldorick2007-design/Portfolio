@@ -19,7 +19,6 @@
     </div>
   </header>
 
-
   <div class="content Hover">
     <div id="Title" class="alignText">
       <h2>Hello World!</h2>
@@ -36,9 +35,9 @@
         <div class="window Hover">
             <div class="topbar">
                 <div class="left">
-                    <div class="dot red"></div>
-                    <div class="dot yellow"></div>
-                    <div class="dot green"></div>
+                    <div class="dot-terminal red"></div>
+                    <div class="dot-terminal yellow"></div>
+                    <div class="dot-terminal green"></div>
                 </div>
                 <button id="copy">Copy</button>
             </div>
@@ -65,9 +64,9 @@ hello();</code></pre>
         <div class="window Hover">
             <div class="topbar">
                 <div class="left">
-                    <div class="dot red"></div>
-                    <div class="dot yellow"></div>
-                    <div class="dot green"></div>
+                    <div class="dot-terminal red"></div>
+                    <div class="dot-terminal yellow"></div>
+                    <div class="dot-terminal green"></div>
                 </div>
                 <button id="copy">Copy</button>
             </div>
@@ -92,9 +91,7 @@ add(1,2);</code></pre>
     </div>
     <div class="content-inner">
       <div id="about" class="alignText">
-        <div class="dotdisplay">
-    <div id="dotgrid2"></div>
-    <p id="dis"></p>
+        <div id="linear" class="dotdisplay">
   </div>
     </div>
       <div class="sidebar alignText">
@@ -104,9 +101,9 @@ add(1,2);</code></pre>
         <div class="window Hover">
             <div class="topbar">
                 <div class="left">
-                    <div class="dot red"></div>
-                    <div class="dot yellow"></div>
-                    <div class="dot green"></div>
+                    <div class="dot-terminal red"></div>
+                    <div class="dot-terminal yellow"></div>
+                    <div class="dot-terminal green"></div>
                 </div>
                 <button id="copy">Copy</button>
             </div>
@@ -140,9 +137,9 @@ linearSearch(A, 2);</code></pre>
         <div class="window Hover">
             <div class="topbar">
                 <div class="left">
-                    <div class="dot red"></div>
-                    <div class="dot yellow"></div>
-                    <div class="dot green"></div>
+                    <div class="dot-terminal red"></div>
+                    <div class="dot-terminal yellow"></div>
+                    <div class="dot-terminal green"></div>
                 </div>
                 <button id="copy">Copy</button>
             </div>
@@ -167,11 +164,15 @@ add(1,2);</code></pre>
     </div>
   </div>
 
+  <div id="matrix" class="dotdisplay">
+  </div>
+
 
   <footer class="footer">
     <h1 >Thank you</h1>
   </footer>
 
+  <script src="Grid.js"></script>
   <script>
     const dotgrid = document.getElementById("dotgrid");
     for (let i = 0; i < 400; i++) {
@@ -187,41 +188,23 @@ add(1,2);</code></pre>
       })
     }, 250);
 
-    let A = [1, 4, 2, 5, 3]
-    const grid1 = document.getElementById("dotgrid2");
-    const p = document.getElementById("dis");
-    grid1.style.gridTemplateColumns = `repeat(${A.length},1fr)`;
-    const DotGrid = []
-    for (let i = 0; i < A.length; i++) {
-      const d = document.createElement("div");
-      d.className = "Dot1";
-      grid1.append(d);
-      d.textContent = `${A[i]}`;
-      
-      DotGrid[i] = d;
-    }
+    const linearGrid = new Grid("linear");
+    // let A = [1, 4, 2, 5, 3]; 
+    let A = [[1,2,3],[3,4,5],[5,6,7]];  
+    linearGrid.setArray(A);
+    async function linearSearch(target) {
+      for (let i = 0; i <A.length; i++) {
+        for (let j = 0; j <A[0].length; j++) {
+        await linearGrid.setActive(i,j);
 
-function sleep(ms){
-    return new Promise(resolve=>setTimeout(resolve,ms));
-}
-
-async function looper(target) {
-  for (let i = 0; i < DotGrid.length; i++) {
-    DotGrid[i].classList.add("active");
-    await sleep(1000);
-    DotGrid[i].classList.remove("active");
-
-    if(DotGrid[i].textContent === target){
-      DotGrid[i].classList.add("match");
-      p.innerText = "Found!"
-    await sleep(1500);
-    DotGrid[i].classList.remove("match");
-    return
-    }
-  }
-}
-
-looper("2")
+        if(A[i][j] == target){
+          await linearGrid.setMatch(i,j);          
+          return;
+          }
+        }
+      }
+      }
+    linearSearch(7);
 
   </script> 
 </body>
