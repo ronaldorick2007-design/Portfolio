@@ -220,7 +220,11 @@ code{
     box-shadow:6px 6px black;
 }
 
-
+.hold{
+    background:yellow;
+    transform:translate(-6px,-6px);
+    box-shadow:6px 6px black;
+}
 /* .active{
     background:red;
     transform:translate(-3px,-3px);
