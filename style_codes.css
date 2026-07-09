@@ -187,25 +187,15 @@ code{
     gap: 10px;
 }
 
-
-.Dot1{
-    color: #fff;
-    font-size: 20px;
-    text-align: center;
-    width: 36px;
-    height: 36px;
-    background: blue; 
-    transition: 0.2s;   
-}
-
 .dot{
     color: #fff;
-    font-size: 20px;
+    font-size: var(--size)/2;
     text-align: center;
-    width: 36px;
-    height: 36px;
+    justify-content: center;
+    width: var(--size);
+    height: var(--size);
     background: blue; 
-    transition: 0.2s;   
+    transition: var(--time);   
 }
 
 .active{
@@ -224,6 +214,10 @@ code{
     background:yellow;
     transform:translate(-6px,-6px);
     box-shadow:6px 6px black;
+}
+
+.eliminate{
+    background:lightblue;
 }
 /* .active{
     background:red;
