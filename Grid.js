@@ -1,5 +1,5 @@
 class Grid{
-    constructor(divElement,cols=0, time=500){
+    constructor(divElement,{cols=0, time=500, size = 36}={}){
         let space = document.getElementById(divElement);
         this.gridSpace = document.createElement("div");
         space.append(this.gridSpace);
@@ -7,10 +7,27 @@ class Grid{
         this.gridSpace.className = "dotGrid";
         this.gridArray = [];
         this.is2D = false;
+        
         this.time = time;
         this.cols = cols;
+        this.size = size;
 
-        console.log(cols)
+        this.states = {}
+    }
+
+    createDot(){
+        let dot = document.createElement("div");
+        dot.className = "dot";
+        dot.style.setProperty("--size", `${this.size}px`)
+        if(this.time < 250){
+            dot.style.setProperty("--time", `${this.time}ms`)
+        }
+        else{
+            dot.style.setProperty("--time", "250ms")
+        }
+        this.gridSpace.append(dot);
+        dot.hold = false;
+        return dot
     }
 
     setArray(array){
@@ -22,25 +39,27 @@ class Grid{
             for (let i = 0; i < array.length; i++) {    
                 let dots=[]        
                 for(let j=0; j<this.cols;j++){
-                        const dot = document.createElement("div");
-                        dot.className = "dot";
-                        this.gridSpace.append(dot);
-                        dot.hold = false;
+                        let dot = this.createDot();
                         dot.textContent = `${array[i][j]}`;
-                        
                         dots[j] = dot;
                 }
                 this.gridArray[i] = dots;
             }
+        }else if(this.cols != 0){
+            console.log(this.cols,"from if else");
+            this.gridSpace.style.gridTemplateColumns = `repeat(${this.cols},1fr)`;
+            for (let i = 0; i < array.length; i++) {            
+                let dot = this.createDot();
+                dot.textContent = `${array[i]}`;
+
+                this.gridArray[i] = dot
+            } 
         }
         else{
             console.log(this.cols,"from else");
             this.gridSpace.style.gridTemplateColumns = `repeat(${array.length},1fr)`;
             for (let i = 0; i < array.length; i++) {            
-                const dot = document.createElement("div");
-                dot.className = "dot";
-                this.gridSpace.append(dot);
-                dot.hold = false;
+                let dot = this.createDot();
                 dot.textContent = `${array[i]}`;
 
                 this.gridArray[i] = dot
@@ -48,9 +67,11 @@ class Grid{
         }
     }
 
+    sleep(ms){
+        return new Promise(resolve=>setTimeout(resolve,ms));
+    }
 
 }
-
 // const gie = new Grid("linear");
 // gie.setArray([1,2,3,4,5]);
 // gie.setActive(3);
