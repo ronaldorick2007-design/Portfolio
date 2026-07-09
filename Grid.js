@@ -71,7 +71,22 @@ class Grid{
         return new Promise(resolve=>setTimeout(resolve,ms));
     }
 
+    async setActive(i,j){
+        if(this.is2D){
+            this.gridArray[i][j].classList.remove("hold");
+            this.gridArray[i][j].classList.add("active");
+            await this.sleep(this.time);
+            this.gridArray[i][j].classList.remove("active");
+        }else{
+            this.gridArray[i].classList.remove("hold");
+            this.gridArray[i].classList.add("active");
+            await this.sleep(this.time);
+            this.gridArray[i].classList.remove("active");
+        }
+    }
+
 }
+
 // const gie = new Grid("linear");
 // gie.setArray([1,2,3,4,5]);
 // gie.setActive(3);
