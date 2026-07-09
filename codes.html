@@ -158,13 +158,13 @@ add(1,2);</code></pre>
     </div>
   </div>
 
-  <div class="dotdisplay">
-    <h2>Matrix</h2>
-    <div id="dotgrid">
-    </div>
+  <div id="dot-grid" class="dotdisplay">    
   </div>
 
   <div id="matrix" class="dotdisplay">
+  </div>
+
+  <div id="binarySearch" class="dotdisplay">
   </div>
 
 
@@ -174,19 +174,10 @@ add(1,2);</code></pre>
 
   <script src="Grid.js"></script>
   <script>
-    const dotgrid = document.getElementById("dotgrid");
-    for (let i = 0; i < 400; i++) {
-      dotgrid.innerHTML += "<div class='Dot'>0</div>"      
-    }
-    const dots = document.querySelectorAll(".Dot");
-    setInterval(() => {
-      dots.forEach(dot => {
-        if(Math.random() < 0.8){
-        dot.textContent = dot.textContent==="1" ? "0" : "1";
-        dot.style.background = dot.style.background==="green" ? "#27ff47" : "green";
-      }
-      })
-    }, 250);
+
+    const range = (start, end) =>
+    Array.from({length: end - start + 1}, (_, i) => start + i);
+    
 
     const linearGrid = new Grid("linear");
     // let A = [1, 4, 2, 5, 3]; 
@@ -205,6 +196,75 @@ add(1,2);</code></pre>
       }
       }
     linearSearch(7);
+
+    const DotGrid = new Grid("dot-grid", {cols:50, size:18});
+    let B = Array(400).fill(0);
+    DotGrid.setArray(B);
+
+    setInterval(() => {
+      DotGrid.gridArray.forEach(dot => {
+        if(Math.random() < 0.8){
+        dot.textContent = dot.textContent==="1" ? "0" : "1";
+        dot.style.background = dot.style.background==="green" ? "#27ff47" : "green";
+      }
+      })
+    }, 250);
+
+    const matGrid = new Grid("binarySearch", {time:2000});
+    
+    const arr = [
+     2,   5,   9,  13,  18,
+    24,  31,  39,  48,  58,
+    69,  81,  94, 108, 123,
+   139, 156, 174, 193, 213,
+   234, 256, 279, 303, 328,
+   354, 381, 409, 438, 468,
+   499, 531, 564, 598, 633
+];
+
+const target = 409;
+    matGrid.setArray(arr);
+
+
+    async function binarySearch(arr, target){
+
+        let left = 0;
+        matGrid.checkChange({left:left})
+        let right = arr.length - 1;
+        matGrid.checkChange({right:right})
+
+        while(left <= right){
+
+            const mid = Math.floor((left + right) / 2);
+            await matGrid.setActive(mid);
+
+            if(arr[mid] === target){
+              await matGrid.setMatch(mid);
+              matGrid.removeClass();
+                return mid;
+            }
+
+            if(arr[mid] < target){
+                left = mid + 1;
+                console.log(range(mid,arr.length))
+
+                matGrid.eliminateArray(range(mid,arr.length-1))
+                matGrid.checkChange({left:left})
+            }else{
+                right = mid - 1;
+                matGrid.checkChange({right:right})
+            }
+
+        }
+        matGrid.removeClass();
+        return -1;
+    }
+
+    binarySearch(arr,target).then
+    (()=>binarySearch(arr,35));
+    
+    
+
 
   </script> 
 </body>
