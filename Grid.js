@@ -19,6 +19,7 @@ class Grid{
         let dot = document.createElement("div");
         dot.className = "dot";
         dot.style.setProperty("--size", `${this.size}px`)
+        dot.hold = false;
         if(this.time < 250){
             dot.style.setProperty("--time", `${this.time}ms`)
         }
@@ -26,7 +27,7 @@ class Grid{
             dot.style.setProperty("--time", "250ms")
         }
         this.gridSpace.append(dot);
-        dot.hold = false;
+        
         return dot
     }
 
@@ -61,7 +62,6 @@ class Grid{
             for (let i = 0; i < array.length; i++) {            
                 let dot = this.createDot();
                 dot.textContent = `${array[i]}`;
-
                 this.gridArray[i] = dot
             }
         }
@@ -73,15 +73,29 @@ class Grid{
 
     async setActive(i,j){
         if(this.is2D){
-            this.gridArray[i][j].classList.remove("hold");
+            this.gridArray[i][j].classList.remove("hold","eliminate");
             this.gridArray[i][j].classList.add("active");
             await this.sleep(this.time);
             this.gridArray[i][j].classList.remove("active");
         }else{
-            this.gridArray[i].classList.remove("hold");
+            this.gridArray[i].classList.remove("hold","eliminate");
             this.gridArray[i].classList.add("active");
             await this.sleep(this.time);
             this.gridArray[i].classList.remove("active");
+        }
+    }
+
+    async setMatch(i,j){
+        if(this.is2D){
+            this.gridArray[i][j].classList.remove("hold","eliminate");
+            this.gridArray[i][j].classList.add("match");
+            await this.sleep(this.time*2);
+            this.gridArray[i][j].classList.remove("match");
+        }else{
+            this.gridArray[i].classList.remove("hold","eliminate");
+            this.gridArray[i].classList.add("match");
+            await this.sleep(this.time*2);
+            this.gridArray[i].classList.remove("match");
         }
     }
 
