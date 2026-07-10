@@ -161,9 +161,6 @@ add(1,2);</code></pre>
   <div id="dot-grid" class="dotdisplay">    
   </div>
 
-  <div id="matrix" class="dotdisplay">
-  </div>
-
   <div id="binarySearch" class="dotdisplay">
   </div>
 
@@ -210,21 +207,11 @@ add(1,2);</code></pre>
       })
     }, 250);
 
-    const matGrid = new Grid("binarySearch", {time:2000});
-    
+    const matGrid = new Grid("binarySearch", {time:2000});    
     const arr = [
-     2,   5,   9,  13,  18,
-    24,  31,  39,  48,  58,
-    69,  81,  94, 108, 123,
-   139, 156, 174, 193, 213,
-   234, 256, 279, 303, 328,
-   354, 381, 409, 438, 468,
-   499, 531, 564, 598, 633
-];
-
-const target = 409;
+     2,   5,   9,  13,  18, 20
+  ]
     matGrid.setArray(arr);
-
 
     async function binarySearch(arr, target){
 
@@ -236,35 +223,34 @@ const target = 409;
         while(left <= right){
 
             const mid = Math.floor((left + right) / 2);
+            console.log("mid",mid)
             await matGrid.setActive(mid);
 
             if(arr[mid] === target){
               await matGrid.setMatch(mid);
-              matGrid.removeClass();
-                return mid;
+              await matGrid.removeClass();
+              return mid;
             }
 
             if(arr[mid] < target){
                 left = mid + 1;
-                console.log(range(mid,arr.length))
-
-                matGrid.eliminateArray(range(mid,arr.length-1))
+                console.log(range(0,mid))
+                matGrid.eliminateArray(range(0,mid))
                 matGrid.checkChange({left:left})
             }else{
                 right = mid - 1;
+                console.log(range(mid,arr.length-1))
+                matGrid.eliminateArray(range(mid,arr.length-1))
                 matGrid.checkChange({right:right})
+                
             }
 
         }
-        matGrid.removeClass();
+        await matGrid.removeClass();
         return -1;
     }
 
-    binarySearch(arr,target).then
-    (()=>binarySearch(arr,35));
-    
-    
-
+    binarySearch(arr,18)
 
   </script> 
 </body>
