@@ -22,19 +22,19 @@ body{
 }
 
 .header #logo span{
-    color :aqua;
+    color: aqua;
 }
 
 .header .nav{
     margin-left: 20px;
-    display :flex;
+    display: flex;
     gap: 20px;
 }
 
 .header .nav a{
     color: #fff;
     text-decoration: none;
-    border : 1px solid #fff;
+    border: 1px solid #fff;
     padding: 5px 10px;
     text-decoration: none;
 
@@ -47,24 +47,24 @@ body{
 }
 
 .content{
-    display:flex;
+    display: flex;
     flex-direction: column;
     margin: 20px;
     height: 82vh;
 
-    transition : all 0.3s ease;
+    transition: all 0.3s ease;
 }
-#Title{
-    height:20px;
-    padding:10px;
-    background-color:#ffb52b
+.card-title{
+    height: 20px;
+    padding: 10px;
+    background-color: #ffb52b;
 }
 .content-inner{
-    display:flex;
+    display: flex;
     height: 82vh;
 }
 
-.content #about{
+.content .card-about{
     flex: 1;
     padding-right: 20px;
     background-color: #f8ff2b;
@@ -107,7 +107,7 @@ body{
     padding: 20px;
     border: 3px solid #000;
 }
-#dotgrid{
+#grid-pattern-demo{
     display: grid;
     grid-template-columns: repeat(50, 18px);
     gap: 10px;
@@ -123,63 +123,61 @@ body{
 
 
 .window{
-    width:650px;
-    background:#bfb8ff;
+    width: 650px;
+    background: #bfb8ff;
     border: 2px solid #000;
     transition: all 0.3s ease;
 }
 
 .topbar{
-    height:42px;
-    background:#fff;
+    height: 42px;
+    background: #fff;
     border-bottom: 2px solid #000;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 14px;
-    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
 }
 
 .left{
-    display:flex;
-    gap:8px;
+    display: flex;
+    gap: 8px;
 }
 
 .dot-terminal{
-    width:12px;
-    height:12px;
-    border-radius:50%;
-    border : 2px solid #000;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #000;
 }
 
-.red{background:#ff5f57; animation: move 1s infinite;}
-.yellow{background:#febc2e;animation: move 1s .2s infinite;}
-.green{background:#28c840;animation: move 1s .4s infinite;}
+.red{background: #ff5f57; animation: move 1s infinite;}
+.yellow{background: #febc2e; animation: move 1s .2s infinite;}
+.green{background: #28c840; animation: move 1s .4s infinite;}
 
 @keyframes move {
-    40% { transform: translateY(4px);}
-    80% { transform: translateY(4px);}
-
+    40% { transform: translateY(4px); }
+    80% { transform: translateY(4px); }
 }
 
 button{
-    padding:6px 14px;
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 pre{
-    margin:0;
-    padding:24px;
-    color:#000;
-    font-size:15px;
-    line-height:1.6;
-    text-align:left;
+    margin: 0;
+    padding: 24px;
+    color: #000;
+    font-size: 15px;
+    line-height: 1.6;
+    text-align: left;
 }
 
 code{
-    font-family:Consolas,monospace;
+    font-family: Consolas, monospace;
 }
 
 .dotGrid{
@@ -194,33 +192,28 @@ code{
     justify-content: center;
     width: var(--size);
     height: var(--size);
-    background: blue; 
-    transition: var(--time);   
+    background: blue;
+    transition: var(--time);
 }
 
 .active{
-    background:red;
-    transform:translate(-6px,-6px);
-    box-shadow:6px 6px black;
+    background: red;
+    transform: translate(-6px,-6px);
+    box-shadow: 6px 6px black;
 }
 
 .match{
-    background:green;
-    transform:translate(-6px,-6px);
-    box-shadow:6px 6px black;
+    background: green;
+    transform: translate(-6px,-6px);
+    box-shadow: 6px 6px black;
 }
 
 .hold{
-    background:yellow;
-    transform:translate(-6px,-6px);
-    box-shadow:6px 6px black;
+    background: yellow;
+    transform: translate(-6px,-6px);
+    box-shadow: 6px 6px black;
 }
 
 .eliminate{
-    background:lightblue;
+    background: lightblue;
 }
-/* .active{
-    background:red;
-    transform:translate(-3px,-3px);
-    box-shadow:3px 3px black;
-} */
