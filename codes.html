@@ -20,11 +20,11 @@
   </header>
 
   <div class="content Hover">
-    <div id="Title" class="alignText">
+    <div id="title-hello-world" class="card-title alignText">
       <h2>Hello World!</h2>
     </div>
     <div class="content-inner">
-      <div id="about" class="alignText">
+      <div id="about-hello-world" class="card-about alignText">
       <h2>Code Snippets</h2>
       <p>This section is for showcasing code snippets.</p>
     </div>
@@ -39,9 +39,9 @@
                     <div class="dot-terminal yellow"></div>
                     <div class="dot-terminal green"></div>
                 </div>
-                <button id="copy">Copy</button>
+                <button id="copy-hello-world">Copy</button>
             </div>
-  <pre><code id="code">function hello(){
+  <pre><code id="code-hello-world">function hello(){
     console.log("Hello World");
   }
 hello();</code></pre>
@@ -52,7 +52,7 @@ hello();</code></pre>
   </div>
 
     <div class="content Hover">
-    <div id="Title" class="alignText">
+    <div id="title-add-numbers-1" class="card-title alignText">
       <h2>Add Two Numbers</h2>
     </div>
     <div class="content-inner">
@@ -68,9 +68,9 @@ hello();</code></pre>
                     <div class="dot-terminal yellow"></div>
                     <div class="dot-terminal green"></div>
                 </div>
-                <button id="copy">Copy</button>
+                <button id="copy-add-numbers-1">Copy</button>
             </div>
-  <pre><code id="code">function add(a,b){
+  <pre><code id="code-add-numbers-1">function add(a,b){
     int sum = a+b;
     console.log(sum);
   }
@@ -78,7 +78,7 @@ add(1,2);</code></pre>
         </div>
 
       </div>
-      <div id="about" class="alignText">
+      <div id="about-add-numbers-1" class="card-about alignText">
       <h2>Code Snippets</h2>
       <p>This section is for showcasing code snippets.</p>
     </div>
@@ -86,12 +86,12 @@ add(1,2);</code></pre>
   </div>
   
   <div class="content Hover">
-    <div id="Title" class="alignText">
+    <div id="title-linear-search" class="card-title alignText">
       <h2>Linear Search</h2>
     </div>
     <div class="content-inner">
-      <div id="about" class="alignText">
-        <div id="linear" class="dotdisplay">
+      <div id="about-linear-search" class="card-about alignText">
+        <div id="grid-linear-search" class="dotdisplay">
   </div>
     </div>
       <div class="sidebar alignText">
@@ -105,9 +105,9 @@ add(1,2);</code></pre>
                     <div class="dot-terminal yellow"></div>
                     <div class="dot-terminal green"></div>
                 </div>
-                <button id="copy">Copy</button>
+                <button id="copy-linear-search">Copy</button>
             </div>
-  <pre><code id="code">function linearSearch(arr, target){
+  <pre><code id="code-linear-search">function linearSearch(arr, target){
     N = arr.length;
     for(let i = 0; i < N; i++ ){
       if(arr[i] == target){
@@ -125,7 +125,7 @@ linearSearch(A, 2);</code></pre>
   </div>
 
     <div class="content Hover">
-    <div id="Title" class="alignText">
+    <div id="title-add-numbers-2" class="card-title alignText">
       <h2>Add Two Numbers</h2>
     </div>
     <div class="content-inner">
@@ -141,9 +141,9 @@ linearSearch(A, 2);</code></pre>
                     <div class="dot-terminal yellow"></div>
                     <div class="dot-terminal green"></div>
                 </div>
-                <button id="copy">Copy</button>
+                <button id="copy-add-numbers-2">Copy</button>
             </div>
-  <pre><code id="code">function add(a,b){
+  <pre><code id="code-add-numbers-2">function add(a,b){
     int sum = a+b;
     console.log(sum);
   }
@@ -151,17 +151,20 @@ add(1,2);</code></pre>
         </div>
 
       </div>
-      <div id="about" class="alignText">
+      <div id="about-add-numbers-2" class="card-about alignText">
       <h2>Code Snippets</h2>
       <p>This section is for showcasing code snippets.</p>
     </div>
     </div>
   </div>
 
-  <div id="dot-grid" class="dotdisplay">    
+  <div id="grid-pattern-demo" class="dotdisplay">    
   </div>
 
-  <div id="binarySearch" class="dotdisplay">
+  <div id="grid-binary-search" class="dotdisplay">
+  </div>
+
+  <div id="grid-bubble-sort" class="dotdisplay">
   </div>
 
 
@@ -173,84 +176,97 @@ add(1,2);</code></pre>
   <script>
 
     const range = (start, end) =>
-    Array.from({length: end - start + 1}, (_, i) => start + i);
-    
+      Array.from({ length: end - start + 1 }, (_, i) => start + i);
 
-    const linearGrid = new Grid("linear");
-    // let A = [1, 4, 2, 5, 3]; 
-    let A = [[1,2,3],[3,4,5],[5,6,7]];  
-    linearGrid.setArray(A);
-    async function linearSearch(target) {
-      for (let i = 0; i <A.length; i++) {
-        for (let j = 0; j <A[0].length; j++) {
-        await linearGrid.setActive(i,j);
+    const linearArray = [1, 4, 2, 5, 3];
+    const linearGrid = new Grid("grid-linear-search");
+    linearGrid.setArray(linearArray);
 
-        if(A[i][j] == target){
-          await linearGrid.setMatch(i,j);          
-          return;
-          }
+    async function linearSearch(grid, arr, target) {
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === target) {
+          await grid.setMatch(i);
+          return i;
         }
+        await grid.setActive(i);
       }
-      }
-    linearSearch(7);
-
-    const DotGrid = new Grid("dot-grid", {cols:50, size:18});
-    let B = Array(400).fill(0);
-    DotGrid.setArray(B);
-
-    setInterval(() => {
-      DotGrid.gridArray.forEach(dot => {
-        if(Math.random() < 0.8){
-        dot.textContent = dot.textContent==="1" ? "0" : "1";
-        dot.style.background = dot.style.background==="green" ? "#27ff47" : "green";
-      }
-      })
-    }, 250);
-
-    const matGrid = new Grid("binarySearch", {time:2000});    
-    const arr = [
-     2,   5,   9,  13,  18, 20
-  ]
-    matGrid.setArray(arr);
-
-    async function binarySearch(arr, target){
-
-        let left = 0;
-        matGrid.checkChange({left:left})
-        let right = arr.length - 1;
-        matGrid.checkChange({right:right})
-
-        while(left <= right){
-
-            const mid = Math.floor((left + right) / 2);
-            console.log("mid",mid)
-            await matGrid.setActive(mid);
-
-            if(arr[mid] === target){
-              await matGrid.setMatch(mid);
-              await matGrid.removeClass();
-              return mid;
-            }
-
-            if(arr[mid] < target){
-                left = mid + 1;
-                console.log(range(0,mid))
-                matGrid.eliminateArray(range(0,mid))
-                matGrid.checkChange({left:left})
-            }else{
-                right = mid - 1;
-                console.log(range(mid,arr.length-1))
-                matGrid.eliminateArray(range(mid,arr.length-1))
-                matGrid.checkChange({right:right})
-                
-            }
-
-        }
-        await matGrid.removeClass();
-        return -1;
+      return -1;
     }
 
-    binarySearch(arr,18)
+    linearSearch(linearGrid, linearArray, 2);
+
+    const binaryArray = [2, 5, 9, 13, 18, 20];
+    const binaryGrid = new Grid("grid-binary-search", { time: 700 });
+    binaryGrid.setArray(binaryArray);
+
+    async function binarySearch(grid, arr, target) {
+      let left = 0;
+      grid.checkChange({ left });
+      let right = arr.length - 1;
+      grid.checkChange({ right });
+
+      while (left <= right) {
+        const mid = Math.floor((left + right) / 2);
+        await grid.setActive(mid);
+
+        if (arr[mid] === target) {
+          await grid.setMatch(mid);
+          await grid.removeClass();
+          return mid;
+        }
+
+        if (arr[mid] < target) {
+          grid.eliminateArray(range(left, mid));
+          left = mid + 1;
+          grid.checkChange({ left });
+        } else {
+          grid.eliminateArray(range(mid, right));
+          right = mid - 1;
+          grid.checkChange({ right });
+        }
+      }
+
+      await grid.removeClass();
+      return -1;
+    }
+
+    binarySearch(binaryGrid, binaryArray, 10);
+
+    const unsortedArray = [64, 34, 25, 12, 22, 11, 90];
+    const bubbleGrid = new Grid("grid-bubble-sort");
+    bubbleGrid.setArray(unsortedArray);
+
+    async function bubbleSort(grid, arr) {
+      let n = arr.length;
+      let swapped;
+
+      for (let i = 0; i < n - 1; i++) {
+        swapped = false;
+
+        for (let j = 0; j < n - i - 1; j++) {
+          await grid.setActive(j);
+
+          if (arr[j] > arr[j + 1]) {
+            let temp = arr[j];
+            arr[j] = arr[j + 1];
+            arr[j + 1] = temp;
+
+            grid.gridArray[j].textContent = arr[j];
+            grid.gridArray[j + 1].textContent = arr[j + 1];
+
+            swapped = true;
+          }
+        }
+
+        grid.setHold({ i: n - i - 1 });
+
+        if (!swapped) break;
+      }
+
+      return arr;
+    }
+
+    bubbleSort(bubbleGrid, unsortedArray);
 
   </script> 
 </body>
