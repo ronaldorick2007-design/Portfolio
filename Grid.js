@@ -99,6 +99,57 @@ class Grid{
         }
     }
 
+    setHold({i,j}){
+        if(this.is2D){
+            if(this.gridArray[i][j].hold == false){
+                this.gridArray[i][j].classList.add("hold");
+                this.gridArray[i][j].hold = true;
+            }else{
+                this.gridArray[i][j].classList.remove("hold");
+                this.gridArray[i][j].hold = false;
+            }
+        }else{
+            if(this.gridArray[i].hold == false){
+                this.gridArray[i].classList.add("hold");
+                this.gridArray[i].hold = true;
+            }else{
+                this.gridArray[i].classList.remove("hold");
+                this.gridArray[i].hold = false;
+            }
+        }
+    }
+
+    async removeClass(){
+        await this.sleep(this.time);
+        for(const [key, value] of Object.entries(this.states)){
+            this.gridArray[value].classList.remove("hold");
+        }
+        this.states = {}
+        this.gridArray.forEach(dot => {
+            dot.classList.remove(...dot.classList);
+            dot.classList.add("dot");
+        });
+    }
+    checkChange(pair){
+        for(const [key, value] of Object.entries(pair)){
+        if(!(key in this.states)){
+            this.states[key] = value;
+            this.gridArray[value].classList.add("hold");
+        }
+        else if(this.states[key] !== value){
+            console.log("different value",key,"from",this.states[key],"to",value);
+            this.gridArray[this.states[key]].classList.remove("hold");
+            this.states[key] = value;
+            this.gridArray[value].classList.add("hold");
+        }
+    }
+    }
+
+    eliminateArray(arr){
+        arr.forEach(element => {
+            this.gridArray[element].classList.add("eliminate");
+        });
+    }
 }
 
 // const gie = new Grid("linear");
