@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
   <title>Hello World</title>
   <link rel="stylesheet" href="style_index.css">
+  <link rel="stylesheet" href="style_codes.css">
 </head>
 <body>
   <header class="header">
@@ -26,15 +27,26 @@
       <h3>Profile Image</h3>
       <p>This is the profile image content.</p>      
     </div>
+
     <div class="welcomeText Hover">
-      <div>
+
+    <div id="grid-pattern-demo"></div>
+
+    <div class="welcomeContent">
         <h2>Hello it's me</h2>
         <h1>Ronald Rick</h1>
         <h2>and Im a <span>Developer</span></h2>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error odit maxime obcaecati dolor commodi velit sapiente dolore deserunt eaque dicta?</p>
+
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Error odit maxime obcaecati dolor commodi velit.
+        </p>
+
         <button class="contact">Contact Me</button>
-      </div>
     </div>
+
+
+</div>
   </div>
 
   <div class="content">
@@ -72,6 +84,21 @@
     <h1 >Thank you</h1>
   </footer>
 
-  <script src="script.js"></script> 
+  <script src="Grid.js"></script>
+  <script>
+    const DotGrid = new Grid("grid-pattern-demo", {cols:14, time:1000, size:48, dotClass:"dot-matrix"});
+    let B = Array(140).fill(0);
+    DotGrid.setArray(B);
+
+    setInterval(() => {
+      DotGrid.gridArray.forEach(dot => {
+        if(Math.random() < 0.8){
+        dot.textContent = dot.textContent==="1" ? "0" : "1";
+        dot.style.background = dot.style.background==="pink" ? "#ff4974" : "pink";
+      }
+      })
+    }, 250);
+
+  </script> 
 </body>
 </html>
