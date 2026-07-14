@@ -1,5 +1,5 @@
 class Grid{
-    constructor(divElement,{cols=0, time=500, size = 36}={}){
+    constructor(divElement,{cols=0, time=500, size = 36, dotClass="dot"}={}){
         let space = document.getElementById(divElement);
         this.gridSpace = document.createElement("div");
         space.append(this.gridSpace);
@@ -11,13 +11,14 @@ class Grid{
         this.time = time;
         this.cols = cols;
         this.size = size;
+        this.dotClass = dotClass;
 
         this.states = {}
     }
 
     createDot(){
         let dot = document.createElement("div");
-        dot.className = "dot";
+        dot.className = this.dotClass;
         dot.style.setProperty("--size", `${this.size}px`)
         dot.hold = false;
         if(this.time < 250){
@@ -71,18 +72,24 @@ class Grid{
         return new Promise(resolve=>setTimeout(resolve,ms));
     }
 
-    async setActive(i,j){
-        if(this.is2D){
-            this.gridArray[i][j].classList.remove("hold","eliminate");
-            this.gridArray[i][j].classList.add("active");
-            await this.sleep(this.time);
-            this.gridArray[i][j].classList.remove("active");
-        }else{
-            this.gridArray[i].classList.remove("hold","eliminate");
-            this.gridArray[i].classList.add("active");
-            await this.sleep(this.time);
-            this.gridArray[i].classList.remove("active");
-        }
+    async setActive(items){
+
+        const elements = items.map(item =>
+            this.is2D
+                ? this.gridArray[item[0]][item[1]]
+                : this.gridArray[item]
+        );
+
+        elements.forEach(el => {
+            el.classList.remove("hold", "eliminate");
+            el.classList.add("active");
+        });
+
+        await this.sleep(this.time);
+
+        elements.forEach(el =>
+            el.classList.remove("active")
+        );
     }
 
     async setMatch(i,j){
