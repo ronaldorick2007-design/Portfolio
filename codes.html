@@ -167,6 +167,9 @@ add(1,2);</code></pre>
   <div id="grid-bubble-sort" class="dotdisplay">
   </div>
 
+  <div id="triangle" class="dotdisplay">
+  </div>
+
 
   <footer class="footer">
     <h1 >Thank you</h1>
@@ -188,12 +191,25 @@ add(1,2);</code></pre>
           await grid.setMatch(i);
           return i;
         }
-        await grid.setActive(i);
+        await grid.setActive([i]);
       }
       return -1;
     }
 
     linearSearch(linearGrid, linearArray, 2);
+
+    const DotGrid = new Grid("grid-pattern-demo", {cols:50, size:18});
+    let B = Array(400).fill(0);
+    DotGrid.setArray(B);
+
+    setInterval(() => {
+      DotGrid.gridArray.forEach(dot => {
+        if(Math.random() < 0.8){
+        dot.textContent = dot.textContent==="1" ? "0" : "1";
+        dot.style.background = dot.style.background==="green" ? "#27ff47" : "green";
+      }
+      })
+    }, 250);
 
     const binaryArray = [2, 5, 9, 13, 18, 20];
     const binaryGrid = new Grid("grid-binary-search", { time: 700 });
@@ -207,7 +223,7 @@ add(1,2);</code></pre>
 
       while (left <= right) {
         const mid = Math.floor((left + right) / 2);
-        await grid.setActive(mid);
+        await grid.setActive([mid]);
 
         if (arr[mid] === target) {
           await grid.setMatch(mid);
@@ -233,7 +249,7 @@ add(1,2);</code></pre>
     binarySearch(binaryGrid, binaryArray, 10);
 
     const unsortedArray = [64, 34, 25, 12, 22, 11, 90];
-    const bubbleGrid = new Grid("grid-bubble-sort");
+    const bubbleGrid = new Grid("grid-bubble-sort",{time : 1000});
     bubbleGrid.setArray(unsortedArray);
 
     async function bubbleSort(grid, arr) {
@@ -244,7 +260,7 @@ add(1,2);</code></pre>
         swapped = false;
 
         for (let j = 0; j < n - i - 1; j++) {
-          await grid.setActive(j);
+          await grid.setActive([j, j+1]);
 
           if (arr[j] > arr[j + 1]) {
             let temp = arr[j];
@@ -263,10 +279,85 @@ add(1,2);</code></pre>
         if (!swapped) break;
       }
 
+      await grid.removeClass();
       return arr;
     }
 
     bubbleSort(bubbleGrid, unsortedArray);
+
+
+
+
+const COLS = 11;
+const ROWS = 6;
+
+const grid = new Grid("triangle",{
+    cols:COLS,
+    size:28
+});
+
+grid.setArray(Array(COLS*ROWS).fill(0));
+
+triangleMask(grid);
+
+function triangleMask(grid){
+
+    const rows = Math.ceil(grid.gridArray.length / grid.cols);
+    const cols = grid.cols;
+
+    for(let row=0; row<rows; row++){
+
+        const leftPadding = rows-row-1;
+        const cells = row+1;
+
+        for(let col=0; col<cols; col++){
+
+            const index = row*cols+col;
+
+            if(index >= grid.gridArray.length)
+                return;
+
+            if(
+                col < leftPadding ||
+                col >= leftPadding + cells
+            ){
+
+                grid.gridArray[index].style.visibility = "hidden";
+
+            }
+
+        }
+
+    }
+
+}
+async function animateTriangle(grid){
+
+    const rows = Math.ceil(grid.gridArray.length / grid.cols);
+    const cols = grid.cols;
+
+    for(let row=0; row<rows; row++){
+
+        const leftPadding = rows-row-1;
+        const cells = row+1;
+
+        const active = [];
+
+        for(let col=leftPadding; col<leftPadding+cells; col++){
+
+            const index = row*cols + col;
+
+            active.push(index);
+
+        }
+
+        await grid.setActive(active);
+
+    }
+
+}
+
+animateTriangle(grid);
 
   </script> 
 </body>
