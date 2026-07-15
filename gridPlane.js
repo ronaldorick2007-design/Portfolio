@@ -1,0 +1,211 @@
+class GridPlane {
+    constructor(divElement, {size = 50, itemSize = 40, time = 500} = {}){
+        this.space = document.getElementById(divElement);
+
+        this.size = size;
+        this.itemSize = itemSize;
+        this.time = time;
+        this.states = {};
+
+        this.points = [];
+
+        this.screen = document.createElement("div");
+        this.screen.className = "grid-screen";
+
+        this.space.style.display = "flex";
+        this.space.style.justifyContent = "center";
+        this.space.style.alignItems = "center";
+        this.space.style.overflow = "hidden";
+
+        this.space.append(this.screen);
+    }
+
+    createItem(x, y, value = "") {
+        const item = document.createElement("div");
+
+        item.className = "grid-item";
+        item.textContent = value;
+
+        item.style.width = `${this.itemSize}px`;
+        item.style.height = `${this.itemSize}px`;
+
+        item.style.left = `${x * this.size}px`;
+        item.style.top = `${y * this.size}px`;
+
+        this.screen.append(item);
+
+    const point = {
+        index: this.points.length,
+        x,
+        y,
+        value,
+        item
+    };
+
+    this.points.push(point);
+
+    return point;
+}
+
+    setScreenSize() {
+        let maxX = 0;
+        let maxY = 0;
+
+        for (const point of this.points) {
+            maxX = Math.max(maxX, point.x);
+            maxY = Math.max(maxY, point.y);
+        }
+
+        this.screen.style.width =
+            `${maxX * this.size + this.itemSize}px`;
+
+        this.screen.style.height =
+            `${maxY * this.size + this.itemSize}px`;
+    }
+
+    setArray(array) {
+        this.is2D = Array.isArray(array[0]);
+
+        if (this.is2D) {
+            this.pointGrid = [];
+
+            array.forEach((row, y) => {
+                this.pointGrid[y] = [];
+
+                row.forEach((value, x) => {
+                    const point = this.createItem(x, y, value);
+                    this.pointGrid[y][x] = point;
+                });
+            });
+        } else {
+            array.forEach((value, x) => {
+                this.createItem(x, 0, value);
+            });
+        }
+
+        console.log(this.points)
+
+        this.setScreenSize();
+    }
+
+    getPoint(index) {
+        if (Array.isArray(index)) {
+            const [y, x] = index;
+            return this.pointGrid[y][x];
+        }
+
+        return this.points[index];
+    }
+
+    sleep(ms) {
+        return new Promise(resolve =>
+            setTimeout(resolve, ms)
+        );
+    }
+
+    async setActive(indices) {
+        const points = indices.map(index => this.getPoint(index));
+
+        points.forEach(point =>
+            point.item.classList.add("active")
+        );
+        await this.sleep(this.time);
+        points.forEach(point =>
+            point.item.classList.remove("active")
+        );
+    }
+
+    async setMatch(index) {
+        const point = this.getPoint(index);
+        point.item.classList.add("match");
+        await this.sleep(this.time * 2);
+        point.item.classList.remove("match");
+    }
+
+    setHold(index) {
+        const point = this.getPoint(index);
+        point.item.classList.toggle("hold");
+    }
+
+    eliminateArray(indices) {
+        indices.forEach(index => {
+            const point = this.getPoint(index);
+            point.item.classList.add("eliminate");
+        });
+    }
+
+    checkChange(pair) {
+        for (const [key, value] of Object.entries(pair)) {
+            if (!(key in this.states)) {
+                this.states[key] = value;
+                this.getPoint(value).item.classList.add("hold");
+                continue;
+            }
+
+            if (this.states[key] !== value) {
+                this.getPoint(this.states[key]).item.classList.remove("hold");
+                this.states[key] = value;
+                this.getPoint(value).item.classList.add("hold");
+            }
+        }
+    }
+
+    async removeClass() {
+        await this.sleep(this.time);
+        this.states = {};
+
+        this.points.forEach(point => {
+            point.item.className = "grid-item";
+        });
+    }
+
+    createCircle(radius) {
+        const used = new Set();
+
+        const centerX = radius;
+        const centerY = radius;
+
+        const steps = Math.ceil(2 * Math.PI * radius * 4);
+
+        for (let i = 0; i < steps; i++) {
+            const angle = (i / steps) * Math.PI * 2;
+            const x = Math.round(centerX + Math.cos(angle) * radius);
+            const y = Math.round(centerY + Math.sin(angle) * radius);
+
+            const key = `${x},${y}`;
+
+            if (used.has(key)) {
+                continue;
+            }
+
+            used.add(key);
+            this.createItem(x, y);
+        }
+        this.setScreenSize();
+
+        return this.points;
+    }
+
+    createFilledCircle(radius) {
+        const centerX = radius;
+        const centerY = radius;
+
+        for (let y = 0; y <= radius * 2; y++) {
+            for (let x = 0; x <= radius * 2; x++) {
+                const dx = x - centerX;
+                const dy = y - centerY;
+                const distance = Math.sqrt(dx ** 2 + dy ** 2);
+
+                if (distance <= radius) {
+                    this.createItem(x, y);
+                }
+            }
+        }
+        this.setScreenSize();
+
+        return this.points;
+    }
+
+
+
+}
