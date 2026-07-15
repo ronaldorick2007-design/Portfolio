@@ -30,7 +30,7 @@
 
     <div class="welcomeText Hover">
 
-    <div id="grid-pattern-demo"></div>
+    <div id="grid-pattern-demo" style="padding: 40px 50px 50px 0px;"></div>
 
     <div class="welcomeContent">
         <h2>Hello it's me</h2>
@@ -49,7 +49,7 @@
 </div>
   </div>
 
-  <div class="content">
+  <div class="content-home">
     <div id="about-section" class="alignText Hover">
       <h2>About Me</h2>
       <p>This section is under development.</p>
@@ -61,8 +61,11 @@
   </div>
 
   <div class="personality alignText Hover">
-    <h1>This is my personality</h1>
+    <div id="grid-pattern-yellow"></div>
+    <div class="personalContent">
+      <h1>This is my personality</h1>
     <p>This section is under construction</p>
+    </div>
   </div>
 
   <div class="projects">
@@ -84,21 +87,83 @@
     <h1 >Thank you</h1>
   </footer>
 
-  <script src="Grid.js"></script>
+  <script src="gridPlane.js"></script>
   <script>
-    const DotGrid = new Grid("grid-pattern-demo", {cols:14, time:1000, size:48, dotClass:"dot-matrix"});
-    let B = Array(140).fill(0);
-    DotGrid.setArray(B);
+   const DotGrid = new GridPlane("grid-pattern-demo", {
+    time: 1000,
+    size: 50,
+    itemSize: 40
+});
 
-    setInterval(() => {
-      DotGrid.gridArray.forEach(dot => {
-        if(Math.random() < 0.8){
-        dot.textContent = dot.textContent==="1" ? "0" : "1";
-        dot.style.background = dot.style.background==="pink" ? "#ff4974" : "pink";
-      }
-      })
-    }, 250);
+const values1 = Array.from(
+    { length: 10 },
+    () => Array(16).fill(0)
+);
 
+DotGrid.setArray(values1);
+
+setInterval(() => {
+    for (const point of DotGrid.points) {
+        if (Math.random() >= 0.8) {
+            continue;
+        }
+
+        const item = point.item;
+
+        item.textContent =
+            item.textContent === "1" ? "0" : "1";
+
+        item.style.background =
+            item.style.background === "pink"
+                ? "#ff4974"
+                : "pink";
+    }
+}, 250);
+// const DotGrid1 = new GridMagnet("grid-pattern-yellow", {
+//     cols: 51,
+//     time: 100,
+//     size: 18,
+//     gap:8,
+//     dotClass: "dot-matrix"
+// });
+
+// const values = Array(765).fill(0);
+
+// DotGrid1.setArray(values);
+// async function run() {
+//     const rows = Math.ceil(
+//         DotGrid1.magnets.length / DotGrid1.cols
+//     );
+
+//     const centerRow = (rows - 1) / 2;
+//     const centerCol = (DotGrid1.cols - 1) / 2;
+
+//     const rings = new Map();
+
+//     for (const magnet of DotGrid1.magnets) {
+//         const distance = Math.hypot(
+//             magnet.row - centerRow,
+//             magnet.col - centerCol
+//         );
+
+//         const ring = Math.round(distance);
+
+//         if (!rings.has(ring)) {
+//             rings.set(ring, []);
+//         }
+
+//         rings.get(ring).push(magnet.index);
+//     }
+
+//     const orderedRings = [...rings.entries()]
+//         .sort((a, b) => a[0] - b[0]);
+
+//     for (const [, indexes] of orderedRings) {
+//         await DotGrid1.setActive(indexes);
+//     }
+// }
+
+// run();
   </script> 
 </body>
 </html>
