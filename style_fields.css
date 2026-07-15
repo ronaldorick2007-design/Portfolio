@@ -22,21 +22,20 @@ body{
 }
 
 .header #logo span{
-    color :aqua;
+    color: aqua;
 }
 
 .header .nav{
     margin-left: 20px;
-    display :flex;
+    display: flex;
     gap: 20px;
 }
 
 .header .nav a{
     color: #fff;
     text-decoration: none;
-    border : 1px solid #fff;
+    border: 1px solid #fff;
     padding: 5px 10px;
-    text-decoration: none;
 
     transition: all 0.3s ease;
 }
@@ -65,18 +64,18 @@ body{
 }
 
 .welcomeText h1, h2 span{
-    margin-top:-20px;
+    margin-top: -20px;
     font-size: 3rem;
     font-weight: 1000;
 }
 .welcomeText h2{
-    margin-top:-40px
+    margin-top: -40px;
 }
 
 .welcomeText button{
     font-size: 32px;
     background-color: #ff4974;
-    border:1px solid #000;
+    border: 1px solid #000;
     transition: all 0.3s ease;
     border-radius: 10px;
 }
@@ -129,7 +128,7 @@ body{
     height: 50vh;
     background-color: #36deff;
 
-    transition : all 0.3s ease
+    transition: all 0.3s ease;
 }
 
 .projects{
@@ -137,12 +136,12 @@ body{
     padding: 20px;
     height: 50vh;
     gap: 20px;
-    justify-content : space-between
+    justify-content: space-between;
 }
 
 .projects .project-card{
     flex: 1;
-    background-color : #89FC00;
+    background-color: #89FC00;
 }
 
 .Hover:hover{
