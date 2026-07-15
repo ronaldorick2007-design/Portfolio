@@ -22,21 +22,20 @@ body{
 }
 
 .header #logo span{
-    color :aqua;
+    color: aqua;
 }
 
 .header .nav{
     margin-left: 20px;
-    display :flex;
+    display: flex;
     gap: 20px;
 }
 
 .header .nav a{
     color: #fff;
     text-decoration: none;
-    border : 1px solid #fff;
+    border: 1px solid #fff;
     padding: 5px 10px;
-    text-decoration: none;
 
     transition: all 0.3s ease;
 }
@@ -54,35 +53,75 @@ body{
 }
 
 .intro .welcomeText{
-    flex: 6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    border: 3px solid #000;
-    background-color: #ff4974;
-    transition: all 0.3s ease;
+    flex:6;
+    position:relative;
+    overflow:hidden;
+    border:3px solid #000;
+    background:#fff;
+    min-height:500px;
+    transition:all .3s ease;
+    padding: 10px 0px 0px 40px ;
 }
 
-.welcomeText h1, h2 span{
-    margin-top:-20px;
-    font-size: 3rem;
-    font-weight: 1000;
+/* GRID BEHIND */
+
+#grid-pattern-demo{
+    /* position:absolute; */
+    inset:0;
+    z-index:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:.7;
+    /* background-color: re; */
 }
-.welcomeText h2{
-    margin-top:-40px
+
+/* TEXT OVER GRID */
+
+.welcomeContent{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    z-index:2;
+    width:55%;
+    max-width:500px;
+    text-align:center;
+}
+
+.welcomeContent h1{
+    font-size:3rem;
+    font-weight:1000;
+    margin:0;
+}
+
+.welcomeContent h2{
+    margin:0;
+}
+
+.welcomeContent h2 span{
+    font-size:3rem;
+    font-weight:1000;
+}
+
+.welcomeContent p{
+    max-width:450px;
+    margin:15px auto;
 }
 
 .welcomeText button{
-    font-size: 32px;
-    background-color: #ff4974;
+    font-size:32px;
+
+    background:#ff4974;
     border:1px solid #000;
-    transition: all 0.3s ease;
-    border-radius: 10px;
+    border-radius:10px;
+
+    transition:.3s;
 }
+
 .welcomeText button:hover{
-    background-color: #000;
-    color: #fff;
+    background:#000;
+    color:#fff;
 }
 
 .intro .profileImage{
@@ -91,20 +130,20 @@ body{
     background-color: #ff0048;
 }
 
-.content{
+.content-home{
     display: flex;
     padding: 20px;
     gap: 20px;
     height: 82vh;
 }
 
-.content #about{
+.content-home #about-section{
     flex: 2;
     padding-right: 20px;
     background-color: #f8ff2b;
 }
 
-.content .sidebar{
+.content-home .sidebar{
     flex: 2;
     padding-right: 20px;
     background-color: #f8ff2b;
@@ -127,9 +166,31 @@ body{
 .personality{
     margin: 20px;
     height: 50vh;
-    background-color: #36deff;
-
-    transition : all 0.3s ease
+    /* background-color: #36deff; */
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    
+}
+#grid-pattern-yellow{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:.7;
+    padding: 10px 0px 0px 80px;
+}
+.personalContent{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    z-index:2;
+    width:55%;
+    max-width:500px;
+    text-align:center;
 }
 
 .projects{
@@ -137,12 +198,12 @@ body{
     padding: 20px;
     height: 50vh;
     gap: 20px;
-    justify-content : space-between
+    justify-content: space-between;
 }
 
 .projects .project-card{
     flex: 1;
-    background-color : #89FC00;
+    background-color: #89FC00;
 }
 
 .Hover:hover{
