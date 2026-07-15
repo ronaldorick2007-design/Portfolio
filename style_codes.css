@@ -108,16 +108,18 @@ body{
     border: 3px solid #000;
 }
 
-.Dot{
-    color: white;
-    text-align: center;
-    width: 18px;
-    height: 18px;
-    transition: 0.25s;
-    background-color: #28c840;
+
+canvas {
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    max-width: none;
+    max-height: none;
+
+    transform: none;
 }
-
-
 .window{
     width: 650px;
     background: #bfb8ff;
@@ -175,52 +177,99 @@ pre{
 code{
     font-family: Consolas, monospace;
 }
+/*
+.dotGrid {
+      position: relative;
 
-.dotGrid{
-    display: grid;
-    gap: 10px;
+      width: 340px;
+      height: 340px;
+
+      border: 1px solid #292929;
+    }
+.dot,
+.dot-matrix{
+      position: absolute;
+
+      top: 0;
+      left: 0;
+
+      width: 18px;
+      height: 18px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      border-radius: 3px;
+
+      background: orange;
+      color: black;
+
+      font-size: 6px;
+    }
+
+.dot-matrix {
+    border-radius: 10%;
 }
 
-.dot{ 
-    color: #fff;
-    font-size: var(--size)/2;
-    text-align: center;
-    justify-content: center;
-    width: var(--size);
-    height: var(--size);
-    background: blue;
-    transition: var(--time);
-}
-
-.dot-matrix{ 
-    color: #fff;
-    font-size: var(--size)/2;
-    text-align: center;
-    justify-content: center;
-    width: var(--size);
-    height: var(--size);
-    background: blue;
-    transition: var(--time);
-}
-
-.active{
+.active {
     background: red;
-    transform: translate(-6px,-6px);
+    transform: translate(-6px, -6px);
     box-shadow: 6px 6px black;
 }
 
-.match{
+.match {
     background: green;
-    transform: translate(-6px,-6px);
+    transform: translate(-6px, -6px);
     box-shadow: 6px 6px black;
 }
 
-.hold{
+.hold {
     background: yellow;
-    transform: translate(-6px,-6px);
+    transform: translate(-6px, -6px);
     box-shadow: 6px 6px black;
 }
 
-.eliminate{
+.eliminate {
+    background: lightblue;
+} */
+
+
+.grid-screen {
+    position: relative;
+    margin: auto;
+}
+
+.grid-item {
+    position: absolute;
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: blue;
+    color: white;
+    /* border-radius: 50%; */
+    
+    transition:
+        translate 700ms ease-in-out,
+        rotate 700ms ease,
+        scale 700ms ease,
+        background 200ms ease;
+}
+
+.grid-item.active {
+    background: red;
+}
+.grid-item.match {
+    background: green;
+}
+.grid-item.hold {
+    background: yellow;
+}
+.grid-item.eliminate {
     background: lightblue;
 }
