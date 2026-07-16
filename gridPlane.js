@@ -1,5 +1,5 @@
 class GridPlane {
-    constructor(divElement, {size = 50, itemSize = 40, time = 500} = {}){
+    constructor(divElement, {size = 50, itemSize = 40, time = 500, grid_item = "grid-item"} = {}){
         this.space = document.getElementById(divElement);
 
         this.size = size;
@@ -8,6 +8,7 @@ class GridPlane {
         this.states = {};
 
         this.points = [];
+        this.grid_item = grid_item;
 
         this.screen = document.createElement("div");
         this.screen.className = "grid-screen";
@@ -23,7 +24,7 @@ class GridPlane {
     createItem(x, y, value = "") {
         const item = document.createElement("div");
 
-        item.className = "grid-item";
+        item.className = this.grid_item;
         item.textContent = value;
 
         item.style.width = `${this.itemSize}px`;
@@ -73,6 +74,7 @@ class GridPlane {
                 this.pointGrid[y] = [];
 
                 row.forEach((value, x) => {
+                    if(value == null) return;
                     const point = this.createItem(x, y, value);
                     this.pointGrid[y][x] = point;
                 });
@@ -158,6 +160,73 @@ class GridPlane {
             point.item.className = "grid-item";
         });
     }
+
+    setLines(pairs) {
+        pairs.forEach(([from, to]) => {
+            const pointA =
+                this.getPoint(from);
+
+            const pointB =
+                this.getPoint(to);
+
+            const x1 =
+                pointA.x * this.size +
+                this.itemSize / 2;
+
+            const y1 =
+                pointA.y * this.size +
+                this.itemSize / 2;
+
+            const x2 =
+                pointB.x * this.size +
+                this.itemSize / 2;
+
+            const y2 =
+                pointB.y * this.size +
+                this.itemSize / 2;
+
+            const dx = x2 - x1;
+            const dy = y2 - y1;
+
+            const distance = Math.sqrt(
+                dx ** 2 + dy ** 2
+            );
+
+            const angle =
+                Math.atan2(dy, dx);
+
+            const line =
+                document.createElement("div");
+
+            line.className = "grid-line";
+
+            line.style.left = `${x1}px`;
+            line.style.top = `${y1}px`;
+            line.style.width = `${distance}px`;
+            line.style.rotate = `${angle}rad`;
+
+            this.screen.prepend(line);
+
+            this.lines.push({
+                from: pointA,
+                to: pointB,
+                item: line
+            });
+        });
+
+        return this.lines;
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     createCircle(radius) {
         const used = new Set();
