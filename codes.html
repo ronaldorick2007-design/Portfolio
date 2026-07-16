@@ -19,13 +19,6 @@
     </div>
   </header>
 
-  <div id="demo" class="alignText"></div>
-  <div id="grid-linear-search" class="alignText"></div>
-  <div id="grid-binary-search" class="alignText"></div>
-  <div id="grid-pattern-demo" class="alignText"></div>
-  <div id="circle-demo"></div>
-  <div id="demo1" class="alignText"></div>
-
 
   <div class="content Hover">
     <div id="title-hello-world" class="card-title alignText">
@@ -58,40 +51,6 @@ hello();</code></pre>
       </div>
     </div>
   </div>
-
-    <div class="content Hover">
-    <div id="title-add-numbers-1" class="card-title alignText">
-      <h2>Add Two Numbers</h2>
-    </div>
-    <div class="content-inner">
-      
-      <div class="sidebar alignText">
-        <h3>Sidebar</h3>
-        <p>This is the code content inside code box.</p>
-
-        <div class="window Hover">
-            <div class="topbar">
-                <div class="left">
-                    <div class="dot-terminal red"></div>
-                    <div class="dot-terminal yellow"></div>
-                    <div class="dot-terminal green"></div>
-                </div>
-                <button id="copy-add-numbers-1">Copy</button>
-            </div>
-  <pre><code id="code-add-numbers-1">function add(a,b){
-    int sum = a+b;
-    console.log(sum);
-  }
-add(1,2);</code></pre>
-        </div>
-
-      </div>
-      <div id="about-add-numbers-1" class="card-about alignText">
-      <h2>Code Snippets</h2>
-      <p>This section is for showcasing code snippets.</p>
-    </div>
-    </div>
-  </div>
   
   <div class="content Hover">
     <div id="title-linear-search" class="card-title alignText">
@@ -99,9 +58,9 @@ add(1,2);</code></pre>
     </div>
     <div class="content-inner">
       <div id="about-linear-search" class="card-about alignText">
-        <div id="grid-linear-search">
-  </div>
-    </div>
+        <div id="grid-linear-search" class="align">
+        </div>
+      </div>
       <div class="sidebar alignText">
         <h3>Sidebar</h3>
         <p>This is the code content inside code box.</p>
@@ -132,15 +91,14 @@ linearSearch(A, 2);</code></pre>
     </div>
   </div>
 
-    <div class="content Hover">
-    <div id="title-add-numbers-2" class="card-title alignText">
-      <h2>Add Two Numbers</h2>
+ <div class="content Hover">
+    <div id="title-binary-search" class="card-title alignText">
+      <h2>Binary Search</h2>
     </div>
     <div class="content-inner">
-      
       <div class="sidebar alignText">
-        <h3>Sidebar</h3>
-        <p>This is the code content inside code box.</p>
+        <h3>Binary Search</h3>
+        <p>Checks the middle element and eliminates half of the sorted array.</p>
 
         <div class="window Hover">
             <div class="topbar">
@@ -149,82 +107,91 @@ linearSearch(A, 2);</code></pre>
                     <div class="dot-terminal yellow"></div>
                     <div class="dot-terminal green"></div>
                 </div>
-                <button id="copy-add-numbers-2">Copy</button>
+                <button id="copy-binary-search">Copy</button>
             </div>
-  <pre><code id="code-add-numbers-2">function add(a,b){
-    int sum = a+b;
-    console.log(sum);
-  }
-add(1,2);</code></pre>
-        </div>
+  <pre><code id="code-binary-search">function binarySearch(arr, target){
+    let left = 0;
+    let right = arr.length - 1;
 
-      </div>
-      <div id="about-add-numbers-2" class="card-about alignText">
-      <h2>Code Snippets</h2>
-      <p>This section is for showcasing code snippets.</p>
-    </div>
-    </div>
-  </div>
+    while(left &lt;= right){
+        const mid = Math.floor(
+            (left + right) / 2
+        );
 
-  <footer class="footer">
-    <h1 >Thank you</h1>
-  </footer>
+        if(arr[mid] === target){
+            return mid;
+        }
 
-  <script src="Grid.js"></script>
-  <script src="gridPlane.js"></script>
-  <script src="gridCanvas.js"></script>
-  <script>
-const plane = new GridPlane("demo", {
-    size: 50,
-    itemSize: 40,
-    time: 100
-});
-const matrix = Array.from(
-    { length: 6 },
-    () => Array(6).fill(0)
-);
-plane.setArray(matrix);
-
-async function run() {
-    for (let i = 0; i < plane.points.length; i++) {
-        await plane.setActive([i]);
-    }
-}
-
-run();
-
-const linearArray = [1, 4, 2, 5, 3];
-
-const linearGrid = new GridPlane(
-    "grid-linear-search",
-    {
-        size: 50,
-        itemSize: 40,
-        time: 500
-    }
-);
-
-linearGrid.setArray(linearArray);
-
-async function linearSearch(grid, array, target) {
-    for (let i = 0; i < array.length; i++) {
-        await grid.setActive([i]);
-
-
-        if (array[i] === target) {
-            await grid.setMatch(i);
-            return i;
+        if(arr[mid] &lt; target){
+            left = mid + 1;
+        }else{
+            right = mid - 1;
         }
     }
 
     return -1;
 }
 
-linearSearch(
-    linearGrid,
-    linearArray,
-    2
-);
+const A = [2, 5, 9, 13, 18, 20];
+binarySearch(A, 18);</code></pre>
+        </div>
+
+      </div>
+      <div id="about-binary-search" class="card-about alignText">
+      <div id="grid-binary-search" class="align"></div>
+    </div>
+    </div>
+  </div>
+
+  <div class="content Hover">
+    <div id="title-bubble-sort" class="card-title alignText">
+      <h2>Bubble Sort</h2>
+    </div>
+    <div class="content-inner">
+      <div id="about-bubble-sort" class="card-about alignText">
+        <div id="grid-bubble-sort" class="align"></div>
+      </div>
+      <div class="sidebar alignText">
+        <h3>Bubble Sort</h3>
+        <p>Compares neighboring values and swaps them when they are in the wrong order.</p>
+
+        <div class="window Hover">
+            <div class="topbar">
+                <div class="left">
+                    <div class="dot-terminal red"></div>
+                    <div class="dot-terminal yellow"></div>
+                    <div class="dot-terminal green"></div>
+                </div>
+                <button id="copy-bubble-sort">Copy</button>
+            </div>
+  <pre><code id="code-bubble-sort">function bubbleSort(arr){
+    for(let i = 0; i &lt; arr.length - 1; i++){
+        for(let j = 0; j &lt; arr.length - i - 1; j++){
+            if(arr[j] &gt; arr[j + 1]){
+                [arr[j], arr[j + 1]] =
+                [arr[j + 1], arr[j]];
+            }
+        }
+    }
+
+    return arr;
+}
+
+bubbleSort([5, 1, 4, 2, 8]);</code></pre>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <footer class="footer">
+    <h1 >Thank you</h1>
+  </footer>
+
+  <script src="gridPlane.js"></script>
+  <script>
+
 
 function range(start, end) {
     return Array.from(
@@ -232,6 +199,26 @@ function range(start, end) {
         (_, i) => start + i
     );
 }
+    const values = [1, 4, 2, 5, 3];
+    const grid = new GridPlane("grid-linear-search", {
+        size: 50,
+        itemSize: 40,
+        time: 500
+    });
+
+    grid.setArray(values);
+
+    async function linearSearch(arr, target){
+        for(let i = 0; i < arr.length; i++){
+            await grid.setActive([i]);
+            if(arr[i] === target){
+                await grid.setMatch(i);
+                return i;
+            }
+        }
+        return -1;
+    }
+    linearSearch(values, 2);
 
 const binaryArray = [2, 5, 9, 13, 18, 20];
 
@@ -294,275 +281,53 @@ binarySearch(
     18
 );
 
-const DotGrid = new GridPlane("grid-pattern-demo", {
-    time: 1000,
-    size: 25,
-    itemSize: 20
+
+const bubbleValues = [5, 1, 4, 2, 8];
+
+const bubbleGrid = new GridPlane("grid-bubble-sort", {
+    size:50,
+    itemSize:40,
+    time:500
 });
 
-const values1 = Array.from(
-    { length: 7 },
-    () => Array(7).fill(0)
-);
+bubbleGrid.setArray(bubbleValues);
+async function bubbleSort(grid, values){
+    const n = values.length;
 
-DotGrid.setArray(values1);
+    for(let i = 0; i < n - 1; i++){
+        let swapped = false;
 
-setInterval(() => {
-    for (const point of DotGrid.points) {
-        if (Math.random() >= 0.8) {
-            continue;
+        for(let j = 0; j < n - i - 1; j++){
+            await grid.setActive([j, j + 1]);
+
+            if(values[j] <= values[j + 1]){
+                continue;
+            }
+
+            [values[j], values[j + 1]] =
+                [values[j + 1], values[j]];
+
+            grid.points[j].value = values[j];
+            grid.points[j + 1].value = values[j + 1];
+
+            grid.points[j].item.textContent = values[j];
+            grid.points[j + 1].item.textContent = values[j + 1];
+
+            swapped = true;
         }
 
-        const item = point.item;
+        grid.setHold(n - i - 1);
 
-        item.textContent =
-            item.textContent === "1" ? "0" : "1";
-
-        item.style.background =
-            item.style.background === "pink"
-                ? "#ff4974"
-                : "pink";
+        if(!swapped){
+            break;
+        }
     }
-}, 250);
 
+    await grid.removeClass();
 
-
-const circle = new GridPlane("circle-demo", {
-    size: 25,
-    itemSize: 20,
-    time: 100
-});
-
-// const circlePoints = circle.createFilledCircle(15);
-// async function traverseCircle(grid, points) {
-//     for (const point of points) {
-//         await grid.setActive([point.index]);
-//     }
-// }
-
-// traverseCircle(circle, circlePoints);
-// async function ripple(grid, points, radius) {
-//     const centerX = radius;
-//     const centerY = radius;
-
-//     const rings = {};
-
-//     for (const point of points) {
-//         const dx = point.x - centerX;
-//         const dy = point.y - centerY;
-
-//         const distance = Math.sqrt(
-//             dx ** 2 + dy ** 2
-//         );
-
-//         const ring = Math.round(distance);
-
-//         if (!rings[ring]) {
-//             rings[ring] = [];
-//         }
-
-//         rings[ring].push(point.index);
-//     }
-
-//     for (const ring of Object.values(rings)) {
-//         await grid.setActive(ring);
-//     }
-// }
-// ripple(
-//     circle,
-//     circlePoints,
-//     15
-// );
-
-// function distort(points) {
-//     for (const point of points) {
-//         const x = Math.random() * 200 - 100;
-//         const y = Math.random() * 200 - 100;
-//         const rotate = Math.random() * 360;
-//         const scale = 0.5 + Math.random();
-
-//         point.item.style.transition = `
-//             translate 4s ease,
-//             rotate 4s ease,
-//             scale 4s ease
-//         `;
-
-//         point.item.style.translate =
-//             `${x}px ${y}px`;
-
-//         point.item.style.rotate =
-//             `${rotate}deg`;
-
-//         point.item.style.scale =
-//             scale;
-//     }
-// }
-// const circlePoints =
-//     circle.createFilledCircle(6);
-
-// setTimeout(() => {
-//     distort(circlePoints);
-// }, 1000);
-
-function scatter(points) {
-    for (const point of points) {
-        const x = Math.random() * 1000 - 500;
-        const y = Math.random() * 50 +500;
-        const rotate = Math.random() * 360;
-        const scale = 0.5 + Math.random();
-
-        point.item.style.translate =
-            `${x}px ${y}px`;
-
-        point.item.style.rotate =
-            `${rotate}deg`;
-
-        point.item.style.scale =
-            scale;
-    }
+    return values;
 }
-function align(points) {
-    for (const point of points) {
-        point.item.style.transition = `
-            translate 3s ease,
-            rotate 3s ease,
-            scale 3s ease
-        `;
-
-        point.item.style.translate = "0px 0px";
-        point.item.style.rotate = "0deg";
-        point.item.style.scale = "1";
-    }
-}
-const values = Array.from(
-    { length: 15 },
-    () => Array(15).fill()
-);
-
-const grid = new GridPlane("demo1", {
-    size: 30,
-    itemSize: 20,
-    time: 100
-});
-
-grid.setArray(values);
-
-scatter(grid.points);
-
-setTimeout(() => {
-    align(grid.points);
-}, 1000);
-// plane.setArray([
-//     1,
-//     4,
-//     2,
-//     5,
-//     3
-// ]);
-//     const value = Array(225).fill(0);
-
-// const cool_matrix = new GridCanvas(
-//     "cool-matrix",
-//     value,
-//     {
-//         cols: 15,
-//         size: 30,
-//         dotSize: 24,
-//         time: 100
-//     }
-// );
-
-//     const range = (start, end) =>
-//       Array.from({ length: end - start + 1 }, (_, i) => start + i);
-
-//     const linearArray = [1, 4, 2, 5, 3];
-//     const linearGrid = new gridMagnet("grid-linear-search");
-//     linearGrid.setArray(linearArray);
-
-//     async function linearSearch(grid, arr, target) {
-//       for (let i = 0; i < arr.length; i++) {
-//         await grid.setActive([i]);
-//         if (arr[i] === target) {
-//           await grid.setMatch([i]);
-//           return i;
-//         }        
-//       }
-//       return -1;
-//     }
-
-//     linearSearch(linearGrid, linearArray, 2);
-
-//     const DotGrid = new gridMagnet("grid-pattern-demo", {
-//     cols: 50,
-//     size: 18
-// });
-
-// const values = Array(400).fill(0);
-
-// DotGrid.setArray(values);
-
-// setInterval(() => {
-//     for (const magnet of DotGrid.magnets) {
-//         if (Math.random() >= 0.8) {
-//             continue;
-//         }
-
-//         const dot = magnet.dot;
-
-//         dot.textContent =
-//             dot.textContent === "1" ? "0" : "1";
-
-//         dot.style.background =
-//             dot.style.background === "green"
-//                 ? "#27ff47"
-//                 : "green";
-//     }
-// }, 250);
-
-
-//     const unsortedArray = [64, 34, 25, 12, 22, 11, 90];
-
-// const bubbleGrid = new gridMagnet("grid-bubble-sort", {
-//     time: 1000,gap:10
-// });
-
-// bubbleGrid.setArray(unsortedArray);
-
-// async function bubbleSort(grid, values) {
-//     const n = values.length;
-
-//     for (let i = 0; i < n - 1; i++) {
-//         let swapped = false;
-
-//         for (let j = 0; j < n - i - 1; j++) {
-//             await grid.setActive([j, j + 1]);
-
-//             if (values[j] <= values[j + 1]) {
-//                 continue;
-//             }
-
-//             [values[j], values[j + 1]] =
-//                 [values[j + 1], values[j]];
-
-//             grid.getDot(j).textContent = values[j];
-//             grid.getDot(j + 1).textContent = values[j + 1];
-
-//             swapped = true;
-//         }
-
-//         grid.setHold(n - i - 1);
-
-//         if (!swapped) {
-//             break;
-//         }
-//     }
-
-//     await grid.removeClass();
-
-//     return values;
-// }
-
-// bubbleSort(bubbleGrid, unsortedArray);
+bubbleSort(bubbleGrid, bubbleValues);
 
   </script> 
 </body>
