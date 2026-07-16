@@ -53,10 +53,10 @@ body{
 }
 
 .intro .welcomeText{
-    flex:6;
+    /* flex:8; */
+    width: 100%;
     position:relative;
     overflow:hidden;
-    border:3px solid #000;
     background:#fff;
     min-height:500px;
     transition:all .3s ease;
@@ -66,9 +66,12 @@ body{
 /* GRID BEHIND */
 
 #grid-pattern-demo{
-    /* position:absolute; */
-    inset:0;
+    position:absolute;
+    /* inset:0; */
     z-index:0;
+    top:0;
+    left:0;
+    /* transform:translate(12%, 2%); */
     display:flex;
     justify-content:center;
     align-items:center;
@@ -80,23 +83,27 @@ body{
 
 .welcomeContent{
     position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
+    top:0;
+    left:0;
+    margin: 10rem 15rem;
+    /* transform:translate(-80%, -50%); */
     z-index:2;
     width:55%;
-    max-width:500px;
-    text-align:center;
+    pointer-events: none;
+    /* max-width:500px; */
 }
 
 .welcomeContent h1{
-    font-size:3rem;
-    font-weight:1000;
-    margin:0;
+  margin: 18px 0;
+  /* max-width: 900px; */
+  font-size: clamp(58px,9vw,130px);
+  line-height: .88;
+  letter-spacing: -.07em;
 }
 
 .welcomeContent h2{
-    margin:0;
+    margin: -30px 0px;
+    font-size: 3rem;
 }
 
 .welcomeContent h2 span{
@@ -125,7 +132,7 @@ body{
 }
 
 .intro .profileImage{
-    flex: 4;
+    flex: 2;
     padding-right: 20px;
     background-color: #ff0048;
 }
