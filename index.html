@@ -23,26 +23,26 @@
   </header>
 
   <div class="intro">
-    <div class="profileImage alignText Hover">
+    <!-- <div class="profileImage alignText Hover">
       <h3>Profile Image</h3>
       <p>This is the profile image content.</p>      
-    </div>
+    </div> -->
 
-    <div class="welcomeText Hover">
+    <div class="welcomeText">
 
-    <div id="grid-pattern-demo" style="padding: 40px 50px 50px 0px;"></div>
+    <div id="grid-pattern-demo" style="padding: 5px 50px 50px 0px;"></div>
 
     <div class="welcomeContent">
         <h2>Hello it's me</h2>
         <h1>Ronald Rick</h1>
-        <h2>and Im a <span>Developer</span></h2>
+        <h2>and Im a <h1>Developer</h1></h2>
 
-        <p>
+        <!-- <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Error odit maxime obcaecati dolor commodi velit.
-        </p>
+        </p> -->
 
-        <button class="contact">Contact Me</button>
+        <!-- <button class="contact">Contact Me</button> -->
     </div>
 
 
@@ -88,37 +88,67 @@
   </footer>
 
   <script src="gridPlane.js"></script>
-  <script>
-   const DotGrid = new GridPlane("grid-pattern-demo", {
+  <script>const DotGrid = new GridPlane("grid-pattern-demo", {
     time: 1000,
-    size: 50,
-    itemSize: 40
+    size: 40,
+    itemSize: 30
 });
 
-const values1 = Array.from(
-    { length: 10 },
-    () => Array(16).fill(0)
+const rows = 14;
+const cols = 37;
+
+DotGrid.setArray(
+    Array.from({ length: rows }, () => Array(cols).fill(""))
 );
 
-DotGrid.setArray(values1);
+let radius = 0;
+
+let centerX = 0;
+let centerY = 0;
+
+DotGrid.screen.addEventListener("mousemove", (e) => {
+    const rect = DotGrid.screen.getBoundingClientRect();
+
+    centerCol = Math.floor(
+        (e.clientX - rect.left) / DotGrid.size
+    );
+
+    centerRow = Math.floor(
+        (e.clientY - rect.top) / DotGrid.size
+    );
+
+    radius = 0; // restart ripple
+});
 
 setInterval(() => {
+
+    // const centerRow = Math.floor(rows / 2);
+    // const centerCol = Math.floor(cols / 4);
+
     for (const point of DotGrid.points) {
-        if (Math.random() >= 0.8) {
-            continue;
-        }
 
-        const item = point.item;
+        const dx = point.x - centerCol;
+        const dy = point.y - centerRow;
 
-        item.textContent =
-            item.textContent === "1" ? "0" : "1";
+        const distance = Math.round(
+            Math.sqrt(dx * dx + dy * dy)
+        );
 
-        item.style.background =
-            item.style.background === "pink"
-                ? "#ff4974"
+        point.item.style.background =
+            distance === radius
+                ? "blue"
                 : "pink";
     }
-}, 250);
+
+    radius++;
+
+    const maxRadius = 9;
+
+    if (radius > maxRadius) {
+        radius = 0;
+    }
+
+}, 100);
 // const DotGrid1 = new GridMagnet("grid-pattern-yellow", {
 //     cols: 51,
 //     time: 100,
