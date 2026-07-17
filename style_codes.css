@@ -1,6 +1,5 @@
 html{
-    scroll-behavior: smooth;
-}
+    scroll-behavior: smooth;}
 body{
     margin: 0;
     padding: 0;
@@ -10,6 +9,7 @@ body{
     flex-direction: column;
     min-height: 100vh;
     background-color: #fff8e8;
+    /* letter-spacing: -.06em; */
 }
 
 .header{
@@ -68,6 +68,7 @@ body{
     flex: 1;
     padding-right: 20px;
     background-color: #F3C178;
+    position: relative;
 }
 
 .content .sidebar{
@@ -136,6 +137,14 @@ canvas {
     background: #bfb8ff;
     border: 2px solid #000;
     transition: all 0.3s ease;
+}
+
+.window-home{
+    width: 650px;
+    /* background: #bfb8ff; */
+    border: 2px solid #000;
+    transition: all 0.3s ease;
+    /* opacity: 0.5; */
 }
 
 .topbar{
@@ -288,9 +297,9 @@ pre{
     justify-content: center;
     align-items: center;
 
-    background: blue;
+    background: pink;
     color: white;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     
     transition: all 0.25s ease;
         /* translate 700ms ease-in-out,
@@ -315,4 +324,40 @@ pre{
 }
 .grid-item.eliminate {
     background: lightblue;
+    transform: translate(-6px, -6px);
+    box-shadow: 6px 6px black;
+}
+
+
+.play-demo{
+    position:absolute;
+
+    top:12px;
+    right:12px;
+
+    width:42px;
+    height:42px;
+
+    border:none;
+    border-radius:50%;
+
+    cursor:pointer;
+
+    background:#ffffff;
+    color:#111;
+
+    font-size:18px;
+    font-weight:bold;
+
+    z-index:20;
+
+    transition:.2s;
+}
+
+.play-demo:hover{
+    transform:scale(1.08);
+}
+
+.play-demo:active{
+    transform:scale(.95);
 }
