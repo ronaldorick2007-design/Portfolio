@@ -33,9 +33,18 @@
     <div id="grid-pattern-demo" style="padding: 5px 50px 50px 0px;"></div>
 
     <div class="welcomeContent">
-        <h2>Hello it's me</h2>
-        <h1>Ronald Rick</h1>
-        <h2>and Im a <h1>Developer</h1></h2>
+      <!-- <p>GRIDPLANE / CORE SHOWCASE</p> -->
+        <div class="window-home Hover">
+            <div class="topbar">
+                <div class="left">
+                    <div class="dot-terminal red"></div>
+                    <div class="dot-terminal yellow"></div>
+                    <div class="dot-terminal green"></div>
+                </div>
+                <!-- <button id="copy-linear-search">Copy</button> -->
+            </div>
+  <pre><code id="code-linear-search"><div id="typewriter"></div></code></pre>
+        </div>
 
         <!-- <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -49,16 +58,33 @@
 </div>
   </div>
 
-  <div class="content-home">
-    <div id="about-section" class="alignText Hover">
-      <h2>About Me</h2>
-      <p>This section is under development.</p>
-    </div>
-    <div class="sidebar alignText Hover">
-      <h3>Sidebar</h3>
-      <p>This is the sidebar content.</p>
-    </div>
+<div class="content-home">
+  <div id="about-section" class="alignText Hover">
+    <h2>About Me</h2>
+    <p>
+      Hello! I'm Ronald, a Computer Science student who enjoys building
+      software and learning how systems work behind the scenes. I'm currently
+      focused on JavaScript, backend development, databases, and creating
+      interactive web applications.
+    </p>
+
+    <p>
+      I enjoy turning ideas into practical projects, whether it's developing
+      visual algorithms, designing user interfaces, or experimenting with new
+      technologies. Every project I build is another step toward becoming a
+      better software engineer.
+    </p>
   </div>
+
+  <div class="sidebar alignText Hover">
+    <h3>Currently Learning</h3>
+    <p>• JavaScript (ES6+)</p>
+    <p>• Node.js & Express</p>
+    <p>• SQL & Databases</p>
+    <p>• HTML & CSS</p>
+    <p>• Git & GitHub</p>
+  </div>
+</div>
 
   <div class="personality alignText Hover">
     <div id="grid-pattern-yellow"></div>
@@ -89,13 +115,14 @@
 
   <script src="gridPlane.js"></script>
   <script>const DotGrid = new GridPlane("grid-pattern-demo", {
-    time: 1000,
-    size: 40,
-    itemSize: 30
+    time: 100,
+    size: 20,
+    itemSize: 10,
+    grid_item : "round-grid-item"
 });
 
-const rows = 14;
-const cols = 37;
+const rows = 28;
+const cols = 72;
 
 DotGrid.setArray(
     Array.from({ length: rows }, () => Array(cols).fill(""))
@@ -133,22 +160,88 @@ setInterval(() => {
         const distance = Math.round(
             Math.sqrt(dx * dx + dy * dy)
         );
-
         point.item.style.background =
             distance === radius
-                ? "blue"
+                ? "red"
                 : "pink";
     }
 
     radius++;
 
-    const maxRadius = 9;
+    const maxRadius = 15;
 
     if (radius > maxRadius) {
         radius = 0;
     }
 
 }, 100);
+
+
+
+const words = [
+    "Developer",
+    "!Vibe Coder",
+    "Engineer",
+    "Creator",
+    "Student"
+];
+
+const element = document.getElementById("typewriter");
+
+let wordIndex = 0;
+let charIndex = 0;
+let deleting = false;
+
+// function animate(){
+
+
+//     const word = words[wordIndex];
+
+//     if(!deleting){
+
+//         charIndex++;
+
+//         element.innerHTML =
+//             word.substring(0,charIndex) +
+//             '<span class="cursor">-></span>';
+
+//         if(charIndex === word.length){
+
+//             deleting = true;
+
+//             setTimeout(animate,1200);
+
+//             return;
+//         }
+
+//     }
+//     else{
+
+//         charIndex--;
+
+//         element.innerHTML =
+//             word.substring(0,charIndex) +
+//             '<span class="cursor"><-</span>';
+
+//         if(charIndex === 0){
+
+//             deleting = false;
+
+//             wordIndex++;
+
+//             if(wordIndex >= words.length){
+//                 wordIndex = 0;
+//             }
+//         }
+//     }
+
+//     setTimeout(
+//         animate,
+//         deleting ? 90 : 150
+//     );
+// }
+
+// animate();
 // const DotGrid1 = new GridMagnet("grid-pattern-yellow", {
 //     cols: 51,
 //     time: 100,
