@@ -184,6 +184,103 @@ bubbleSort([5, 1, 4, 2, 8]);</code></pre>
     </div>
   </div>
 
+  <div class="content Hover">
+    <div id="title-selection-sort" class="card-title alignText">
+        <h2>Selection Sort</h2>
+    </div>
+
+    <div class="content-inner">
+        <div id="about-selection-sort" class="card-about alignText">
+            <div id="grid-selection-sort" class="align"></div>
+        </div>
+
+        <div class="sidebar alignText">
+            <h3>Selection Sort</h3>
+            <p>Finds the smallest element in the unsorted portion and swaps it with the first unsorted position.</p>
+
+            <div class="window Hover">
+                <div class="topbar">
+                    <div class="left">
+                        <div class="dot-terminal red"></div>
+                        <div class="dot-terminal yellow"></div>
+                        <div class="dot-terminal green"></div>
+                    </div>
+
+                    <button id="copy-selection-sort">Copy</button>
+                </div>
+
+<pre><code id="code-selection-sort">function selectionSort(arr){
+    for(let i = 0; i &lt; arr.length - 1; i++){
+        let min = i;
+
+        for(let j = i + 1; j &lt; arr.length; j++){
+            if(arr[j] &lt; arr[min]){
+                min = j;
+            }
+        }
+
+        if(min !== i){
+            [arr[i], arr[min]] =
+            [arr[min], arr[i]];
+        }
+    }
+
+    return arr;
+}
+
+selectionSort([5, 1, 4, 2, 8]);</code></pre>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content Hover">
+    <div id="title-insertion-sort" class="card-title alignText">
+        <h2>Insertion Sort</h2>
+    </div>
+
+    <div class="content-inner">
+        <div id="about-insertion-sort" class="card-about alignText">
+            <div id="grid-insertion-sort" class="align"></div>
+        </div>
+
+        <div class="sidebar alignText">
+            <h3>Insertion Sort</h3>
+            <p>Builds the sorted array one element at a time by inserting each value into its correct position.</p>
+
+            <div class="window Hover">
+                <div class="topbar">
+                    <div class="left">
+                        <div class="dot-terminal red"></div>
+                        <div class="dot-terminal yellow"></div>
+                        <div class="dot-terminal green"></div>
+                    </div>
+
+                    <button id="copy-insertion-sort">Copy</button>
+                </div>
+
+<pre><code id="code-insertion-sort">function insertionSort(arr){
+    for(let i = 1; i &lt; arr.length; i++){
+        let j = i;
+
+        while(j &gt; 0 && arr[j] &lt; arr[j - 1]){
+            [arr[j], arr[j - 1]] =
+            [arr[j - 1], arr[j]];
+
+            j--;
+        }
+    }
+
+    return arr;
+}
+
+insertionSort([5, 1, 4, 2, 8]);</code></pre>
+
+            </div>
+        </div>
+    </div>
+</div>
 
   <footer class="footer">
     <h1 >Thank you</h1>
@@ -300,20 +397,15 @@ async function bubbleSort(grid, values){
         for(let j = 0; j < n - i - 1; j++){
             await grid.setActive([j, j + 1]);
 
-            if(values[j] <= values[j + 1]){
-                continue;
-            }
+            if(values[j] > values[j + 1]){
 
-            [values[j], values[j + 1]] =
-                [values[j + 1], values[j]];
+    [values[j], values[j + 1]] =
+    [values[j + 1], values[j]];
 
-            grid.points[j].value = values[j];
-            grid.points[j + 1].value = values[j + 1];
+    grid.swap(j, j + 1);
 
-            grid.points[j].item.textContent = values[j];
-            grid.points[j + 1].item.textContent = values[j + 1];
-
-            swapped = true;
+    swapped = true;
+}
         }
 
         grid.setHold(n - i - 1);
@@ -327,7 +419,117 @@ async function bubbleSort(grid, values){
 
     return values;
 }
-bubbleSort(bubbleGrid, bubbleValues);
+
+bubbleSort(bubbleGrid, bubbleValues)
+    .then(() => {
+        bubbleGrid.clear();
+        bubbleGrid.setArray([5,1,4,2,8])
+    });
+
+
+const selectionValues = [5, 1, 4, 2, 8];
+
+const selectionGrid = new GridPlane("grid-selection-sort", {
+    size: 50,
+    itemSize: 40,
+    time: 3000
+});
+
+selectionGrid.setArray(selectionValues);
+
+async function selectionSort(grid, values){
+
+    const n = values.length;
+
+    for(let i = 0; i < n - 1; i++){
+
+        let min = i;
+        grid.checkChange({min});
+
+        for(let j = i + 1; j < n; j++){
+
+            await grid.setActive([min, j]);
+
+            if(values[j] < values[min]){
+                min = j;
+                grid.checkChange({min});
+            }
+        }
+
+        if(min !== i){
+
+            [values[i], values[min]] =
+            [values[min], values[i]];
+
+            grid.swap(i, min);
+        }
+
+        grid.eliminateArray([i]);
+    }
+
+    grid.setHold(n - 1);
+
+    await grid.removeClass();
+
+    return values;
+}
+
+selectionSort(selectionGrid, selectionValues)
+.then(() => {
+    selectionGrid.clear();
+    selectionGrid.setArray([5,1,4,2,8]);
+});
+
+const insertionValues = [5, 1, 4, 2, 8];
+
+const insertionGrid = new GridPlane("grid-insertion-sort", {
+    size: 50,
+    itemSize: 40,
+    time: 3000
+});
+
+insertionGrid.setArray(insertionValues);
+
+async function insertionSort(grid, values){
+
+    const n = values.length;
+
+    // grid.setHold(0);
+
+    for(let i = 1; i < n; i++){
+
+        for(let j = i; j > 0; j--){
+            grid.checkChange({j})
+
+             await grid.eliminateArray([j - 1, j]);
+
+            if(values[j] < values[j - 1]){
+
+                [values[j], values[j - 1]] =
+                [values[j - 1], values[j]];
+
+                grid.swap(j, j - 1);
+            }
+            else{
+                break;
+            }
+        }
+
+        // for(let k = 0; k <= i; k++){
+        //     grid.setHold(k);
+        // }
+    }
+
+    await grid.removeClass();
+
+    return values;
+}
+
+insertionSort(insertionGrid, insertionValues)
+.then(() => {
+    insertionGrid.clear();
+    insertionGrid.setArray([5,1,4,2,8]);
+});
 
   </script> 
 </body>
