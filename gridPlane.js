@@ -90,6 +90,29 @@ class GridPlane {
         this.setScreenSize();
     }
 
+    clear(){
+
+    // Remove every point from the DOM
+    this.points.forEach(point => {
+        point.item.remove();
+    });
+
+    // Remove every line from the DOM (if you have lines)
+    this.lines?.forEach(line => {
+        line.item.remove();
+    });
+
+    // Reset all internal arrays
+    this.points = [];
+    this.pointGrid = [];
+    this.lines = [];
+
+    // Optional: reset cached states
+    this.rows = 0;
+    this.cols = 0;
+    this.is2D = false;
+}
+
     getPoint(index) {
         if (Array.isArray(index)) {
             const [y, x] = index;
@@ -160,6 +183,18 @@ class GridPlane {
             point.item.className = "grid-item";
         });
     }
+
+    swap(index1, index2){
+
+    const point1 = this.getPoint(index1);
+    const point2 = this.getPoint(index2);
+
+    [point1.value, point2.value] =
+    [point2.value, point1.value];
+
+    point1.item.textContent = point1.value;
+    point2.item.textContent = point2.value;
+}
 
     setLines(pairs) {
         pairs.forEach(([from, to]) => {
