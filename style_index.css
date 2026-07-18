@@ -12,13 +12,7 @@ body{
     /* letter-spacing: -.02em; */
 }
 
-.welcomeContent,
-.welcomeContent h1,
-.welcomeContent h2,
-.welcomeContent p,
-#typewriter{
-    font-family: "Times New Roman", Times, serif;
-}
+
 
 .header{
     background-color: #000;
@@ -81,7 +75,7 @@ body{
     top:0;
     left:0;
     margin-top: 20px;
-    margin-left: 10px;
+    margin-left: 40px;
     /* transform:translate(12%, 2%); */
     display:flex;
     justify-content:center;
@@ -246,12 +240,16 @@ body{
 }
 
 #typewriter{
-    font-size:80px;
+    display: inline;
+    font-size:25px;
     font-weight:bold;
-
 }
 
 .cursor{
+    display: inline-block;
+    /* padding-top: 10px; */
+    height: 20px;
+    border-right: #000 10px solid;
     animation:blink .8s infinite;
 }
 
@@ -259,4 +257,22 @@ body{
     50%{
         opacity:0;
     }
+}
+
+.terminal-name{
+    /* color:#000dff; */
+    font-weight:bold;
+    font-size:7rem;
+    font-family:"Times New Roman", serif;
+}
+
+#typing-line{
+    /* color:#000dff; */
+    font-weight:bold;
+    font-size:4rem;
+    font-family:"Times New Roman", serif;
+}
+
+.command{
+    color: green;
 }
