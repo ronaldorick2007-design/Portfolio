@@ -140,10 +140,15 @@ canvas {
 }
 
 .window-home{
-    width: 650px;
-    /* background: #bfb8ff; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 900px;
+    background: rgba(255, 91, 252, 0.571);
     border: 2px solid #000;
     transition: all 0.3s ease;
+    height: 450px;
+    
     /* opacity: 0.5; */
 }
 
@@ -208,6 +213,23 @@ pre{
 
     text-align:left;
 }
+
+.window-home pre{
+    width:100%;
+    height:500px;
+    margin:0;
+    padding:20px;
+    
+
+    overflow:auto;
+    white-space:pre;
+
+    text-align:left;
+}
+
+
+
+
 /*
 .dotGrid {
       position: relative;
@@ -299,7 +321,7 @@ pre{
 
     background: pink;
     color: white;
-    /* border-radius: 50%; */
+    border-radius: 30%;
     
     transition: all 0.25s ease;
         /* translate 700ms ease-in-out,
