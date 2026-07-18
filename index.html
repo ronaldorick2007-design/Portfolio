@@ -43,7 +43,7 @@
                 </div>
                 <!-- <button id="copy-linear-search">Copy</button> -->
             </div>
-  <pre><code id="code-linear-search"><div id="typewriter"></div></code></pre>
+  <pre><code id="code-linear-search"><div><div id="typewriter"></div><div class="cursor"></div></div></code></pre>
         </div>
 
         <!-- <p>
@@ -60,7 +60,7 @@
 
 <div class="content-home">
   <div id="about-section" class="alignText Hover">
-    <h2>About Me</h2>
+    <h2>About Me<div class="cursor"></div></h2>
     <p>
       Hello! I'm Ronald, a Computer Science student who enjoys building
       software and learning how systems work behind the scenes. I'm currently
@@ -174,8 +174,7 @@ setInterval(() => {
         radius = 0;
     }
 
-}, 100);
-
+}, 90);
 
 
 const words = [
@@ -187,11 +186,110 @@ const words = [
 ];
 
 const element = document.getElementById("typewriter");
+const cursor = document.querySelector(".cursor");
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// --------------------
+// Infinite Typewriter
+// --------------------
 
 let wordIndex = 0;
 let charIndex = 0;
 let deleting = false;
 
+// --------------------
+// Terminal Intro
+// --------------------
+
+async function terminalIntro() {
+
+    const intro = "> saymyname";
+
+    for (const letter of intro) {
+        element.innerHTML += letter;
+        await delay(100);
+    }
+
+    
+    await delay(800);
+    element.innerHTML += "<br>";
+
+    const name = "RONALD RICK!";
+    element.innerHTML += `<span class="terminal-name"></span>`;
+    const nameSpan = element.querySelector(".terminal-name");
+
+    cursor.style.height = "85px";
+    for (const letter of name) {
+        nameSpan.innerHTML += letter;
+        await delay(200);
+    }
+    
+
+    
+    await delay(1200);
+    element.innerHTML += "<br>";
+
+    const who = ">whoami";
+
+  cursor.style.height = "20px";
+for (const letter of who) {
+    element.innerHTML += letter;
+    await delay(100);
+}
+
+
+await delay(800);
+element.innerHTML += "<br>";
+
+cursor.style.height = "50px";
+// Create a line that will be updated forever
+element.innerHTML += `<span id="typing-line"></span>`;
+const typingLine = document.getElementById("typing-line");
+
+let wordIndex = 0;
+let charIndex = 0;
+let deleting = false;
+
+function animate() {
+
+    const word = words[wordIndex];
+
+    if (!deleting) {
+
+        charIndex++;
+
+        typingLine.textContent =
+            word.substring(0, charIndex);
+
+        if (charIndex === word.length) {
+            deleting = true;
+            setTimeout(animate, 1200);
+            return;
+        }
+
+    } else {
+
+        charIndex--;
+
+        typingLine.textContent =
+            word.substring(0, charIndex);
+
+        if (charIndex === 0) {
+            deleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+        }
+    }
+
+    setTimeout(animate, deleting ? 60 : 120);
+}
+
+animate();
+}
+
+terminalIntro();
 // function animate(){
 
 
