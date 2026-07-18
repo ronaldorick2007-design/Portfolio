@@ -14,7 +14,8 @@
     <h1 id="logo">Ronald's <span>Portfolio</span></h1>
 
     <div class="nav">      
-        <a href="index.html">Home</a> 
+        <a href="index.html">Home</a>
+        <a href="fields.html">Field</a> 
         <a href="#">Github</a>      
     </div>
   </header>
@@ -452,6 +453,7 @@ async function selectionSort(grid, values){
 
             if(values[j] < values[min]){
                 min = j;
+                // await grid.setActive([j])
                 grid.checkChange({min});
             }
         }
