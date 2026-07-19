@@ -383,3 +383,11 @@ pre{
 .play-demo:active{
     transform:scale(.95);
 }
+
+.grid-line{
+    position: absolute;
+    height: 2px;
+    background: #000;
+    transform-origin: left center;
+    z-index: 0;
+}
