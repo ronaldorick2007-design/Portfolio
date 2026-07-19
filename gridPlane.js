@@ -8,6 +8,7 @@ class GridPlane {
         this.states = {};
 
         this.points = [];
+        this.lines = []
         this.grid_item = grid_item;
 
         this.screen = document.createElement("div");
@@ -81,6 +82,7 @@ class GridPlane {
             });
         } else {
             array.forEach((value, x) => {
+                
                 this.createItem(x, 0, value);
             });
         }
@@ -251,6 +253,9 @@ class GridPlane {
 
         return this.lines;
     }
+
+
+    
 
 
 
