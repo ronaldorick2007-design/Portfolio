@@ -1,31 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width = device-width, initial-scale = 1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
-  <title>Hello World</title>
-  <link rel="stylesheet" href="style_fields.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&display=swap" rel="stylesheet">
+
+    <title>Linked List Demo</title>
+
+    <link rel="stylesheet" href="style_fields.css">
+    <link rel="stylesheet" href="style_codes.css">
 </head>
+
 <body>
-  <header class="header">
-    <h1 id="logo">Ronald's <span>Portfolio</span></h1>
 
-    <div class="nav">      
-        <a href="index.html">Home</a>        
-        <a href="codes.html">Codes</a>            
-        <a href="#">Github</a>      
+<header class="header">
+    <h1 id="logo">
+        Ronald's <span>Portfolio</span>
+    </h1>
+
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="codes.html">Codes</a>
+        <a href="#">Github</a>
     </div>
-  </header>
+</header>
 
-  <div id="grid-linked-list"></div>
+<div class="layout">
+<aside>
+<h3>General</h3>
+<a href="#welcome">Welcome</a>
+<a href="#about">About</a>
+<h3>Data Structures</h3>
+<a href="#array">Array</a>
+<a href="#linked-list">Linked List</a>
+<a href="#stack">Stack</a>
+<a href="#queue">Queue</a>
+</aside>
+<main id="content"></main>
+</div>
 
-  <footer class="footer">
-    <h1 >Thank you</h1>
-  </footer>
+<footer class="footer">
+    <h1>Thank you</h1>
+</footer>
 
-  <script src="script.js"></script> 
+<script src="gridPlane.js"></script>
+
+<script>
+  const content=document.getElementById('content');
+async function load(){
+ const page=location.hash.slice(1)||'welcome';
+ const r=await fetch('data/'+page+'.html');
+ content.innerHTML=await r.text();
+ document.querySelectorAll('aside a').forEach(a=>a.style.background='');
+ const active=document.querySelector(`aside a[href="#${page}"]`);
+ if(active) active.style.background='green';
+}
+window.addEventListener('hashchange',load);
+load();
+
+
+</script>
+
 </body>
 </html>
