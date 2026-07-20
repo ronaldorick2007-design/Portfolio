@@ -391,3 +391,33 @@ pre{
     transform-origin: left center;
     z-index: 0;
 }
+
+.grid-line{
+    position: absolute;
+    height: 2px;
+    background: #333;
+    transform-origin: left center;
+    overflow: hidden;
+}
+
+.grid-line::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    transform: scaleX(0);
+    transform-origin: left center;
+}
+
+.grid-line.active::after{
+    animation: fillLine .25s linear forwards;
+}
+
+@keyframes fillLine{
+    from{
+        transform: scaleX(0);
+    }
+    to{
+        transform: scaleX(1);
+    }
+}
