@@ -59,8 +59,10 @@ hello();</code></pre>
     </div>
     <div class="content-inner">
       <div id="about-linear-search" class="card-about alignText">
+        <button id="linear-button">></button>
         <div id="grid-linear-search" class="align">
         </div>
+        <p id="linear-p">Click to play</p>
       </div>
       <div class="sidebar alignText">
         <h3>Sidebar</h3>
@@ -139,7 +141,9 @@ binarySearch(A, 18);</code></pre>
 
       </div>
       <div id="about-binary-search" class="card-about alignText">
+        <button id="binary-button">></button>
       <div id="grid-binary-search" class="align"></div>
+      <p id="binary-p">Click to play</p>
     </div>
     </div>
   </div>
@@ -150,7 +154,9 @@ binarySearch(A, 18);</code></pre>
     </div>
     <div class="content-inner">
       <div id="about-bubble-sort" class="card-about alignText">
+        <button id="bubble-button">></button>
         <div id="grid-bubble-sort" class="align"></div>
+        <p id="bubble-p">Click to play</p>
       </div>
       <div class="sidebar alignText">
         <h3>Bubble Sort</h3>
@@ -185,14 +191,63 @@ bubbleSort([5, 1, 4, 2, 8]);</code></pre>
     </div>
   </div>
 
-  <div class="content Hover">
+    <div class="content Hover">
+        <div id="title-sll-traversal" class="card-title alignText">
+            <h2>Singly Linked List Traversal</h2>
+        </div>
+
+        <div class="content-inner">
+            <div id="about-sll-traversal" class="card-about alignText">
+                <button id="sll-traversal-button">></button>
+                <div id="grid-sll-traversal" class="align"></div>
+                <p id="sll-traversal-p">Click to traverse</p>
+            </div>
+
+            <div class="sidebar alignText">
+                <h3>Singly Linked List Traversal</h3>
+                <p>Starts from the head node and visits each node one by one until reaching <code>null</code>.</p>
+
+                <div class="window Hover">
+                    <div class="topbar">
+                        <div class="left">
+                            <div class="dot-terminal red"></div>
+                            <div class="dot-terminal yellow"></div>
+                            <div class="dot-terminal green"></div>
+                        </div>
+
+                        <button id="copy-sll-traversal">Copy</button>
+                    </div>
+
+    <pre><code id="code-sll-traversal">class Node{
+        constructor(data){
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    function traverse(head){
+        let current = head;
+
+        while(current !== null){
+            console.log(current.data);
+            current = current.next;
+        }
+    }</code></pre>
+
+                </div>
+            </div>
+        </div>
+    </div>
+  <!-- <div class="content Hover">
     <div id="title-selection-sort" class="card-title alignText">
         <h2>Selection Sort</h2>
     </div>
 
     <div class="content-inner">
         <div id="about-selection-sort" class="card-about alignText">
+            <button id="selection-button">></button>
             <div id="grid-selection-sort" class="align"></div>
+            <p id="selection-p">Click to play</p>
         </div>
 
         <div class="sidebar alignText">
@@ -234,16 +289,18 @@ selectionSort([5, 1, 4, 2, 8]);</code></pre>
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
-<div class="content Hover">
+<!-- <div class="content Hover">
     <div id="title-insertion-sort" class="card-title alignText">
         <h2>Insertion Sort</h2>
     </div>
 
     <div class="content-inner">
         <div id="about-insertion-sort" class="card-about alignText">
+            <button id="insertion-button">></button>
             <div id="grid-insertion-sort" class="align"></div>
+            <p id="insertion-p">Click to play</p>
         </div>
 
         <div class="sidebar alignText">
@@ -281,7 +338,7 @@ insertionSort([5, 1, 4, 2, 8]);</code></pre>
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
   <footer class="footer">
     <h1 >Thank you</h1>
@@ -297,6 +354,26 @@ function range(start, end) {
         (_, i) => start + i
     );
 }
+
+    const linear_button = document.getElementById("linear-button");
+    const linear_p = document.getElementById("linear-p");
+
+    const binary_button = document.getElementById("binary-button");
+    const binary_p = document.getElementById("binary-p");
+
+    const sll_traversal_button = document.getElementById("sll-traversal-button");
+    const sll_traversal_p = document.getElementById("sll-traversal-p");
+
+    const bubble_button = document.getElementById("bubble-button");
+    const bubble_p = document.getElementById("bubble-p");
+
+    const selection_button = document.getElementById("selection-button");
+    const selection_p = document.getElementById("selection-p");
+    
+    const insertion_button = document.getElementById("insertion-button");
+    const insertion_p = document.getElementById("insertion-p");
+
+    
     const values = [1, 4, 2, 5, 3];
     const grid = new GridPlane("grid-linear-search", {
         size: 50,
@@ -308,15 +385,25 @@ function range(start, end) {
 
     async function linearSearch(arr, target){
         for(let i = 0; i < arr.length; i++){
+
+            linear_p.innerHTML = `Current item : ${arr[i]}\n`;
             await grid.setActive([i]);
+            
             if(arr[i] === target){
+                linear_p.innerHTML = `Match found : ${arr[i]}\n`;
                 await grid.setMatch(i);
                 return i;
             }
         }
         return -1;
     }
-    linearSearch(values, 2);
+
+    linear_button.addEventListener("click", async () => {
+        linear_button.disabled = true;
+        await linearSearch(values, 2);
+        linear_p.innerHTML = `Click to play`;
+        linear_button.disabled = false;
+    })
 
 const binaryArray = [2, 5, 9, 13, 18, 20];
 
@@ -325,7 +412,7 @@ const binaryGrid = new GridPlane(
     {
         size: 50,
         itemSize: 40,
-        time: 700
+        time: 1500
     }
 );
 
@@ -334,6 +421,9 @@ binaryGrid.setArray(binaryArray);
 async function binarySearch(grid, array, target) {
     let left = 0;
     let right = array.length - 1;
+    let mid = null;
+
+    binary_p.innerHTML = `left:${left}\tright:${right}\tmid:${mid}`;
 
     grid.checkChange({ left, right });
 
@@ -341,16 +431,19 @@ async function binarySearch(grid, array, target) {
         const mid = Math.floor(
             (left + right) / 2
         );
-
+        
+        binary_p.innerHTML = `left:${left}\tright:${right}\tmid:${mid}`;
         await grid.setActive([mid]);
 
         if (array[mid] === target) {
+            binary_p.innerHTML = `left:${left}\tright:${right}\tmid:${mid}<br>Match Found`;
             await grid.setMatch(mid);
             grid.removeClass();
             return mid;
         }
 
         if (array[mid] < target) {
+            binary_p.innerHTML = `left:${left}\tright:${right}\tmid:${mid}`;
             grid.eliminateArray(
                 range(left, mid)
             );
@@ -359,6 +452,7 @@ async function binarySearch(grid, array, target) {
 
             grid.checkChange({ left });
         } else {
+            binary_p.innerHTML = `left:${left}\tright:${right}\tmid:${mid}`;
             grid.eliminateArray(
                 range(mid, right)
             );
@@ -370,32 +464,160 @@ async function binarySearch(grid, array, target) {
     }
 
     grid.removeClass();
+    binary_p.textContent = "Not Found";
     return -1;
 }
 
-binarySearch(
+
+
+binary_button.addEventListener("click", async () => {
+        binary_button.disabled = true;
+        await binarySearch(
     binaryGrid,
     binaryArray,
     18
 );
+        binary_p.innerHTML = `Click to play`;
+        binary_button.disabled = false;
+    })
 
 
+// const selectionValues = [5, 1, 4, 2, 8];
+
+// const selectionGrid = new GridPlane("grid-selection-sort", {
+//     size: 50,
+//     itemSize: 40,
+//     time: 3000
+// });
+
+// selectionGrid.setArray(selectionValues);
+
+// async function selectionSort(grid, values){
+
+//     const n = values.length;
+
+//     for(let i = 0; i < n - 1; i++){
+
+//         let min = i;
+//         grid.checkChange({min});
+
+//         for(let j = i + 1; j < n; j++){
+
+//             await grid.setActive([min, j]);
+
+//             if(values[j] < values[min]){
+//                 min = j;
+//                 // await grid.setActive([j])
+//                 grid.checkChange({min});
+//             }
+//         }
+
+//         if(min !== i){
+
+//             [values[i], values[min]] =
+//             [values[min], values[i]];
+
+//             grid.swap(i, min);
+//         }
+
+//         grid.eliminateArray([i]);
+//     }
+
+//     grid.setHold(n - 1);
+
+//     await grid.removeClass();
+
+//     return values;
+// }
+
+
+
+// selection_button.addEventListener("click", async () => {
+//         selection_button.disabled = true;
+//         await selectionSort(selectionGrid, selectionValues)
+// .then(() => {
+//     selectionGrid.clear();
+//     selectionGrid.setArray([5,1,4,2,8]);
+// });
+//         selection_p.innerHTML = ``;
+//         selection_button.disabled = false;
+//     })
+
+// const insertionValues = [5, 1, 4, 2, 8];
+
+// const insertionGrid = new GridPlane("grid-insertion-sort", {
+//     size: 50,
+//     itemSize: 40,
+//     time: 3000
+// });
+
+// insertionGrid.setArray(insertionValues);
+
+// async function insertionSort(grid, values){
+
+//     const n = values.length;
+
+//     // grid.setHold(0);
+
+//     for(let i = 1; i < n; i++){
+
+//         for(let j = i; j > 0; j--){
+//             grid.checkChange({j})
+
+//              await grid.eliminateArray([j - 1, j]);
+
+//             if(values[j] < values[j - 1]){
+
+//                 [values[j], values[j - 1]] =
+//                 [values[j - 1], values[j]];
+
+//                 grid.swap(j, j - 1);
+//             }
+//             else{
+//                 break;
+//             }
+//         }
+
+//         // for(let k = 0; k <= i; k++){
+//         //     grid.setHold(k);
+//         // }
+//     }
+
+//     await grid.removeClass();
+
+//     return values;
+// }
+
+
+
+// insertion_button.addEventListener("click", async () => {
+//         insertion_button.disabled = true;
+//         await insertionSort(insertionGrid, insertionValues)
+// .then(() => {
+//     insertionGrid.clear();
+//     insertionGrid.setArray([5,1,4,2,8]);
+// });
+//         insertion_p.innerHTML = ``;
+//         insertion_button.disabled = false;
+//     })
 const bubbleValues = [5, 1, 4, 2, 8];
 
 const bubbleGrid = new GridPlane("grid-bubble-sort", {
     size:50,
     itemSize:40,
-    time:500
+    time:1500
 });
 
 bubbleGrid.setArray(bubbleValues);
 async function bubbleSort(grid, values){
     const n = values.length;
+    
 
     for(let i = 0; i < n - 1; i++){
         let swapped = false;
+        let j=0;
 
-        for(let j = 0; j < n - i - 1; j++){
+        for( j = 0; j < n - i - 1; j++){
             await grid.setActive([j, j + 1]);
 
             if(values[j] > values[j + 1]){
@@ -409,7 +631,8 @@ async function bubbleSort(grid, values){
 }
         }
 
-        grid.setHold(n - i - 1);
+        grid.eliminateArray(range(j,values.length-1))
+        // grid.setHold(n - i - 1);
 
         if(!swapped){
             break;
@@ -421,117 +644,190 @@ async function bubbleSort(grid, values){
     return values;
 }
 
-bubbleSort(bubbleGrid, bubbleValues)
+
+
+    bubble_button.addEventListener("click", async () => {
+        bubble_button.disabled = true;
+        await bubbleSort(bubbleGrid, bubbleValues)
     .then(() => {
         bubbleGrid.clear();
         bubbleGrid.setArray([5,1,4,2,8])
     });
+        bubble_p.innerHTML = ``;
+        bubble_button.disabled = false;
+    })
 
 
-const selectionValues = [5, 1, 4, 2, 8];
 
-const selectionGrid = new GridPlane("grid-selection-sort", {
-    size: 50,
+    const values1 = [1, 4, 2, 5, 3];
+
+const grid1 = new GridPlane("grid-sll-traversal", {
+    size: 80,
     itemSize: 40,
-    time: 3000
+    time: 500
 });
 
-selectionGrid.setArray(selectionValues);
+const links = [
+    [0,1],
+    [1,2],
+    [2,3],
+    [3,4]
+];
 
-async function selectionSort(grid, values){
+grid1.setArray(values1);
+grid1.setLines(links);
 
-    const n = values.length;
+async function traverse(arr){
 
-    for(let i = 0; i < n - 1; i++){
+    for(let i = 0; i < arr.length; i++){
 
-        let min = i;
-        grid.checkChange({min});
+        sll_traversal_p.innerHTML =
+            `Current Node : ${arr[i]}`;
 
-        for(let j = i + 1; j < n; j++){
-
-            await grid.setActive([min, j]);
-
-            if(values[j] < values[min]){
-                min = j;
-                // await grid.setActive([j])
-                grid.checkChange({min});
-            }
-        }
-
-        if(min !== i){
-
-            [values[i], values[min]] =
-            [values[min], values[i]];
-
-            grid.swap(i, min);
-        }
-
-        grid.eliminateArray([i]);
+        await Promise.all([
+        grid1.setActive([i]),
+        i < links.length
+            ? grid1.setActiveLine([links[i]])
+            : Promise.resolve()
+    ]);
     }
 
-    grid.setHold(n - 1);
-
-    await grid.removeClass();
-
-    return values;
+    sll_traversal_p.innerHTML = "Reached NULL";
 }
 
-selectionSort(selectionGrid, selectionValues)
-.then(() => {
-    selectionGrid.clear();
-    selectionGrid.setArray([5,1,4,2,8]);
+sll_traversal_button.addEventListener("click", async () => {
+
+    sll_traversal_button.disabled = true;
+
+    await traverse(values1);
+
+    sll_traversal_p.innerHTML =
+        "Click to traverse";
+
+    sll_traversal_button.disabled = false;
+
 });
+    
 
-const insertionValues = [5, 1, 4, 2, 8];
 
-const insertionGrid = new GridPlane("grid-insertion-sort", {
-    size: 50,
-    itemSize: 40,
-    time: 3000
-});
+// const selectionValues = [5, 1, 4, 2, 8];
 
-insertionGrid.setArray(insertionValues);
+// const selectionGrid = new GridPlane("grid-selection-sort", {
+//     size: 50,
+//     itemSize: 40,
+//     time: 3000
+// });
 
-async function insertionSort(grid, values){
+// selectionGrid.setArray(selectionValues);
 
-    const n = values.length;
+// async function selectionSort(grid, values){
 
-    // grid.setHold(0);
+//     const n = values.length;
 
-    for(let i = 1; i < n; i++){
+//     for(let i = 0; i < n - 1; i++){
 
-        for(let j = i; j > 0; j--){
-            grid.checkChange({j})
+//         let min = i;
+//         grid.checkChange({min});
 
-             await grid.eliminateArray([j - 1, j]);
+//         for(let j = i + 1; j < n; j++){
 
-            if(values[j] < values[j - 1]){
+//             await grid.setActive([min, j]);
 
-                [values[j], values[j - 1]] =
-                [values[j - 1], values[j]];
+//             if(values[j] < values[min]){
+//                 min = j;
+//                 // await grid.setActive([j])
+//                 grid.checkChange({min});
+//             }
+//         }
 
-                grid.swap(j, j - 1);
-            }
-            else{
-                break;
-            }
-        }
+//         if(min !== i){
 
-        // for(let k = 0; k <= i; k++){
-        //     grid.setHold(k);
-        // }
-    }
+//             [values[i], values[min]] =
+//             [values[min], values[i]];
 
-    await grid.removeClass();
+//             grid.swap(i, min);
+//         }
 
-    return values;
-}
+//         grid.eliminateArray([i]);
+//     }
 
-insertionSort(insertionGrid, insertionValues)
-.then(() => {
-    insertionGrid.clear();
-    insertionGrid.setArray([5,1,4,2,8]);
-});
+//     grid.setHold(n - 1);
+
+//     await grid.removeClass();
+
+//     return values;
+// }
+
+
+
+// selection_button.addEventListener("click", async () => {
+//         selection_button.disabled = true;
+//         await selectionSort(selectionGrid, selectionValues)
+// .then(() => {
+//     selectionGrid.clear();
+//     selectionGrid.setArray([5,1,4,2,8]);
+// });
+//         selection_p.innerHTML = ``;
+//         selection_button.disabled = false;
+//     })
+
+// const insertionValues = [5, 1, 4, 2, 8];
+
+// const insertionGrid = new GridPlane("grid-insertion-sort", {
+//     size: 50,
+//     itemSize: 40,
+//     time: 3000
+// });
+
+// insertionGrid.setArray(insertionValues);
+
+// async function insertionSort(grid, values){
+
+//     const n = values.length;
+
+//     // grid.setHold(0);
+
+//     for(let i = 1; i < n; i++){
+
+//         for(let j = i; j > 0; j--){
+//             grid.checkChange({j})
+
+//              await grid.eliminateArray([j - 1, j]);
+
+//             if(values[j] < values[j - 1]){
+
+//                 [values[j], values[j - 1]] =
+//                 [values[j - 1], values[j]];
+
+//                 grid.swap(j, j - 1);
+//             }
+//             else{
+//                 break;
+//             }
+//         }
+
+//         // for(let k = 0; k <= i; k++){
+//         //     grid.setHold(k);
+//         // }
+//     }
+
+//     await grid.removeClass();
+
+//     return values;
+// }
+
+
+
+// insertion_button.addEventListener("click", async () => {
+//         insertion_button.disabled = true;
+//         await insertionSort(insertionGrid, insertionValues)
+// .then(() => {
+//     insertionGrid.clear();
+//     insertionGrid.setArray([5,1,4,2,8]);
+// });
+//         insertion_p.innerHTML = ``;
+//         insertion_button.disabled = false;
+//     })
 
   </script> 
 </body>
