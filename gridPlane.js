@@ -199,60 +199,103 @@ class GridPlane {
 }
 
     setLines(pairs) {
-        pairs.forEach(([from, to]) => {
-            const pointA =
-                this.getPoint(from);
 
-            const pointB =
-                this.getPoint(to);
+    if (!this.lines_set)
+        this.lines_set = new Set();
 
-            const x1 =
-                pointA.x * this.size +
-                this.itemSize / 2;
+    pairs.forEach(([from, to]) => {
 
-            const y1 =
-                pointA.y * this.size +
-                this.itemSize / 2;
+        // Normalize: [1,0] === [0,1]
+        const key =
+            from < to
+                ? `${from}-${to}`
+                : `${to}-${from}`;
 
-            const x2 =
-                pointB.x * this.size +
-                this.itemSize / 2;
+        // Already exists
+        if (this.lines_set.has(key))
+            return;
 
-            const y2 =
-                pointB.y * this.size +
-                this.itemSize / 2;
+        this.lines_set.add(key);
 
-            const dx = x2 - x1;
-            const dy = y2 - y1;
+        const pointA =
+            this.getPoint(from);
 
-            const distance = Math.sqrt(
-                dx ** 2 + dy ** 2
-            );
+        const pointB =
+            this.getPoint(to);
 
-            const angle =
-                Math.atan2(dy, dx);
+        const x1 =
+            pointA.x * this.size +
+            this.itemSize / 2;
 
-            const line =
-                document.createElement("div");
+        const y1 =
+            pointA.y * this.size +
+            this.itemSize / 2;
 
-            line.className = "grid-line";
+        const x2 =
+            pointB.x * this.size +
+            this.itemSize / 2;
 
-            line.style.left = `${x1}px`;
-            line.style.top = `${y1}px`;
-            line.style.width = `${distance}px`;
-            line.style.rotate = `${angle}rad`;
+        const y2 =
+            pointB.y * this.size +
+            this.itemSize / 2;
 
-            this.screen.prepend(line);
+        const dx = x2 - x1;
+        const dy = y2 - y1;
 
-            this.lines.push({
-                from: pointA,
-                to: pointB,
-                item: line
-            });
+        const distance =
+            Math.sqrt(dx ** 2 + dy ** 2);
+
+        const angle =
+            Math.atan2(dy, dx);
+
+        const line =
+            document.createElement("div");
+
+        line.className = "grid-line";
+
+        line.style.left = `${x1}px`;
+        line.style.top = `${y1}px`;
+        line.style.width = `${distance}px`;
+        line.style.rotate = `${angle}rad`;
+
+        this.screen.prepend(line);
+
+        this.lines.push({
+            from: pointA,
+            to: pointB,
+            key,
+            item: line
         });
 
-        return this.lines;
+    });
+
+    return this.lines;
+}
+async setActiveLine(pairs) {
+
+    for (const [from, to] of pairs) {
+
+        const key =
+            from < to
+                ? `${from}-${to}`
+                : `${to}-${from}`;
+
+        const line =
+            this.lines.find(
+                line => line.key === key
+            );
+
+        if (!line)
+            continue;
+
+        line.item.classList.add("active");
+
+        await this.sleep(this.time);
+
+        line.item.classList.remove("active");
     }
+
+}
 
 
     
