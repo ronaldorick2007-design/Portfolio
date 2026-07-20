@@ -17,3 +17,5 @@ Then suddenly i was struck by an idea of have magnetic grid points, and array it
 Nope i changed my mind with different architecture, two cases, user make a array and get it to a render class that renders 1d, 2d grids, but for complex shapes like circle, hollow circle the render engine build a array and return to user, so user can use it for further modification,
 
 this seperates the problem and controlability.
+
+now i added fields.html to just me convey of what i build daily, anything, hand written codes, vibe codes.
