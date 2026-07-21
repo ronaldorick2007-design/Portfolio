@@ -8,7 +8,7 @@ class GridPlane {
         this.states = {};
 
         this.points = [];
-        this.lines = []
+        this.lines = new Map();
         this.grid_item = grid_item;
 
         this.screen = document.createElement("div");
@@ -200,56 +200,33 @@ class GridPlane {
 
     setLines(pairs) {
 
-    if (!this.lines_set)
-        this.lines_set = new Set();
-
     pairs.forEach(([from, to]) => {
 
-        // Normalize: [1,0] === [0,1]
         const key =
             from < to
                 ? `${from}-${to}`
                 : `${to}-${from}`;
 
         // Already exists
-        if (this.lines_set.has(key))
+        if (this.lines.has(key))
             return;
 
-        this.lines_set.add(key);
+        const pointA = this.getPoint(from);
+        const pointB = this.getPoint(to);
 
-        const pointA =
-            this.getPoint(from);
+        const x1 = pointA.x * this.size + this.itemSize / 2;
+        const y1 = pointA.y * this.size + this.itemSize / 2;
 
-        const pointB =
-            this.getPoint(to);
-
-        const x1 =
-            pointA.x * this.size +
-            this.itemSize / 2;
-
-        const y1 =
-            pointA.y * this.size +
-            this.itemSize / 2;
-
-        const x2 =
-            pointB.x * this.size +
-            this.itemSize / 2;
-
-        const y2 =
-            pointB.y * this.size +
-            this.itemSize / 2;
+        const x2 = pointB.x * this.size + this.itemSize / 2;
+        const y2 = pointB.y * this.size + this.itemSize / 2;
 
         const dx = x2 - x1;
         const dy = y2 - y1;
 
-        const distance =
-            Math.sqrt(dx ** 2 + dy ** 2);
+        const distance = Math.sqrt(dx ** 2 + dy ** 2);
+        const angle = Math.atan2(dy, dx);
 
-        const angle =
-            Math.atan2(dy, dx);
-
-        const line =
-            document.createElement("div");
+        const line = document.createElement("div");
 
         line.className = "grid-line";
 
@@ -260,12 +237,7 @@ class GridPlane {
 
         this.screen.prepend(line);
 
-        this.lines.push({
-            from: pointA,
-            to: pointB,
-            key,
-            item: line
-        });
+        this.lines.set(key, line);
 
     });
 
@@ -280,20 +252,49 @@ async setActiveLine(pairs) {
                 ? `${from}-${to}`
                 : `${to}-${from}`;
 
-        const line =
-            this.lines.find(
-                line => line.key === key
-            );
+        const line = this.lines.get(key);
 
         if (!line)
             continue;
 
-        line.item.classList.add("active");
+        line.classList.add("active");
 
         await this.sleep(this.time);
 
-        line.item.classList.remove("active");
+        line.classList.remove("active");
     }
+}
+
+removeLines(pairs = null) {
+
+    // Remove all lines
+    if (pairs === null) {
+
+        for (const line of this.lines.values()) {
+            line.remove();
+        }
+
+        this.lines.clear();
+        return;
+    }
+
+    // Remove specific lines
+    pairs.forEach(([from, to]) => {
+
+        const key =
+            from < to
+                ? `${from}-${to}`
+                : `${to}-${from}`;
+
+        const line = this.lines.get(key);
+
+        if (!line)
+            return;
+
+        line.remove();
+        this.lines.delete(key);
+
+    });
 
 }
 
