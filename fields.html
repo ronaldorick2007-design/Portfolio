@@ -24,6 +24,7 @@
     <div class="nav">
         <a href="index.html">Home</a>
         <a href="codes.html">Codes</a>
+        <a href="index_i.html">Godes</a>
         <a href="#">Github</a>
     </div>
 </header>
@@ -31,15 +32,15 @@
 <div class="layout">
 <aside>
 <h3>General</h3>
-<a href="#welcome">Welcome</a>
-<a href="#about">About</a>
+<a onclick="loadPage('welcome')">Welcome</a>
+<a onclick="loadPage('about')">About</a>
 <h3>Data Structures</h3>
-<a href="#array">Array</a>
-<a href="#linked-list">Linked List</a>
-<a href="#stack">Stack</a>
-<a href="#queue">Queue</a>
+<a onclick="loadPage('array')">Array</a>
+<a onclick="loadPage('linked-list')">Linked List</a>
+<a onclick="loadPage('stack')">Stack</a>
+<a onclick="loadPage('queue')">Queue</a>
 </aside>
-<main id="content"></main>
+<iframe id="content" src="pages/welcome.html"></iframe>
 </div>
 
 <footer class="footer">
@@ -49,17 +50,16 @@
 <script src="gridPlane.js"></script>
 
 <script>
-  const content=document.getElementById('content');
-async function load(){
- const page=location.hash.slice(1)||'welcome';
- const r=await fetch('data/'+page+'.html');
- content.innerHTML=await r.text();
- document.querySelectorAll('aside a').forEach(a=>a.style.background='');
- const active=document.querySelector(`aside a[href="#${page}"]`);
- if(active) active.style.background='green';
+  
+  const viewer =
+document.getElementById("content");
+
+function loadPage(page){
+
+    viewer.src =
+        `pages/${page}.html`;
+
 }
-window.addEventListener('hashchange',load);
-load();
 
 
 </script>
