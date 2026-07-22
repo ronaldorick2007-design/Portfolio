@@ -298,6 +298,68 @@ removeLines(pairs = null) {
 
 }
 
+findNode(i,rows,span){
+    let I = i + 1;
+    let row = Math.floor(Math.log2(I))
+
+    let no = Math.pow(2, row)
+    let half = no*2
+    let col = Math.floor(rows / half)
+    let cross = Math.pow(2, span - row)
+     
+    let index = I % no
+    let c = col + index*cross
+    console.log(I,no,half,col,i,index,rows,cross,row,c,span)
+
+    return [row,c]
+}
+buildBinaryTree(tree){
+
+    const span = Math.floor(Math.log2(tree.length)) + 1
+ const rows = 2**span - 1
+    const matrix = Array.from({ length: span }, () => Array(rows).fill(null));
+for(let i=0;i<tree.length;i++){
+    let [a,b] = this.findNode(i,rows,span);
+    console.log(a,b)
+    matrix[a][b] = tree[i]
+}
+this.setArray(matrix)
+
+const links = []
+for(let i=0; i<2**(span-1)-1;i++){
+    let [a1,b1] = this.findNode(i,rows,span);
+    let [a2,b2] = this.findNode(2*i+1,rows,span);
+    let [a3,b3] = this.findNode(2*i+2,rows,span);
+    
+    console.log(a1,b1,a2,b2)
+    console.log(a1,b1,a3,b3)
+    links.push([[a1,b1],[a2,b2]])
+    links.push([[a1,b1],[a3,b3]])
+}
+this.setLines(links)
+
+
+}
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    createCircle(radius) {
+
+
+}
+
 
     
 
@@ -361,4 +423,12 @@ removeLines(pairs = null) {
 
 
 
+}
+
+class Node{
+    constructor(data){
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
 }
