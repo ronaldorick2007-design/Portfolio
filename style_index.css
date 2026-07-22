@@ -263,14 +263,18 @@ body{
     /* color:#000dff; */
     font-weight:bold;
     font-size:7rem;
-    font-family:"Times New Roman", serif;
+    color: rgb(255, 0, 0);
+    text-shadow: 5px 5px #000;
+    /* font-family:"Times New Roman", serif; */
 }
 
 #typing-line{
     /* color:#000dff; */
     font-weight:bold;
     font-size:4rem;
-    font-family:"Times New Roman", serif;
+    color: rgb(255, 106, 0);
+    text-shadow: 3px 3px #000;
+    /* font-family:"Times New Roman", serif; */
 }
 
 .command{
