@@ -19,3 +19,5 @@ Nope i changed my mind with different architecture, two cases, user make a array
 this seperates the problem and controlability.
 
 now i added fields.html to just me convey of what i build daily, anything, hand written codes, vibe codes.
+
+i have successful implemented binary trees using a complicated math approach(it works!) and very tidious array manipulation but the visualizer is same one for previous grids, thats the speciality.
