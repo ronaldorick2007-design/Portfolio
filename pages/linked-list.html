@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+  <head>
+    <link rel="stylesheet" href="../style_codes.css">
+    <link rel="stylesheet" href="../style_fields.css">
+</head>
+<div class="content Hover">
+        <div id="title-sll-traversal" class="card-title alignText">
+            <h2>Singly Linked List Traversal</h2>
+        </div>
+
+        <div class="content-inner">
+            <div id="about-sll-traversal" class="card-about alignText">
+                <button id="sll-traversal-button">></button>
+                <div id="grid-sll-traversal" class="align"></div>
+                <p id="sll-traversal-p">Click to traverse</p>
+            </div>
+
+            <div class="sidebar alignText">
+                <h3>Singly Linked List Traversal</h3>
+                <p>Starts from the head node and visits each node one by one until reaching <code>null</code>.</p>
+
+                <div class="window Hover">
+                    <div class="topbar">
+                        <div class="left">
+                            <div class="dot-terminal red"></div>
+                            <div class="dot-terminal yellow"></div>
+                            <div class="dot-terminal green"></div>
+                        </div>
+
+                        <button id="copy-sll-traversal">Copy</button>
+                    </div>
+
+    <pre><code id="code-sll-traversal">class Node{
+        constructor(data){
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    function traverse(head){
+        let current = head;
+
+        while(current !== null){
+            console.log(current.data);
+            current = current.next;
+        }
+    }</code></pre>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="../gridPlane.js"></script>
+<script src="linked-list.js"></script>
