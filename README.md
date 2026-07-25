@@ -23,3 +23,5 @@ now i added fields.html to just me convey of what i build daily, anything, hand 
 i have successful implemented binary trees using a complicated math approach(it works!) and very tidious array manipulation but the visualizer is same one for previous grids, thats the speciality.
 
 as time forwards im planning to move to react, after going through some its concepts i see a clear path to implement my idea with ease, but first i want to learn react.
+
+React helps lot when its comes to DOM changes handling, for this reason im translating these codes to react, and started to think about building architecture of visualizer, currently after having a discussion with ai, i came to know about a new model generator -> customHook -> react, it is exactly useful for my visualizer, and im adopting it into my profile, changes coming soon.
