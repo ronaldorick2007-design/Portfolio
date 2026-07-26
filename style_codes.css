@@ -330,7 +330,7 @@ pre{
         rotate 700ms ease,
         scale 700ms ease,
         background 200ms ease; */
-}
+}  
 .grid-item.active {
     background: red;
     transform: translate(-6px, -6px);
