@@ -1,0 +1,60 @@
+.content{
+    display: flex;
+    flex-direction: column;
+    height: 85vh;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+.card-title{
+    height: 20px;
+    padding: 10px;
+    background-color: #ffb52b;
+}
+.content-inner{
+    display: flex;
+    height: 82vh;
+}
+
+.content .card-about{
+    flex: 1;
+    padding-right: 20px;
+    background-color: #F3C178;
+    display: grid;
+    place-items: center;
+}
+
+.content .sidebar{
+    flex: 2;
+    padding-right: 20px;
+    background-color: #FE5E41;
+}
+
+.alignText{
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    font-size: 1.2rem;
+    font-weight: 600;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #000;
+
+    transition: all 0.3s ease;
+}
+
+.align{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.3s ease;
+}
+
+
+
+.Hover:hover{
+    box-shadow: 10px 10px #000;
+    transform: scale(0.95);
+}
