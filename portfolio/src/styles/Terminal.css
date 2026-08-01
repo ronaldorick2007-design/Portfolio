@@ -1,0 +1,44 @@
+/* Command prompt lines */
+.command {
+  font-size: 1.4rem;
+  color: black;
+  margin-bottom: 0.5rem;
+}
+
+.command .prompt {
+  color: #ff79c6;
+}
+
+/* Name output line */
+.name {
+    /* color:#000dff; */
+    font-weight:bold;
+    font-size:7rem;
+    color: rgb(255, 0, 0);
+    text-shadow: 5px 5px #000;
+    /* font-family:"Times New Roman", serif; */
+}
+
+/* Dynamic role text output */
+.roles {
+    /* color:#000dff; */
+    font-weight:bold;
+    font-size:4rem;
+    color: rgb(255, 106, 0);
+    text-shadow: 3px 3px #000;
+    /* font-family:"Times New Roman", serif; */
+}
+
+/* Shared dynamic cursor */
+.cursor::after {
+  content: "|";
+  font-weight: 300;
+  color: #ffffff;
+  margin-left: 4px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
