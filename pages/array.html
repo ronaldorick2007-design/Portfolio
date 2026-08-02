@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+  <head><link rel="stylesheet" href="../style_codes.css"></head>
+  <div class="content Hover">
+    <div id="title-linear-search" class="card-title alignText">
+      <h2>Linear Search</h2>
+    </div>
+    <div class="content-inner">
+      <div id="about-linear-search" class="card-about alignText">
+        <button id="linear-button">></button>
+        <div id="grid-linear-search" class="align">
+        </div>
+        <p id="linear-p">Click to play</p>
+      </div>
+      <div class="sidebar alignText">
+        <h3>Sidebar</h3>
+        <p>This is the code content inside code box.</p>
+
+        <div class="window Hover">
+            <div class="topbar">
+                <div class="left">
+                    <div class="dot-terminal red"></div>
+                    <div class="dot-terminal yellow"></div>
+                    <div class="dot-terminal green"></div>
+                </div>
+                <button id="copy-linear-search">Copy</button>
+            </div>
+  <pre><code id="code-linear-search">function linearSearch(arr, target){
+    N = arr.length;
+    for(let i = 0; i < N; i++ ){
+      if(arr[i] == target){
+        return i;
+      }
+    return -1;
+    }
+  }
+A = [1, 4, 2, 5, 3]
+linearSearch(A, 2);</code></pre>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+ <div class="content Hover">
+    <div id="title-binary-search" class="card-title alignText">
+      <h2>Binary Search</h2>
+    </div>
+    <div class="content-inner">
+      <div class="sidebar alignText">
+        <h3>Binary Search</h3>
+        <p>Checks the middle element and eliminates half of the sorted array.</p>
+
+        <div class="window Hover">
+            <div class="topbar">
+                <div class="left">
+                    <div class="dot-terminal red"></div>
+                    <div class="dot-terminal yellow"></div>
+                    <div class="dot-terminal green"></div>
+                </div>
+                <button id="copy-binary-search">Copy</button>
+            </div>
+  <pre><code id="code-binary-search">function binarySearch(arr, target){
+    let left = 0;
+    let right = arr.length - 1;
+
+    while(left &lt;= right){
+        const mid = Math.floor(
+            (left + right) / 2
+        );
+
+        if(arr[mid] === target){
+            return mid;
+        }
+
+        if(arr[mid] &lt; target){
+            left = mid + 1;
+        }else{
+            right = mid - 1;
+        }
+    }
+
+    return -1;
+}
+
+const A = [2, 5, 9, 13, 18, 20];
+binarySearch(A, 18);</code></pre>
+        </div>
+
+      </div>
+      <div id="about-binary-search" class="card-about alignText">
+        <button id="binary-button">></button>
+      <div id="grid-binary-search" class="align"></div>
+      <p id="binary-p">Click to play</p>
+    </div>
+    </div>
+  </div>
+
+  <div class="content Hover">
+    <div id="title-bubble-sort" class="card-title alignText">
+      <h2>Bubble Sort</h2>
+    </div>
+    <div class="content-inner">
+      <div id="about-bubble-sort" class="card-about alignText">
+        <button id="bubble-button">></button>
+        <div id="grid-bubble-sort" class="align"></div>
+        <p id="bubble-p">Click to play</p>
+      </div>
+      <div class="sidebar alignText">
+        <h3>Bubble Sort</h3>
+        <p>Compares neighboring values and swaps them when they are in the wrong order.</p>
+
+        <div class="window Hover">
+            <div class="topbar">
+                <div class="left">
+                    <div class="dot-terminal red"></div>
+                    <div class="dot-terminal yellow"></div>
+                    <div class="dot-terminal green"></div>
+                </div>
+                <button id="copy-bubble-sort">Copy</button>
+            </div>
+  <pre><code id="code-bubble-sort">function bubbleSort(arr){
+    for(let i = 0; i &lt; arr.length - 1; i++){
+        for(let j = 0; j &lt; arr.length - i - 1; j++){
+            if(arr[j] &gt; arr[j + 1]){
+                [arr[j], arr[j + 1]] =
+                [arr[j + 1], arr[j]];
+            }
+        }
+    }
+
+    return arr;
+}
+
+bubbleSort([5, 1, 4, 2, 8]);</code></pre>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<script src="../gridPlane.js"></script>
+<script src="../codes.js"></script>
