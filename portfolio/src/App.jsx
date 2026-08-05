@@ -9,7 +9,7 @@ import Codes from "./pages/Codes";
 export default function App(){
   return(
     <BrowserRouter>
-      <Header />
+      {/* <Header /> */}
       <Routes>
         <Route path="/" element = {<Home/>}/>
         <Route path="/codes" element = {<Codes/>}/>
