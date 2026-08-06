@@ -1,12 +1,7 @@
 export default function Footer(){
     return(
-        <div className="header">
-            <span id="logo">Ronald</span>
-            <div className="nav">
-                <a href="#">Home</a>
-                <a href="#">Home</a>
-                <a href="#">Home</a>
-            </div>
+        <div className="flex items-center justify-center p-8 text-4xl font-bold text-white bg-black">
+            Thankyou
         </div>
     );
 }
