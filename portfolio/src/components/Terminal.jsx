@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "../styles/Terminal.css";
 
-const ROLES = ["developer", "creator", "vibe coder"];
+const ROLES = ["developer", "creator", "!vibe coder"];
 
 // Helper function for clean timing delays
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -64,7 +64,7 @@ export default function Terminal() {
 
       // Step 2: Reveal target Name ("Alice")
       setActiveStep("name");
-      await typeString("Alice", setNameText);
+      await typeString("Ronald", setNameText);
       await wait(1000);
 
       // Step 3: Type command "whoami"
