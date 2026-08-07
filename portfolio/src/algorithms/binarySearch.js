@@ -1,7 +1,7 @@
 export default function* binarySearch() {
-    const arr = [1, 2, 3, 4, 5,6,7,8];
+    const arr = [1, 2, 3, 4, 5,6];
     const target = 1;
-
+ 
     let left = 0;
     let right = arr.length - 1;
 
