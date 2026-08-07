@@ -26,4 +26,6 @@ as time forwards im planning to move to react, after going through some its conc
 
 React helps lot when its comes to DOM changes handling, for this reason im translating these codes to react, and started to think about building architecture of visualizer, currently after having a discussion with ai, i came to know about a new model generator -> customHook -> react, it is exactly useful for my visualizer, and im adopting it into my profile, changes coming soon.
 
-Currently im using react-router to navigate between pages,Home and Codes
+Im using react-router to navigate between pages,Home and Codes
+
+Currently , im organizing codes into basics(loops and if-else) and data structures. in fields page, im trying to bring like iframe implemented, or ms docs layout style.
