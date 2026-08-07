@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Codes from "./pages/Codes";
+import Fields from "./pages/Fields";
 
 export default function App(){
   return(
@@ -13,6 +14,7 @@ export default function App(){
       <Routes>
         <Route path="/" element = {<Home/>}/>
         <Route path="/codes" element = {<Codes/>}/>
+        <Route path="/fields" element = {<Fields/>}/>
       </Routes>
     </BrowserRouter>
   );
