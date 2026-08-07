@@ -9,7 +9,7 @@ export default function* linearSearch() {
             { action: "active", index: [i] },
             { action: "pass", index: [i-1]}
         ];
-
+ 
         // Found target
         if (arr[i] === target) {
             yield [
