@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from "react";
 export default function usePipeline(generator, delay = 500) {
     const gen = useRef(generator());
 
+    const [arr, setArr] = useState([]);
+    const [log, setLog] = useState("");
     const [active, setActive] = useState([]);
     const [match, setMatch] = useState([]);
     const [pass, setPass] = useState([]);
@@ -11,6 +13,7 @@ export default function usePipeline(generator, delay = 500) {
     const [running, setRunning] = useState(false);
 
     function reset() {
+        setLog("");
         setActive([]);
         setMatch([]);
         setPass([]);
@@ -27,6 +30,14 @@ export default function usePipeline(generator, delay = 500) {
         const { action, index } = actionObj;
  
         switch (action) {
+            case "swap":
+                setArr(index);
+                break;
+            
+            case "log":
+                setLog(index);
+                break;
+
             case "active":
                 setActive(index);
                 break;
@@ -94,6 +105,8 @@ export default function usePipeline(generator, delay = 500) {
     }
 
     return {
+        log,
+        arr,
         active,
         match,
         pass,
