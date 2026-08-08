@@ -10,7 +10,7 @@ export default function LinkedList({
     gap = 10
 }) {
     const step = size + gap;
-
+ 
     function getBoxStatus(i, { active, match, pass, hold }) {
         // Priority order: match > active > hold > pass
         if (match.includes(i)) return "match";
