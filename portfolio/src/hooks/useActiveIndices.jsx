@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function useActiveIndices(rows, cols, maxRadius = 6, speed = 100) {
+export default function useActiveIndices(rows, cols, maxRadius = 9, speed = 100) {
   const [center, setCenter] = useState({ r: 0, c: 0 });
   const [radius, setRadius] = useState(0);
 
