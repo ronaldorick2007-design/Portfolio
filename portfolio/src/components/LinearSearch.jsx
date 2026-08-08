@@ -5,7 +5,7 @@ import LinkedList from "./LinkedList";
 import "../styles/Grid.css";
 import "../styles/Item.css";
 import GridBuild from "./Grid";
-
+ 
 export default function LinearSearch({arr}) {
 
     const {
@@ -42,7 +42,7 @@ export default function LinearSearch({arr}) {
             </div>
 
             <div className="container">
-                <GridBuild
+                <LinkedList
                     arr={arr}
                     active={active}
                     match={match}
