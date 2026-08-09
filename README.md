@@ -28,4 +28,6 @@ React helps lot when its comes to DOM changes handling, for this reason im trans
 
 Im using react-router to navigate between pages,Home and Codes
 
-Currently , im organizing codes into basics(loops and if-else) and data structures. in fields page, im trying to bring like iframe implemented, or ms docs layout style.
+im organizing codes into basics(loops and if-else) and data structures. in fields page, im trying to bring like iframe implemented, or ms docs layout style.
+
+currently im going to mass refactor not in codebase but in my understanding of react itself, now my current data structure of implementation is single linked list, i was hoping to have a way to capture the SLL in a memory space as like useRef to not get affected everything the component re-render happens, then with the help of ai i found that we can store custom classes in useRef rather than primitves like string,int,array, so this opens the possibility to have stacks,queues be implemented easy but to handle re-render explicitly through by converting custom data structure to array, as my current Grid visualizer works well with array.
