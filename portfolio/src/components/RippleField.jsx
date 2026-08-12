@@ -29,7 +29,7 @@ export default function RippleField({ rows = 30, cols = 70, size = 10, gap = 10 
                   isActive ? "scale(1)" : "scale(1)"
                 }`,
                 backgroundColor: isActive ? "#ff0055" : "#ffb6c1",
-                borderRadius: "0px",
+                borderRadius: "4px",
                 // transition: "all 0.15s ease",
               }}
             />
