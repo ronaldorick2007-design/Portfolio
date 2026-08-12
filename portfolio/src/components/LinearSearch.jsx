@@ -1,5 +1,5 @@
 import usePipeline from "../hooks/usePipeline";
-import linearSearch from "../algorithms/linearSearch";
+import linearSearch from "../algorithms/Arrays/linearSearch";
 // import GridBuild from "./Grid";
 import LinkedList from "./LinkedList";
 import "../styles/Grid.css";
