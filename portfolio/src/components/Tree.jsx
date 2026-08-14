@@ -45,6 +45,7 @@ export default function TreeBuild({
 
         for (const child of [2 * i + 1, 2 * i + 2]) {
             if (child >= arr.length) continue;
+            if(arr[child]==null) continue;
 
             const [r2, c2] = findNode(child);
 
@@ -77,8 +78,8 @@ export default function TreeBuild({
             ))}
 
             {arr.map((value, i) => {
+                if(value === null) return null;
                 const [row, col] = findNode(i);
-
                 return (
                     <div
                         key={i}
