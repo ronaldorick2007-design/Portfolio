@@ -1,5 +1,5 @@
 export default function* selectionSort(arr){
-    n = arr.length;
+    let n = arr.length;
     for (let i = 0; i < n; i++) {
 
         let lowest = i;
