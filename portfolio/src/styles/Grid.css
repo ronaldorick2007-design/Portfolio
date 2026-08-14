@@ -15,10 +15,10 @@
     transition: all 0.25s ease;
 }
 
-.box-wrapper{
+/* .box-wrapper{
     position:absolute;
     transition: all 0.25s ease;
-}
+} */
 
 .box.active {
     background: red;
@@ -74,7 +74,7 @@
 
 .line{
     width:10px;
-    height:2px;
+    height:3px;
     background:black;
     transition:all .25s ease;
 }
