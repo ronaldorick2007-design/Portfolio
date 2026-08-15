@@ -3,6 +3,7 @@ export default function GridBuild({
     swap = {},
     active = [],
     match = [],
+    change = [],
     pass = [],
     hold = [],
     size = 50,
@@ -21,6 +22,7 @@ export default function GridBuild({
 
     function getBoxStatus(i) {
         // Priority order: match > active > swap > hold > pass
+        if (change.includes(i)) return "change";
         if (match.includes(i)) return "match";
         if (active.includes(i)) return "active";
         if (hold.includes(i)) return "hold";
