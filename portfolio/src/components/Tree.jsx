@@ -90,7 +90,7 @@ export default function TreeBuild({
                             transform: `translate(${col * step}px, ${row * step}px)`
                         }}
                     >
-                        {value}
+                        {value.toString()}
                     </div>
                 );
             })}
