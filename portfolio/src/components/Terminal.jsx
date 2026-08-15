@@ -3,7 +3,6 @@ import "../styles/Terminal.css";
 
 const ROLES = ["developer", "creator", "!vibe coder"];
 
-// Helper function for clean timing delays
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export default function Terminal() {
@@ -12,13 +11,11 @@ export default function Terminal() {
   const [whoAmIText, setWhoAmIText] = useState("");
   const [roleText, setRoleText] = useState("");
 
-  // Tracks which section currently owns the active blinking cursor
-  const [activeStep, setActiveStep] = useState("sayMyName"); // "sayMyName" | "name" | "whoAmI" | "roles"
+  const [activeStep, setActiveStep] = useState("sayMyName");
 
   useEffect(() => {
     let isMounted = true;
 
-    // Helper: Type out a string character by character
     const typeString = async (text, setter, speed = 100) => {
       for (let i = 1; i <= text.length; i++) {
         if (!isMounted) return;
@@ -27,7 +24,6 @@ export default function Terminal() {
       }
     };
 
-    // Helper: Loop roles (type, pause, delete, switch)
     const cycleRoles = async (roles) => {
       let roleIndex = 0;
 
