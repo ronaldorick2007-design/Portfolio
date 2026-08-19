@@ -10,17 +10,9 @@ export default function LinkedList({
     gap = 10
 }) {
     const step = size + gap;
- 
-    function getBoxStatus(i, { active, match, pass, hold }) {
-        // Priority order: match > active > hold > pass
-        if (match.includes(i)) return "match";
-        if (active.includes(i)) return "active";
-        if (hold.includes(i)) return "hold";
-        if (pass.includes(i)) return "pass";
-        return "";
-    }
 
-    return arr.map((value, i) => (
+    return <div className="container">
+        {arr.map((value, i) => (
         <div
             key={i}
             className="box-wrapper"
@@ -30,29 +22,34 @@ export default function LinkedList({
             }}
         >
             <div
-                className={`box ${getBoxStatus(i, { active, match, pass, hold })}`}
+                className={`box ${value.status}`}
                 style={{
                     width: `${size}px`,
                     height: `${size}px`,
                 }}
             >
-                {value}
+                {value.toString()}
             </div>
 
-            {i !== arr.length && (
-                <div
-                    className={`line
-                        ${active.includes(i) ? "active" : ""}
-                        ${match.includes(i) ? "match" : ""}
-                        ${pass.includes(i) ? "pass" : ""}
-                        ${hold.includes(i) ? "hold" : ""}
-                        ${cut.includes(i) ? "cut" : ""}
-                    `}
-                    style={{
-                        width: `${size + gap}px`,
-                    }}
-                />
-            )}
+
+            <svg width={gap} height={size} style={{overflow : "visible"}}>
+                {value.prev && <line x1={-gap} y1={size/3} x2={0} y2={size/3} stroke="black" stroke-width="2" />}
+                
+                {value.next && <line x1={size} y1={2*size/3} x2={size+gap} y2={2*size/3} stroke="black" stroke-width="2" />}
+            </svg>
+            
+
         </div>
-    ));
+    ))}
+    </div>;
 }
+
+{/* <div
+                className={`box ${value.status}`}
+                style={{
+                    width: `${size}px`,
+                    height: `${size}px`,
+                }}
+            >
+                {value.toString()}
+            </div> */}
