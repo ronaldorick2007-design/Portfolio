@@ -10,6 +10,7 @@ export default function GridBuild({
     gap = 10
 }) {
     const step = size + gap;
+    const n = arr.length;
 
     // Calculates target index position if swapping
     const getTargetIndex = (index) => {
@@ -30,7 +31,7 @@ export default function GridBuild({
         return "";
     }
 
-    return arr.map((value, i) => {
+    return <div className="container border-2" style={{width : `${n*step}px`,height : `${size*2}`, paddingTop : `${size/2}px`}}>{arr.map((value, i) => {
         const targetIndex = getTargetIndex(i);
 
         return (
@@ -49,5 +50,5 @@ export default function GridBuild({
                 </div>
             </div>
         );
-    });
+    })}</div>;
 }
