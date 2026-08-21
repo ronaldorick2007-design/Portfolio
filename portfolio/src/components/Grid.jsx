@@ -30,8 +30,8 @@ export default function GridBuild({
         if (pass.includes(i)) return "pass";
         return "";
     }
-
-    return <div className="container border-2" style={{width : `${n*step}px`,height : `${size*2}`, paddingTop : `${size/2}px`}}>{arr.map((value, i) => {
+ 
+    return <div className="container border-2" style={{width : `${n*step}px`,height : `${size*2}`, paddingTop : `${size/2}px`,paddingLeft : `${gap/2}px`}}>{arr.map((value, i) => {
         const targetIndex = getTargetIndex(i);
 
         return (
