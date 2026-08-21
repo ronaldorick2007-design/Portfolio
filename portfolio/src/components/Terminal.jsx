@@ -100,7 +100,7 @@ export default function Terminal() {
       <span className="prompt">$ </span>{whoAmIText}
     </div>
   )}
-
+ 
   {/* 4. Roles Output */}
   {activeStep === "roles" && (
     <div className="roles cursor">
