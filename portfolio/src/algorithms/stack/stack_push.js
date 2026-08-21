@@ -22,7 +22,7 @@ export default function* stack_push(){
         yield [
         {action:"rearr", index : []},
         {action:"indicate", index : {[sll.head] : "active"}},
-        {action:"log", index:[`Popped value ${i}`]}
+        {action:"log", index:[`Popped value ${4-i}`]}
     ];
     }
 
