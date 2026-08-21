@@ -12,7 +12,7 @@ export default function LinkedList({
 }) {
     const step = size + gap;
     const n = arr.length;
-    return <div className="container border-2" style={{width : `${n*step}px`,height : `${size*2}`, paddingTop : `${size/2}px`}}>
+    return <div className="container border-2" style={{width : `${n*step}px`,height : `${size*2}`, paddingTop : `${size/2}px`,paddingLeft : `${gap/2}px`}}>
         {arr.map((value, i) => (
         <div
             key={i}
@@ -46,12 +46,3 @@ export default function LinkedList({
     </div>;
 }
 
-{/* <div
-                className={`box ${value.status}`}
-                style={{
-                    width: `${size}px`,
-                    height: `${size}px`,
-                }}
-            >
-                {value.toString()}
-            </div> */}
