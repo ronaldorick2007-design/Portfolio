@@ -29,7 +29,7 @@ export default function* bubbleSort(arr) {
              
         }
         yield [
-                {action:"active", index:[]},
+                { action: "active", index:[]},
                 { action: "pass", index: [n-i-1] },
                 { action: "log" ,index: [`index ${n-i-1} is sorted`]}
             ];
