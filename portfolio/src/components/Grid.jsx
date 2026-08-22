@@ -8,7 +8,7 @@ export default function GridBuild({
     hold = [],
     size = 50,
     gap = 10
-}) {
+}) { 
     const step = size + gap;
     const n = arr.length;
 
