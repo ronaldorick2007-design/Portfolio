@@ -1,11 +1,15 @@
-export default function* binarySearch(arr) {
+export default function* binarySearch() {
+    const arr = [1,2,3,4,5];
+    yield [
+            { action: "set",type:"A", index: arr, name: "arr" },
+        ];
     const target = 1;
  
     let left = 0;
     let right = arr.length - 1;
 
     console.log(left,right)
-    yield  [{ action: "hold", index: [left, right] },
+    yield  [{ action: "hold", index: [left, right], name: "arr" },
             { action: "log", index: [`left : ${left}\nright : ${right}`]}]
             
 
@@ -14,7 +18,7 @@ export default function* binarySearch(arr) {
         // Highlight current window bounds (left and right) and mid
         yield [
             // { action: "hold", index: [] },
-            { action: "active", index: [mid] },
+            { action: "active", index: [mid], name: "arr" },
             { action: "log", index: [`Middle index : ${mid}`]}
             // { action: "hold", index: [left, right] }
         ];
@@ -22,7 +26,7 @@ export default function* binarySearch(arr) {
         // Found target
         if (arr[mid] === target) {
             yield [
-                { action: "match", index: [mid] }, 
+                { action: "match", index: [mid], name: "arr" }, 
                 { action: "log", index: [`Target found!`]}               
                 // { action: "cut", index: mid }
             ];
@@ -39,9 +43,9 @@ export default function* binarySearch(arr) {
             left = mid + 1;
 
             yield [
-                { action: "active", index: [] },
-                { action: "pass", index: eliminated },
-                { action: "hold", index: [left, right] },
+                { action: "active", index: [], name: "arr" },
+                { action: "pass", index: eliminated, name: "arr" },
+                { action: "hold", index: [left, right], name: "arr" },
                 { action: "log", index: [`Shift left to ${left}`]}
             ];
         } else {
@@ -53,9 +57,9 @@ export default function* binarySearch(arr) {
             right = mid - 1;
 
             yield [
-                { action: "active", index: [] },
-                { action: "pass", index: eliminated },
-                { action: "hold", index: [left, right] },
+                { action: "active", index: [], name: "arr" },
+                { action: "pass", index: eliminated, name: "arr" },
+                { action: "hold", index: [left, right], name: "arr" },
                 { action: "log", index: [`Shift right to ${right}`]}
             ];
         }
