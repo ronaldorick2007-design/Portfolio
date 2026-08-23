@@ -1,6 +1,11 @@
-export default function* bubbleSort(arr) {
+export default function* bubbleSort() {
 
+    const arr = [5, 3, 8, 4, 2]
     const n = arr.length;
+ 
+    yield [
+            { action: "set",type:"A", index: arr, name: "arr" },
+        ];
 
     for (let i = 0; i < n - 1; i++) {
         let swapped = false;
@@ -8,29 +13,29 @@ export default function* bubbleSort(arr) {
         for (let j = 0; j < n - i - 1; j++) {
             // Highlight the two adjacent elements being compared
             yield [
-                { action: "active", index: [j, j + 1] },
+                { action: "active", index: [j, j + 1], name: "arr" },
                 { action: "log" ,index: [`Comparing ${j} and ${j+1}`]}
                 ];
-
+ 
             if (arr[j] > arr[j + 1]) {
                 yield { action: "log" ,index: [`Swapping ${j} and ${j+1}`]}
                 // Swap elements
                 yield [                    
-                    { action: "swap", index: { [j]: j+1, [j+1]: j } }                 
+                    { action: "swap", index: { [j]: j+1, [j+1]: j }, name: "arr" }                 
                     ];
             // STEP 2: Mutate array data in memory
             [arr[j], arr[j+1]] = [arr[j+1], arr[j]];
 
             // STEP 3: Yield updated array AND clear swap offsets
-            yield { action: "rearrange", index: [...arr] }
+            yield { action: "rearrange", index: [...arr], name: "arr" }
                 
             swapped = true;                
             }
              
         }
         yield [
-                { action: "active", index:[]},
-                { action: "pass", index: [n-i-1] },
+                { action: "active", index:[], name: "arr"},
+                { action: "pass", index: [n-i-1], name: "arr" },
                 { action: "log" ,index: [`index ${n-i-1} is sorted`]}
             ];
 
