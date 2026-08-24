@@ -1,9 +1,13 @@
-export default function* forLoop(arr){
+export default function* forLoop(){
+    const arr = [1, 2, 3, 4, 5];
+    yield [
+            { action: "set",type:"A", index: arr, name: "arr" },
+        ];
     const n = arr.length;
         
     for(let i=0;i<n;i++){
         yield [
-            { action: "active", index: [i] },
+            { action: "active", index: [i], name: "arr"  },
             { action: "log", index: [`Current index : ${i} < ${n}`] },
         ];
     }
