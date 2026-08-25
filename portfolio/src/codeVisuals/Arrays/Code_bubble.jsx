@@ -1,7 +1,7 @@
 import "../../styles/Code.css";
 import "../../styles/Grid.css";
 import Window from "../../components/Window";
-import useArray from "../../hooks/useArray";
+import useArray from "../../hooks/useArray copy";
 import GridBuild from "../../components/Grid";
 import bubbleSort from "../../algorithms/Arrays/bubbleSort";
 
