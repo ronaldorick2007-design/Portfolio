@@ -16,8 +16,6 @@ export default function GridBuild({
     const getTargetIndex = (index) => {
         if (!swap) return index;
         if (swap[index] !== undefined) return swap[index];
-        // if (swap.i === index && swap.j !== undefined) return swap.j;
-        // if (swap.j === index && swap.i !== undefined) return swap.i;
         return index;
     };
 
@@ -46,7 +44,7 @@ export default function GridBuild({
                         transition: (targetIndex !== i) ? "transform 0.25s ease" : "none"
                     }}
                 >
-                    {value}
+                    {value.toString()}
                 </div>
             </div>
         );
