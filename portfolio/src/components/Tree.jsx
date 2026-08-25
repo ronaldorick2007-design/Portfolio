@@ -65,7 +65,7 @@ export default function TreeBuild({
     }
 
     return (
-        <div className="tree-container">
+        <div className="container border-2" style={{width : `${cols*step}px`,height : `${span*step}px`, paddingTop : `${gap/2}px`,paddingLeft : `${gap/2}px`}}>
             {lines.map((line, i) => (
                 <div
                     key={i}
