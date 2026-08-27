@@ -1,5 +1,6 @@
 import { SinglyLinkedList } from "../../data_structures/SinglyLinkedList";
-export default function* highlight(n=4,result =1) {
+
+export default function* highlight(n=4,result =1, depth = 1) {
     
     // const sll = new SinglyLinkedList();
     //     yield [
@@ -38,11 +39,14 @@ export default function* highlight(n=4,result =1) {
     //     ];
     // const id = Math.floor(Math.random() * 10000)
     // const id = crypto.randomUUID();
+    console.log(`enter func ${depth}`);
     console.log(n);
     
     
-    if (n === 0) return;
-
+    if (n === 1) {
+        console.log(`exit func ${depth}`);
+        return 1;
+    }
     result = n;
     yield [
             { action: "set",type:"P", index:{name:"result",item:result}, name: "result",scope:`${n}` },
@@ -65,7 +69,8 @@ export default function* highlight(n=4,result =1) {
     
     // yield result;
 
-    yield* highlight(n - 1, result);
+    yield* highlight(n - 1, result, depth + 1);
+    console.log(`exit func ${depth}`);
     yield [
             { action: "clear", index:arr,name:"arr", scope: `${n}` },
             { action: "clear", index:arr,name:"result", scope: `${n}` }
