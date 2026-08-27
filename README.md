@@ -34,4 +34,6 @@ i went to mass refactor not in codebase but in my understanding of react itself,
 
 i successfully able to implement shapes of few linear data structures like linked list, stacks, queues easily, and for trees iwass able to perfectly create visual with help of intricate maths and array manipulations. and next im planning to move to set, hashmap,.. like structure representation.
 
-currently im moving towards dynamically initialization of data structures directly from generator(function) to render a view of data structure.
+im moving towards dynamically initialization of data structures directly from generator(function) to render a view of data structure.
+
+Currently, while experimenting around with different architecture of rendering elements ,i accidently found a way to yield recursion as seperate value of each function within, and able to stack upon, and also i added visual elements for primitive data structures.
