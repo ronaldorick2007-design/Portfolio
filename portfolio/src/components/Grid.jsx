@@ -1,4 +1,5 @@
 export default function GridBuild({
+    name,
     arr,
     swap = {},
     active = [],
@@ -29,7 +30,9 @@ export default function GridBuild({
         return "";
     }
  
-    return <div className="container border-2" style={{width : `${n*step}px`,height : `${size*2}`, paddingTop : `${size/2}px`,paddingLeft : `${gap/2}px`}}>{arr.map((value, i) => {
+    return <div className="container border-2" style={{width : `${n*step}px`,height : `${size*2}`, paddingTop : `${size/2}px`,paddingLeft : `${gap/2}px`}}>
+        <div className="-mt-5">{name}</div>
+        {arr.map((value, i) => {
         const targetIndex = getTargetIndex(i);
 
         return (
