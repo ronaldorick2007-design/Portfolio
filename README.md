@@ -36,4 +36,6 @@ i successfully able to implement shapes of few linear data structures like linke
 
 im moving towards dynamically initialization of data structures directly from generator(function) to render a view of data structure.
 
-Currently, while experimenting around with different architecture of rendering elements ,i accidently found a way to yield recursion as seperate value of each function within, and able to stack upon, and also i added visual elements for primitive data structures.
+while experimenting around with different architecture of rendering elements ,i accidently found a way to yield recursion as seperate value of each function within, and able to stack upon, and also i added visual elements for primitive data structures.
+
+Currently im working on source to source code parser, with help of ai i came to know about AST but im not getting deep into that because i dont have much relevance to it.but im interesting in letting user write a code to simulate rendering, offering a better understanding rather than static hardcode examples.
