@@ -47,7 +47,7 @@ export default function GridBuild({
                         transition: (targetIndex !== i) ? "transform 0.25s ease" : "none"
                     }}
                 >
-                    {value.toString()}
+                    {value ? value.toString() : ""}
                 </div>
             </div>
         );
