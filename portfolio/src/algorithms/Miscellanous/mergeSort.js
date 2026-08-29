@@ -1,4 +1,4 @@
-export default function* main(){
+export default function* main_mergesort(){
 
     yield* mergeSort([1,3,4,2,5,8,7,6]);
 }
@@ -6,6 +6,7 @@ export default function* main(){
 function* mergeSort(arr,depth = 1) {
     yield [
             { action: "set",type:"F",scope:`${depth}`},
+            {action:"log", index:["Entering mergeSort function..."]}
         ];
 
     if (arr.length <=1) {
@@ -15,7 +16,7 @@ function* mergeSort(arr,depth = 1) {
         yield [
             { action: "clear", index:[], scope: `${depth}` },
             { action: "clear", index:[],name:"arr", scope: `${depth}` },
-            { action : "log", index : [`Base case : one element`]}
+            { action : "log", index : [`Base case : one element, exited mergeSort function...`]}
         ];
         return arr;
         
@@ -68,7 +69,7 @@ function* merge(left, right) {
 
     yield [
             { action: "set",type:"F",scope:`merge`},
-            {action:"log",index:["Merging given two arrays."]}
+            {action:"log",index:["Entering merge() function"]}
         ];
 
     yield [
@@ -145,6 +146,7 @@ function* merge(left, right) {
         { action: "clear", index:[], name:"right", scope: `merge` },
         { action: "clear", index:[], name:"i", scope: `merge` },
         { action: "clear", index:[], name:"j", scope: `merge` },
+        { action : "log", index : [`Exited mergeSort function...`]}
     ]
     return result;
 }
