@@ -1,9 +1,7 @@
 export default function TreeBuild({
+    name,
     arr,
-    active = [],
-    match = [],
-    pass = [],
-    hold = [],
+    indicate = {},
     size = 50,
     gap = 30
 }) {
@@ -24,15 +22,6 @@ export default function TreeBuild({
         const c = col + index * cross;
 
         return [row, c];
-    }
-
-    function getBoxStatus(i, { active, match, pass, hold }) {
-        // Priority order: match > active > hold > pass
-        if (match.includes(i)) return "match";
-        if (active.includes(i)) return "active";
-        if (hold.includes(i)) return "hold";
-        if (pass.includes(i)) return "pass";
-        return "";
     }
 
     const lines = [];
@@ -66,6 +55,7 @@ export default function TreeBuild({
 
     return (
         <div className="container border-2" style={{width : `${cols*step}px`,height : `${span*step}px`, paddingTop : `${gap/2}px`,paddingLeft : `${gap/2}px`}}>
+            <div className="-mt-5">{name}</div>
             {lines.map((line, i) => (
                 <div
                     key={i}
@@ -83,7 +73,7 @@ export default function TreeBuild({
                 return (
                     <div
                         key={i}
-                        className={`box ${getBoxStatus(i, { active, match, pass, hold })}`}
+                        className={`box ${indicate.get(value) ? indicate.get(value) : "" }`}
                         style={{
                             width: `${size}px`,
                             height: `${size}px`,
