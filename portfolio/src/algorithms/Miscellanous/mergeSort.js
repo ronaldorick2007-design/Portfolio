@@ -80,7 +80,7 @@ function* merge(left, right) {
     const result = [];
     yield [
             { action: "set",type:"A", index: result, name: "result",scope:`merge` }
-        ]; 
+        ];  
     let i = 0;
     yield [
             { action: "set",type:"P", index:i, name: "i",scope:`merge` }
@@ -93,7 +93,7 @@ function* merge(left, right) {
     while (i < left.length && j < right.length) {
         if (left[i] <= right[j]) {
             yield [
-            { action: "active", index: [i], name: "left",scope:`merge` },            
+            {action:"indicate",index:[i,"active"],d:left},            
             ];
             result.push(left[i]);
             i++;
@@ -103,7 +103,7 @@ function* merge(left, right) {
             ]; 
         } else {
             yield [
-            { action: "active", index: [j], name: "right",scope:`merge` },            
+            {action:"indicate",index:[j,"active"],d:right},            
             ];
             result.push(right[j]);
             j++;
@@ -117,7 +117,7 @@ function* merge(left, right) {
     // Add remaining elements
     while (i < left.length) {
         yield [
-            { action: "active", index: [i], name: "left",scope:`merge` },            
+            {action:"indicate",index:[i,"active"],d:left},            
             ];
         result.push(left[i]);
         i++;
@@ -129,7 +129,7 @@ function* merge(left, right) {
 
     while (j < right.length) {
         yield [
-            { action: "active", index: [j], name: "right",scope:`merge` },            
+            {action:"indicate",index:[j,"active"],d:right},           
             ];
         result.push(right[j]);
         j++;
