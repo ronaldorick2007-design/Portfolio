@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
+import { useTheme } from "./ThemeProvider";
+import { themes } from "../styles/themes";
 
 export default function Header() {
+  const { theme, setTheme } = useTheme();
+
   return (
-    <header className="mt-0.5 ml-[4.5%] w-[90%] flex items-center justify-between bg-black p-5 text-white">
+    <header className={themes.Header[theme]}>
       
       <h1 className="text-white text-4xl">
         <span id="logo" className="text-4xl font-bold text-cyan-400">
@@ -34,6 +38,14 @@ export default function Header() {
         >
           Home
         </a>
+        <a
+        className="border border-white px-2.5 py-1 text-white transition-all duration-300 ease-in-out hover:bg-white hover:text-black"
+        onClick={() =>
+          setTheme(theme === "light" ? "dark" : "light")
+        }
+      >
+        {theme}
+      </a>
       </nav>
     </header>
   );
