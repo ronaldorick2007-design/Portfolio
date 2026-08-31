@@ -8,7 +8,7 @@ export default function LinkedList({
     const step = size + gap;
     const n = arr.length
 
-    return <div className="container border-2" style={{width : `${n*step}px`,height : `${size*2}px`, paddingTop : `${size/2}px`,paddingLeft : `${gap/2}px`}}>
+    return <div className="container border-2" style={{width : `${n!=0 ? n*step : 100}px`,height : `${size*2}px`, paddingTop : `${size/2}px`,paddingLeft : `${gap/2}px`}}>
         <div className="-mt-5">{name}</div>
         {arr.map((value, i) => (
         <div 
