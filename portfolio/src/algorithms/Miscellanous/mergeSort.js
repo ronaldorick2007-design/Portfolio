@@ -15,7 +15,6 @@ function* mergeSort(arr,depth = 1) {
         ];
         yield [
             { action: "clear", index:[], scope: `${depth}` },
-            { action: "clear", index:[],name:"arr", scope: `${depth}` },
             { action : "log", index : [`Base case : one element, exited mergeSort function...`]}
         ];
         return arr;
@@ -54,11 +53,6 @@ function* mergeSort(arr,depth = 1) {
 
     yield [
             { action: "clear", index:[], scope: `${depth}` },
-            { action: "clear", index:[],name:"arr", scope: `${depth}` },
-            { action: "clear", index:[],name:"middle", scope: `${depth}` },
-            { action: "clear", index:[],name:"result", scope: `${depth}` },
-            { action: "clear", index:[],name:"left", scope: `${depth}` },
-            { action: "clear", index:[],name:"right", scope: `${depth}` },
             { action : "log", index : [`Array Sorted`]}
         ];
 
@@ -141,11 +135,6 @@ function* merge(left, right) {
 
     yield[
         { action: "clear", index:[], scope: `merge` },
-        { action: "clear", index:[], name:"result", scope: `merge` },
-        { action: "clear", index:[], name:"left", scope: `merge` },
-        { action: "clear", index:[], name:"right", scope: `merge` },
-        { action: "clear", index:[], name:"i", scope: `merge` },
-        { action: "clear", index:[], name:"j", scope: `merge` },
         { action : "log", index : [`Exited mergeSort function...`]}
     ]
     return result;
