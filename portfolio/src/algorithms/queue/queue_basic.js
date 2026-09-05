@@ -10,7 +10,7 @@ export default function* queue_basic(){
     for(let i=0;i<5;i++){
         queue.enqueue(i);
        yield [
-        {action:"rearr", index : [], name:"queue"},
+        {action:"rearrange", index : [], name:"queue"},
         // {action:"indicate", index : {[stack.head] : "active"}},
         {action:"log", index:[`enqueued new value ${i}`]}
         ]; 
@@ -19,7 +19,7 @@ export default function* queue_basic(){
     for(let i=0;i<5;i++){
         queue.dequeue();
        yield [
-        {action:"rearr", index : [], name:"queue"},
+        {action:"rearrange", index : [], name:"queue"},
         // {action:"indicate", index : {[stack.head] : "active"}},
         {action:"log", index:[`dequeued new value ${i}`]}
         ]; 
