@@ -10,7 +10,7 @@ export default function* sll_traversal(){
     for(let i=0;i<5;i++){
         sll.add(i);
         yield [
-        {action:"rearr", index : [], name:"sll"},
+        {action:"rearrange", index : [], name:"sll"},
         {action:"log", index:[`Adding new node ${i}`]}
     ];
     }
@@ -24,7 +24,7 @@ export default function* sll_traversal(){
     for(let i=0;i<5;i++){
         sll.pop();
         yield [
-        {action:"rearr", index : [], name:"sll"},
+        {action:"rearrange", index : [], name:"sll"},
         {action:"log", index:[`Popped node ${i}`]}
     ];
     }
