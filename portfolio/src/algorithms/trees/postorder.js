@@ -58,7 +58,7 @@ function* postorder(root, res,depth=1){
 
     res.add(root.value);
     yield [
-        {action:"rearr",index:res,name:"res",scope:"main"},
+        {action:"rearrange",index:res,name:"res",scope:"main"},
 
         {action:"log", index:[`Appending node ${root.value} to res`]}
     ]
