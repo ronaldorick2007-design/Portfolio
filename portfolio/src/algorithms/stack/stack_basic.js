@@ -11,7 +11,7 @@ export default function* stack_basic(){
         stack.push(i);
         
         yield [
-        {action:"rearr", index : [], name:"stack"},
+        {action:"rearrange", index : [], name:"stack"},
         {action:"indicate", index : {[stack.head] : "active"}, name:"stack"},
         {action:"log", index:[`pushed new value ${i}`]}
     ];
@@ -20,7 +20,7 @@ export default function* stack_basic(){
     for(let i=0;i<5;i++){
         stack.pop();
         yield [
-        {action:"rearr", index : [], name:"stack"},
+        {action:"rearrange", index : [], name:"stack"},
         {action:"indicate", index : {[stack.head] : "active"}, name:"stack"},
         {action:"log", index:[`Popped value ${4-i}`]}
     ];
