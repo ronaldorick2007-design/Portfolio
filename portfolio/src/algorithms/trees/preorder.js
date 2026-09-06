@@ -56,7 +56,7 @@ function* preorder(root, res,depth=1){
 
     res.add(root.value);
     yield [
-        {action:"rearr",index:res,name:"res",scope:"main"}
+        {action:"rearrange",index:res,name:"res",scope:"main"}
     ]
 
     yield* preorder(root.left, res,depth+1);
