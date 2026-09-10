@@ -38,4 +38,6 @@ im moving towards dynamically initialization of data structures directly from ge
 
 while experimenting around with different architecture of rendering elements ,i accidently found a way to yield recursion as seperate value of each function within, and able to stack upon, and also i added visual elements for primitive data structures.
 
-Currently im working on source to source code parser, with help of ai i came to know about AST but im not getting deep into that because i dont have much relevance to it.but im interesting in letting user write a code to simulate rendering, offering a better understanding rather than static hardcode examples.
+im working on source to source code parser, with help of ai i came to know about AST but im not getting deep into that because i dont have much relevance to it.but im interesting in letting user write a code to simulate rendering, offering a better understanding rather than static hardcode examples.
+
+currently, almost 70% of leetcode could run on my project, as i more have covered array, linkedlist(single, double, stack, queue), nodes, tree, basis algos like search and sort, my parser is also doing built ,to be honest i used ai to build the code parser ,as it is mostly regex and item juggling i left it to ai, if the project demain AST, i will try it later, and now i need to push the parser towards recursion.
