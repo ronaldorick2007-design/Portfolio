@@ -1,4 +1,5 @@
-export default function* insertionSort(){
+export default function* insertionSort()
+{
     
     const arr = [5, 3, 8, 4, 2]
     const n = arr.length;
@@ -10,7 +11,7 @@ export default function* insertionSort(){
     for (let i = 1; i < n; i++) {
         let key = arr[i];
         yield[
-            { action : "hold", index : [i], name: "arr"},
+            { action: "indicate", index: [i,"hold"], d:arr },
             { action : "log", index : [`Current Index ${i}`]}
         ]
         let j = i - 1;
@@ -26,7 +27,7 @@ export default function* insertionSort(){
             arr[j + 1] = key;
             yield [
                 { action : "rearrange", index : [], name: "arr"},
-                { action : "hold", index : [j+1], name: "arr"}
+                { action: "indicate", index: [j+1,"hold"], d:arr },
             ]
         }
         
