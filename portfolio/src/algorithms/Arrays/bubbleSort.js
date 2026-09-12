@@ -1,5 +1,4 @@
 export default function* bubbleSort() {
-
     const arr = [5, 3, 8, 4, 2]
     const n = arr.length;
  
@@ -13,7 +12,7 @@ export default function* bubbleSort() {
         for (let j = 0; j < n - i - 1; j++) {
             // Highlight the two adjacent elements being compared
             yield [
-                { action: "active", index: [j, j + 1], name: "arr" },
+                {action:"indicate",index:[[j,j+1],"active"],d:arr},
                 { action: "log" ,index: [`Comparing ${j} and ${j+1}`]}
                 ];
  
@@ -34,8 +33,7 @@ export default function* bubbleSort() {
              
         }
         yield [
-                { action: "active", index:[], name: "arr"},
-                { action: "pass", index: [n-i-1], name: "arr" },
+                { action: "indicate", index: [n-i-1,"pass"], d:arr },
                 { action: "log" ,index: [`index ${n-i-1} is sorted`]}
             ];
 
