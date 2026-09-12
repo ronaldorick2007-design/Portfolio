@@ -9,14 +9,14 @@ export default function* linearSearch() {
         // At the start of each iteration, combine active highlight 
         // with pass status for the previous element (if any)
         yield [
-            { action: "active", index: [i], name: "arr" }
+            { action: "indicate", index: [i,"active"], d:arr}
             // { action: "pass", index: [i-1]}
         ];
  
         // Found target
         if (arr[i] === target) {
             yield [
-                { action: "match", index: [i], name: "arr" }
+                { action: "indicate", index: [i,"match"], d:arr}
             ];
             return;
         }
