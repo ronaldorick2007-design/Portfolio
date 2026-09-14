@@ -7,13 +7,13 @@ export default function* selection(){
         
     for(let i=0;i<n;i++){
         yield [
-            { action: "active", index: [i], name: "arr" },
+            { action: "indicate", index: [i,"active"], d: arr},
             { action: "log", index: [`Current index : ${i}`] },
         ];
 
         if(i == 2){
             yield [
-            { action: "match", index: [i], name: "arr" },
+            { action: "indicate", index: [i,"match"], d: arr},
             { action: "log", index: [`Condition met!`] },
         ];
         }
