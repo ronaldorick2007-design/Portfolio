@@ -20,7 +20,7 @@ export default function* specific()
     yield [
             { action: "set",type:"A", index: arr, name: "arr" },
         ];
-    const target = 1;
+    const target = 5;
  
     let left = 0;
     let right = arr.length - 1;
@@ -28,7 +28,7 @@ export default function* specific()
     let clear;
 
     console.log(left,right)
-    yield  [{ action: "indicate", index: [[left, right],"hold"], name: "arr" },
+    yield  [{ action: "indicate", index: [[left, right],"hold"], d:arr},
             { action: "log", index: [`left : ${left}\nright : ${right}`]}]
             
 
@@ -37,7 +37,7 @@ export default function* specific()
         // Highlight current window bounds (left and right) and mid
         yield [
             // { action: "hold", index: [] },
-            {action:"indicate",index:[mid,"active"],name:"arr"},
+            {action:"indicate",index:[mid,"active"],d:arr},
             { action: "log", index: [`Middle index : ${mid}`]}
             // { action: "hold", index: [left, right] }
         ];
@@ -45,7 +45,7 @@ export default function* specific()
         // Found target
         if (arr[mid] === target) {
             yield [
-                {action:"indicate",index:[mid,"match"],name:"arr"}, 
+                {action:"indicate",index:[mid,"match"],d:arr}, 
                 { action: "log", index: [`Target found!`]}               
                 // { action: "cut", index: mid }
             ];
@@ -68,8 +68,8 @@ export default function* specific()
         }
 
         yield [
-                { action: "indicate", index: [[left, right],"hold"], name: "arr" },
-                { action: "indicate", index: [clear,"pass"], name: "arr" },
+                { action: "indicate", index: [[left, right],"hold"], d:arr },
+                { action: "indicate", index: [clear,"pass"], d:arr },
                 { action: "log", index: [status]}
             ];
     }
