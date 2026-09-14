@@ -7,9 +7,9 @@ export default function* forLoop(){
         
     for(let i=0;i<n;i++){
         yield [
-            { action: "active", index: [i], name: "arr"  },
+            { action: "indicate", index: [i,"active"], d: arr},
             { action: "log", index: [`Current index : ${i} < ${n}`] },
-        ];
+        ]; 
     }
     yield { action: "log", index: [`Loop termination`] }
 }
