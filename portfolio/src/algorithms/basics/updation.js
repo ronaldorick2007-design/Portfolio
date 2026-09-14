@@ -6,24 +6,22 @@ export default function* updation(){
     let n = arr.length;
     for(let i = 0; i < n; i++){
         yield [
-            { action : "active", index : [i], name: "arr" },
+            { action: "indicate", index: [i,"active"], d: arr},
             { action : "log", index : [`Current index ${i}`]}
         ];
 
         if(i == 2){
             yield [
-                { action : "match", index : [i], name: "arr"},
-                { action : "active", index : [], name: "arr"},
+                { action: "indicate", index: [i,"match"], d: arr},
                 { action : "log", index : [`Match Found`]}
             ]
             arr[i] = 7
             yield [
-                { action : "match", index : [], name: "arr"},
-                { action : "change", index : [i], name: "arr"},
+                { action: "indicate", index: [i,"change"], d: arr},
                 { action : "log", index : [`Updating with new value`]}
             ]
 
-            yield { action : "change", index : [], name: "arr"}
+            yield { action: "indicate", index: [-1,"change"], d: arr}
         }
     }
 
