@@ -40,4 +40,6 @@ while experimenting around with different architecture of rendering elements ,i 
 
 im working on source to source code parser, with help of ai i came to know about AST but im not getting deep into that because i dont have much relevance to it.but im interesting in letting user write a code to simulate rendering, offering a better understanding rather than static hardcode examples.
 
-currently, almost 70% of leetcode could run on my project, as i more have covered array, linkedlist(single, double, stack, queue), nodes, tree, basis algos like search and sort, my parser is also doing built ,to be honest i used ai to build the code parser ,as it is mostly regex and item juggling i left it to ai, if the project demain AST, i will try it later, and now i need to push the parser towards recursion.
+almost 70% of leetcode could run on my project, as i more have covered array, linkedlist(single, double, stack, queue), nodes, tree, basis algos like search and sort, my parser is also doing built ,to be honest i used ai to build the code parser ,as it is mostly regex and item juggling i left it to ai, if the project demain AST, i will try it later, and now i need to push the parser towards recursion.
+
+currently, i have successfully completed my visualizer for graph, and im gonna start demonstrating leetcodes rather than adding integrity and style, maybe i might polish the portfolio as i go, but i had enough feature in perspective of data structures...
