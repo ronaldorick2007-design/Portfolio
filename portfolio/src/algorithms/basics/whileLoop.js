@@ -8,7 +8,7 @@ export default function* whileLoop(){
     
     while(i < n){
         yield [
-            { action: "active", index: [i], name: "arr" },
+            { action: "indicate", index: [i,"active"], d: arr},
             { action: "log", index: [`Current index : ${i} < ${n}`] },
         ];
         i++;
