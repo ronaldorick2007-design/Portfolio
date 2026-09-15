@@ -15,12 +15,6 @@ export default function* sll_traversal(){
     ];
     }
 
-    // let curr = sll.head;
-    // while(curr != null){
-    //     yield [{action:"indicate", index : {[curr] : "active"}},];
-    //     curr = curr.next;
-    // }
-
     for(let i=0;i<5;i++){
         sll.pop();
         yield [
