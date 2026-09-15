@@ -10,7 +10,6 @@ export default function* binarySearch() {
     let status ="";
     let clear;
 
-    console.log(left,right)
     yield  [{ action: "indicate", index: [[left, right],"hold"], d:arr},
             { action: "log", index: [`left : ${left}\nright : ${right}`]}]
             
