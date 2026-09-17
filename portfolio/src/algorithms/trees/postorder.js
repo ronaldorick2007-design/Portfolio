@@ -73,7 +73,6 @@ function* sll_traversal(head){
     let curr = head;
 
     while(curr !== null){
-        console.log(curr)
         yield [
         {action:"indicate",index:[curr,"active"]},
         ]
