@@ -51,7 +51,6 @@ function* inorder(root, res,depth=1){
 
     yield [
         {action:"indicate",index:[root,"active"]},
-        
     ]
 
     yield* inorder(root.left, res,depth+1);
