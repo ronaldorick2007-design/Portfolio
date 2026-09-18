@@ -17,7 +17,7 @@ export default function* bubbleSort() {
                 ];
  
             if (arr[j] > arr[j + 1]) {
-                yield { action: "log" ,index: [`Swapping ${j} and ${j+1}`]}
+                yield { action: "log" ,index: [`Swapping ${j} and ${j+1}`]} 
                 // Swap elements
                 yield [                    
                     { action: "swap", index: { [j]: j+1, [j+1]: j }, name: "arr" }                 
