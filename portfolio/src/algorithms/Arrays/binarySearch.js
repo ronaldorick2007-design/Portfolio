@@ -37,13 +37,13 @@ export default function* binarySearch() {
         // Adjust boundaries and eliminate sub-array range
         if (arr[mid] < target) {
             // Cut everything from left up to mid
-            clear = Array.from({ length: mid - left + 1 }, (_, i) => left + i);
+
             left = mid + 1;
             status = `Shift left to ${left}`;
 
         } else {
             // Cut everything from mid up to right
-            clear = Array.from({ length: right - mid + 1 }, (_, i) => mid + i);
+
             right = mid - 1;
             status = `Shift right to ${right}`
 
@@ -51,7 +51,6 @@ export default function* binarySearch() {
 
         yield [
                 { action: "indicate", index: [[left, right],"hold"], d:arr },
-                { action: "indicate", index: [clear,"pass"], d:arr },
                 { action: "log", index: [status]}
             ];
     }
