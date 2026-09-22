@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle } from "react";
 
 import useArray from "../hooks/useArray_switch";
-import GridBuild from "./Grid copy";
+import GridBuild from "./GridCopy";
 
 const ArrayVisual = forwardRef(function ArrayVisual(_, ref) {
     
