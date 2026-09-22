@@ -1,8 +1,6 @@
 import { forwardRef, useImperativeHandle } from "react";
 
-import useSet from "../hooks/useSet_renders";
 import useMap from "../hooks/useMap_renders";
-import HashSet from "./HashSet";
 import HashMap from "./HashMap";
 
 const MapVisual = forwardRef(function ArrayVisual(_, ref) {
