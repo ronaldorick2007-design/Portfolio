@@ -30,8 +30,10 @@ export default function CompetentRenderStack({generator}) {
                       Stop
                   </button>
               </div>
-              <div>{log}</div>
+              
               {render()}
+
+              <div>{log}</div>
               
           </div>
       );
