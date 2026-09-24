@@ -10,46 +10,16 @@ export default function GridBuild({
     size = 50,
     gap = 10
 }) { 
-    const step = size + gap;
-    const n = arr.length;
-
-    // Calculates target index position if swapping
-    const getTargetIndex = (index) => {
-        if (!swap) return index;
-        if (swap[index] !== undefined) return swap[index];
-        return index;
-    };
-
-    function getBoxStatus(i) {
-        // Priority order: match > active > swap > hold > pass
-        if (change.includes(i)) return "change";
-        if (match.includes(i)) return "match";
-        if (active.includes(i)) return "active";
-        if (hold.includes(i)) return "hold";
-        if (pass.includes(i)) return "pass";
-        return "";
-    }
- 
-    return <div className="container border-2" style={{width : `${n*step}px`,height : `${size*2}`, paddingTop : `${size/2}px`,paddingLeft : `${gap/2}px`}}>
-        <div className="-mt-5">{name}</div>
-        {arr.map((value, i) => {
-        const targetIndex = getTargetIndex(i);
-
-        return (
-            <div key={i} className="box-wrapper">
-                <div
-                    className={`box ${getBoxStatus(i)}`}
-                    style={{
-                        width: `${size}px`,
-                        height: `${size}px`,
-                        transform: `translateX(${targetIndex * step}px)`,
-                        // Smooth slide during Phase 1; instant snap during Phase 2 reset
-                        transition: (targetIndex !== i) ? "transform 0.25s ease" : "none"
-                    }}
-                >
-                    {value ? value.toString() : ""}
-                </div>
-            </div>
-        );
-    })}</div>;
+    
+    return(
+        <div className="relative gap-2 border-2 p-2">
+            {arr.map((value, i) => {
+                return(
+                    <div key={i} className="absolute h-10 w-10 bg-blue-500 text-center" style={{transform: `translateX(${i * 60}px)`}}>
+                        {value ? value.toString() : ""}
+                    </div>
+                )
+            })}        
+        </div>
+    )
 }
