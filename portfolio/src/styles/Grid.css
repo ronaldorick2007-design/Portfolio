@@ -15,27 +15,26 @@
     transition: all 0.25s ease;
 }
 
-/* .box-wrapper{
-    position:absolute;
-    transition: all 0.25s ease;
-} */
 
 .box.active {
     background: red;
-    /* transform: translate(-6px, -6px);
-    box-shadow: 6px 6px black; */
+    box-shadow: 6px 6px black;
 }
 .box.change {
     background: rgb(255, 0, 217);
+    box-shadow: 6px 6px black;
 }
 .box.match {
     background: green;
+    box-shadow: 6px 6px black;
 }
 .box.hold {
     background: rgb(0, 242, 255);
+    box-shadow: 6px 6px black;
 }
 .box.pass {
     background: rgb(255, 217, 0);
+    box-shadow: 6px 6px black;
 }
 
 .container {
@@ -56,7 +55,8 @@
     position: absolute;
     display: flex;
     align-items: center;      /* centers the line vertically */
-    height: 50px;             /* or use the same value as `size` */
+    height: 50px;   
+    transition: all 0.25s ease;          /* or use the same value as `size` */
 }
 
 .box{
