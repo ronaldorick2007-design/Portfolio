@@ -1,11 +1,10 @@
-import { useRef } from "react";
-
+import { useRef, useState } from "react";
 import useScope from "./useScope";
 import useIndication from "./useIndication";
 
 
 /* =========================================================
-   EXECUTION
+   USE BOX
 ========================================================= */
 
 function useBox(generator) {
@@ -27,6 +26,23 @@ function useBox(generator) {
   } = useIndication();
 
 
+  /*
+     Execution logs
+
+     Example:
+
+     Initialized browser history
+     Created history stack
+     Visited Google
+     Entered back operation
+  */
+
+  const [
+    logs,
+    setLogs
+  ] = useState([]);
+
+
   const gen =
     useRef(generator());
 
@@ -35,21 +51,22 @@ function useBox(generator) {
      NEXT
   ======================================================= */
 
-  function next() {
+  const next = () => {
 
     const result =
       gen.current.next();
 
 
-    /* -------------------------------------------------------
-       GENERATOR FINISHED
-    ------------------------------------------------------- */
+    /* =====================================================
+       GENERATOR DONE
+    ===================================================== */
 
     if (result.done) {
 
       console.log("DONE");
 
       return;
+
     }
 
 
@@ -57,58 +74,73 @@ function useBox(generator) {
       result.value;
 
 
-    /* =======================================================
-       FUNCTION ADD
-    ======================================================= */
+    /* =====================================================
+       LOG
+    ===================================================== */
 
-    if (
-      data.type === "function-add"
-    ) {
+    if (data.action === "log") {
+
+      setLogs(prev => [
+        ...prev,
+        data.message
+      ]);
+
+      return;
+
+    }
+
+
+    /* =====================================================
+       FUNCTION ADD
+    ===================================================== */
+
+    if (data.type === "function-add") {
 
       addScope(
         data.scope
       );
 
       return;
+
     }
 
 
-    /* =======================================================
+    /* =====================================================
        FUNCTION REMOVE
-    ======================================================= */
+    ===================================================== */
 
-    if (
-      data.type === "function-rm"
-    ) {
+    if (data.type === "function-rm") {
 
       removeScope(
         data.scope
       );
 
       return;
+
     }
 
 
-    /* =======================================================
+    /* =====================================================
        INDICATION
-    ======================================================= */
+    ===================================================== */
 
-    if (
-      data.action === "indicate"
-    ) {
+    if (data.action === "indicate") {
 
       indicate(
         data.name,
-        data.value
+        data.value,
+        data.index,
+        data.array
       );
 
       return;
+
     }
 
 
-    /* =======================================================
-       NORMAL VALUE
-    ======================================================= */
+    /* =====================================================
+       NORMAL WRITE
+    ===================================================== */
 
     write(
       data.scope,
@@ -117,7 +149,7 @@ function useBox(generator) {
       data.type
     );
 
-  }
+  };
 
 
   return {
@@ -132,7 +164,9 @@ function useBox(generator) {
 
     clearIndication,
 
-    clearAll
+    clearAll,
+
+    logs
 
   };
 
@@ -140,13 +174,14 @@ function useBox(generator) {
 
 
 /* =========================================================
-   VALUE
+   DISPLAY VALUE
 ========================================================= */
 
 function DisplayValue({
   value,
   type,
-  indications
+  indications,
+  flashSpot
 }) {
 
 
@@ -154,27 +189,12 @@ function DisplayValue({
      PRIMITIVE
   ======================================================= */
 
-  if (
-    type === "primitive"
-  ) {
+  if (type === "primitive") {
 
     return (
-
-      <div
-        style={{
-          fontSize: 15,
-
-          color: "#1e3a8a",
-
-          overflowWrap:
-            "anywhere"
-        }}
-      >
-
+      <span>
         {value?.toString()}
-
-      </div>
-
+      </span>
     );
 
   }
@@ -184,66 +204,83 @@ function DisplayValue({
      ARRAY
   ======================================================= */
 
-  if (
-    type === "array"
-  ) {
+  if (type === "array") {
 
     return (
 
       <div
         style={{
           display: "flex",
-
-          flexWrap: "wrap",
-
           gap: 8,
-
-          width: "100%"
+          flexWrap: "wrap",
+          padding: 5
         }}
       >
 
         {value.map(
           (item, index) => {
 
-            /*
-               Check whether this
-               exact object is
-               currently indicated.
-            */
+
+            /* ---------------------------------------------
+               OBJECT INDICATION
+            --------------------------------------------- */
+
+            const objectHighlighted =
+              indications.has(item);
+
+
+            /* ---------------------------------------------
+               ARRAY POSITION INDICATION
+            --------------------------------------------- */
+
+            const arrayHighlighted =
+              [...flashSpot.values()].some(
+                indication =>
+
+                  indication &&
+                  typeof indication === "object" &&
+                  indication.array === value &&
+                  indication.index === index
+              );
+
+
+            /* ---------------------------------------------
+               EITHER ONE
+            --------------------------------------------- */
 
             const highlighted =
-              indications.has(item);
+              objectHighlighted ||
+              arrayHighlighted;
 
 
             return (
 
               <div
                 key={index}
+
                 style={{
+                  minWidth: 50,
+                  minHeight: 50,
+
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+
                   background:
                     highlighted
                       ? "#fecaca"
                       : "#bfdbfe",
 
-                  borderRadius: 8,
-
-                  padding:
-                    "7px 10px",
-
-                  fontSize: 13,
-
-                  color:
-                    highlighted
-                      ? "#991b1b"
-                      : "#1e3a8a",
-
-                  overflowWrap:
-                    "anywhere",
-
                   border:
                     highlighted
-                      ? "2px solid #ef4444"
-                      : "2px solid transparent"
+                      ? "2px solid red"
+                      : "2px solid #222",
+
+                  borderRadius: 8,
+
+                  padding: 5,
+
+                  boxSizing: "border-box"
                 }}
               >
 
@@ -267,22 +304,15 @@ function DisplayValue({
      CLASS
   ======================================================= */
 
-  if (
-    type === "CLASS"
-  ) {
+  if (type === "CLASS") {
 
     return (
 
       <div
         style={{
           display: "flex",
-
-          flexDirection:
-            "column",
-
-          gap: 7,
-
-          width: "100%"
+          flexDirection: "column",
+          gap: 6
         }}
       >
 
@@ -291,20 +321,19 @@ function DisplayValue({
 
             <div
               key={key}
+
               style={{
                 display: "flex",
+                gap: 10,
 
-                justifyContent:
-                  "space-between",
+                padding: "5px 8px",
 
-                gap: 15,
+                background: "#f8fafc",
 
-                fontSize: 14,
+                border:
+                  "1px solid #cbd5e1",
 
-                borderBottom:
-                  "1px solid #bfdbfe",
-
-                paddingBottom: 5
+                borderRadius: 6
               }}
             >
 
@@ -312,21 +341,8 @@ function DisplayValue({
                 {key}
               </strong>
 
-
-              <span
-                style={{
-                  overflowWrap:
-                    "anywhere",
-
-                  textAlign:
-                    "right"
-                }}
-              >
-
-                {String(
-                  value[key]
-                )}
-
+              <span>
+                {String(value[key])}
               </span>
 
             </div>
@@ -341,215 +357,186 @@ function DisplayValue({
   }
 
 
-  return null;
+  /* =======================================================
+     DEFAULT
+  ======================================================= */
+
+  return (
+    <span>
+      {String(value)}
+    </span>
+  );
 
 }
 
 
 /* =========================================================
-   VISUALIZER
+   VISUALIZE
 ========================================================= */
 
 function Visualize({
   grid,
-  indications
+  indications,
+  flashSpot
 }) {
 
   return (
 
     <div
       style={{
-        marginTop: 30,
-
         display: "flex",
-
-        flexDirection:
-          "column",
-
-        gap: 25
+        flexDirection: "column",
+        gap: 20,
+        width: "100%"
       }}
     >
 
       {grid.map(
-        ([scope, ...variables]) => (
+        (row, rowIndex) => {
 
-          /* =================================================
-             SCOPE
-          ================================================= */
+          const scope =
+            row[0];
 
-          <div
-            key={scope}
-            style={{
-              border:
-                "2px solid #222",
 
-              borderRadius: 16,
-
-              padding: 25,
-
-              width: 700,
-
-              maxWidth: "100%",
-
-              boxSizing:
-                "border-box"
-            }}
-          >
-
-            {/* =================================================
-               SCOPE NAME
-            ================================================= */}
+          return (
 
             <div
+              key={rowIndex}
+
               style={{
-                textAlign:
-                  "center",
+                border:
+                  "2px solid #222",
 
-                fontSize: 20,
+                borderRadius: 16,
 
-                fontWeight:
-                  "bold",
+                padding: 25,
 
-                marginBottom: 25
+                width: 700,
+
+                maxWidth: "100%",
+
+                boxSizing: "border-box"
               }}
             >
 
-              {scope}
+              {/* =================================================
+                  SCOPE NAME
+              ================================================= */}
+
+              <div
+                style={{
+                  fontWeight: "bold",
+                  fontSize: 18,
+                  marginBottom: 15
+                }}
+              >
+                {scope}
+              </div>
+
+
+              {/* =================================================
+                  VARIABLES
+              ================================================= */}
+
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 15
+                }}
+              >
+
+                {row
+                  .slice(1)
+                  .map(
+                    (variable, index) => {
+
+                      const name =
+                        variable[0];
+
+                      const value =
+                        variable[1];
+
+                      const type =
+                        variable[2];
+
+
+                      /* -----------------------------------------
+                         VARIABLE HIGHLIGHT
+                      ----------------------------------------- */
+
+                      const highlighted =
+                        indications.has(value);
+
+
+                      return (
+
+                        <div
+                          key={index}
+
+                          style={{
+                            minWidth: 140,
+                            minHeight: 80,
+
+                            maxWidth: 450,
+
+                            padding: 12,
+
+                            boxSizing: "border-box",
+
+                            background:
+                              highlighted
+                                ? "#fecaca"
+                                : "#dbeafe",
+
+                            border:
+                              highlighted
+                                ? "2px solid red"
+                                : "2px solid #222",
+
+                            borderRadius: 12
+                          }}
+                        >
+
+                          {/* -------------------------------------
+                              VARIABLE NAME
+                          ------------------------------------- */}
+
+                          <div
+                            style={{
+                              fontWeight: "bold",
+                              marginBottom: 8
+                            }}
+                          >
+                            {name}
+                          </div>
+
+
+                          {/* -------------------------------------
+                              VALUE
+                          ------------------------------------- */}
+
+                          <DisplayValue
+                            value={value}
+                            type={type}
+                            indications={indications}
+                            flashSpot={flashSpot}
+                          />
+
+                        </div>
+
+                      );
+
+                    }
+                  )}
+
+              </div>
 
             </div>
 
+          );
 
-            {/* =================================================
-               VARIABLES
-            ================================================= */}
-
-            <div
-              style={{
-                display: "flex",
-
-                flexWrap: "wrap",
-
-                alignItems:
-                  "flex-start",
-
-                gap: 20
-              }}
-            >
-
-              {variables.map(
-                ([name, value, type]) => {
-
-                  /*
-                     Check the value itself.
-
-                     Example:
-
-                     indications =
-                     {
-                       Node#2
-                     }
-
-                     value === Node#2
-                     → RED
-                  */
-
-                  const highlighted =
-                    indications.has(
-                      value
-                    );
-
-
-                  return (
-
-                    /* =========================================
-                       VARIABLE BOX
-                    ========================================= */
-
-                    <div
-                      key={name}
-                      style={{
-                        minWidth: 140,
-
-                        minHeight: 80,
-
-                        maxWidth: 450,
-
-                        background:
-                          highlighted
-                            ? "#fecaca"
-                            : "#dbeafe",
-
-                        borderRadius: 12,
-
-                        padding: 16,
-
-                        boxSizing:
-                          "border-box",
-
-                        display: "flex",
-
-                        flexDirection:
-                          "column",
-
-                        alignItems:
-                          "center",
-
-                        gap: 12,
-
-                        border:
-                          highlighted
-                            ? "2px solid #ef4444"
-                            : "2px solid transparent"
-                      }}
-                    >
-
-                      {/* ===================================
-                         VARIABLE NAME
-                      =================================== */}
-
-                      <div
-                        style={{
-                          fontSize: 16,
-
-                          fontWeight:
-                            "bold",
-
-                          color:
-                            highlighted
-                              ? "#991b1b"
-                              : "#111827"
-                        }}
-                      >
-
-                        {name}
-
-                      </div>
-
-
-                      {/* ===================================
-                         VALUE
-                      =================================== */}
-
-                      <DisplayValue
-                        value={value}
-                        type={type}
-                        indications={
-                          indications
-                        }
-                      />
-
-                    </div>
-
-                  );
-
-                }
-              )}
-
-            </div>
-
-          </div>
-
-        )
+        }
       )}
 
     </div>
@@ -560,7 +547,7 @@ function Visualize({
 
 
 /* =========================================================
-   MAIN COMPONENT
+   SCOPE VISUAL
 ========================================================= */
 
 export default function ScopeVisual({
@@ -570,68 +557,100 @@ export default function ScopeVisual({
   const {
     next,
     grid,
-
     flashSpot,
     indications,
-
     clearIndication,
-    clearAll
-
-  } = useBox(
-    generator
-  );
+    clearAll,
+    logs
+  } =
+    useBox(generator);
 
 
   return (
 
     <div
       style={{
-        padding: 30,
-
-        fontFamily:
-          "monospace"
+        width: "100%",
+        padding: 20,
+        boxSizing: "border-box"
       }}
     >
 
-      {/* ===================================================
-         TITLE
-      =================================================== */}
+      {/* =====================================================
+          CONTROLS + LOGS
+      ===================================================== */}
 
-      <h2>
-        DSA Visualizer
-      </h2>
-
-
-      {/* ===================================================
-         NEXT
-      =================================================== */}
-
-      <button
-        onClick={next}
+      <div
         style={{
-          padding:
-            "10px 25px",
-
-          fontSize: 16,
-
-          cursor: "pointer"
+          display: "flex",
+          alignItems: "flex-start",
+          gap: 15,
+          marginBottom: 20
         }}
       >
 
-        NEXT
+        {/* ===================================================
+            NEXT BUTTON
+        =================================================== */}
 
-      </button>
+        <button
+          onClick={next}
+
+          style={{
+            padding: "10px 20px",
+
+            fontSize: 16,
+
+            cursor: "pointer",
+
+            flexShrink: 0
+          }}
+        >
+          NEXT
+        </button>
 
 
-      {/* ===================================================
-         VISUALIZER
-      =================================================== */}
+        {/* ===================================================
+            LOG
+        =================================================== */}
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 4,
+
+            paddingTop: 5,
+
+            fontFamily: "monospace",
+
+            fontSize: 14
+          }}
+        >
+
+          {logs.map(
+            (log, index) => (
+
+              <div key={index}>
+                {log}
+              </div>
+
+            )
+          )}
+
+        </div>
+
+      </div>
+
+
+      {/* =====================================================
+          VISUALIZER
+      ===================================================== */}
 
       <Visualize
         grid={grid}
-        indications={
-          indications
-        }
+        indications={indications}
+        flashSpot={flashSpot}
       />
 
     </div>
