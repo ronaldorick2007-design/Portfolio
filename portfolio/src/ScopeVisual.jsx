@@ -1,6 +1,12 @@
-import { useRef, useState } from "react";
+import {
+  useRef,
+  useState
+} from "react";
+
 import useScope from "./useScope";
 import useIndication from "./useIndication";
+import useVisual from "./useVisual";
+
 
 
 /* =========================================================
@@ -26,15 +32,15 @@ function useBox(generator) {
   } = useIndication();
 
 
+  const {
+    visuals,
+    visual,
+    clearVisual
+  } = useVisual();
+
+
   /*
-     Execution logs
-
-     Example:
-
-     Initialized browser history
-     Created history stack
-     Visited Google
-     Entered back operation
+    LOGS
   */
 
   const [
@@ -44,7 +50,10 @@ function useBox(generator) {
 
 
   const gen =
-    useRef(generator());
+    useRef(
+      generator()
+    );
+
 
 
   /* =======================================================
@@ -78,7 +87,9 @@ function useBox(generator) {
        LOG
     ===================================================== */
 
-    if (data.action === "log") {
+    if (
+      data.action === "log"
+    ) {
 
       setLogs(prev => [
         ...prev,
@@ -94,7 +105,9 @@ function useBox(generator) {
        FUNCTION ADD
     ===================================================== */
 
-    if (data.type === "function-add") {
+    if (
+      data.type === "function-add"
+    ) {
 
       addScope(
         data.scope
@@ -109,7 +122,9 @@ function useBox(generator) {
        FUNCTION REMOVE
     ===================================================== */
 
-    if (data.type === "function-rm") {
+    if (
+      data.type === "function-rm"
+    ) {
 
       removeScope(
         data.scope
@@ -124,13 +139,51 @@ function useBox(generator) {
        INDICATION
     ===================================================== */
 
-    if (data.action === "indicate") {
+    if (
+      data.action === "indicate"
+    ) {
 
       indicate(
         data.name,
         data.value,
         data.index,
         data.array
+      );
+
+      return;
+
+    }
+
+
+    /* =====================================================
+       CLEAR INDICATION
+    ===================================================== */
+
+    if (
+      data.action === "clear-indicate"
+    ) {
+
+      clearIndication(
+        data.name
+      );
+
+      return;
+
+    }
+
+
+    /* =====================================================
+       VISUAL
+    ===================================================== */
+
+    if (
+      data.action === "visual"
+    ) {
+
+      visual(
+        data.element,
+        data.type,
+        data.value
       );
 
       return;
@@ -152,17 +205,22 @@ function useBox(generator) {
   };
 
 
+
   return {
 
     next,
 
     grid,
 
+    visuals,
+
     flashSpot,
 
     indications,
 
     clearIndication,
+
+    clearVisual,
 
     clearAll,
 
@@ -173,15 +231,21 @@ function useBox(generator) {
 }
 
 
+
 /* =========================================================
    DISPLAY VALUE
 ========================================================= */
 
 function DisplayValue({
+
   value,
+
   type,
+
   indications,
+
   flashSpot
+
 }) {
 
 
@@ -189,35 +253,52 @@ function DisplayValue({
      PRIMITIVE
   ======================================================= */
 
-  if (type === "primitive") {
+  if (
+    type === "primitive"
+  ) {
 
     return (
+
       <span>
+
         {value?.toString()}
+
       </span>
+
     );
 
   }
+
 
 
   /* =======================================================
      ARRAY
   ======================================================= */
 
-  if (type === "array") {
+  if (
+    type === "array"
+  ) {
 
     return (
 
       <div
+
         style={{
+
           display: "flex",
+
           gap: 8,
+
           flexWrap: "wrap",
+
           padding: 5
+
         }}
+
       >
 
         {value.map(
+
           (item, index) => {
 
 
@@ -226,7 +307,10 @@ function DisplayValue({
             --------------------------------------------- */
 
             const objectHighlighted =
-              indications.has(item);
+
+              indications.has(
+                item
+              );
 
 
             /* ---------------------------------------------
@@ -234,13 +318,21 @@ function DisplayValue({
             --------------------------------------------- */
 
             const arrayHighlighted =
-              [...flashSpot.values()].some(
+
+              [
+                ...flashSpot.values()
+              ].some(
+
                 indication =>
 
                   indication &&
+
                   typeof indication === "object" &&
+
                   indication.array === value &&
+
                   indication.index === index
+
               );
 
 
@@ -249,31 +341,44 @@ function DisplayValue({
             --------------------------------------------- */
 
             const highlighted =
+
               objectHighlighted ||
+
               arrayHighlighted;
 
 
             return (
 
               <div
+
                 key={index}
 
                 style={{
+
                   minWidth: 50,
+
                   minHeight: 50,
 
                   display: "flex",
+
                   alignItems: "center",
+
                   justifyContent: "center",
 
                   background:
+
                     highlighted
+
                       ? "#fecaca"
+
                       : "#bfdbfe",
 
                   border:
+
                     highlighted
+
                       ? "2px solid red"
+
                       : "2px solid #222",
 
                   borderRadius: 8,
@@ -281,7 +386,9 @@ function DisplayValue({
                   padding: 5,
 
                   boxSizing: "border-box"
+
                 }}
+
               >
 
                 {String(item)}
@@ -291,6 +398,7 @@ function DisplayValue({
             );
 
           }
+
         )}
 
       </div>
@@ -298,56 +406,81 @@ function DisplayValue({
     );
 
   }
+
 
 
   /* =======================================================
      CLASS
   ======================================================= */
 
-  if (type === "CLASS") {
+  if (
+    type === "CLASS"
+  ) {
 
     return (
 
       <div
+
         style={{
+
           display: "flex",
+
           flexDirection: "column",
+
           gap: 6
+
         }}
+
       >
 
-        {Object.keys(value).map(
+        {Object.keys(
+
+          value || {}
+
+        ).map(
+
           key => (
 
             <div
+
               key={key}
 
               style={{
+
                 display: "flex",
+
                 gap: 10,
 
                 padding: "5px 8px",
 
                 background: "#f8fafc",
 
-                border:
-                  "1px solid #cbd5e1",
+                border: "1px solid #cbd5e1",
 
                 borderRadius: 6
+
               }}
+
             >
 
               <strong>
+
                 {key}
+
               </strong>
 
               <span>
-                {String(value[key])}
+
+                {String(
+                  value[key]
+                )}
+
               </span>
 
             </div>
 
           )
+
         )}
 
       </div>
@@ -355,6 +488,7 @@ function DisplayValue({
     );
 
   }
+
 
 
   /* =======================================================
@@ -362,182 +496,162 @@ function DisplayValue({
   ======================================================= */
 
   return (
+
     <span>
+
       {String(value)}
+
     </span>
+
   );
 
 }
 
 
+
 /* =========================================================
-   VISUALIZE
+   TREE NODE
 ========================================================= */
 
-function Visualize({
-  grid,
-  indications,
-  flashSpot
+function TreeNode({
+
+  node,
+
+  indications
+
 }) {
+
+  if (!node) {
+
+    return null;
+
+  }
+
+
+  const highlighted =
+    indications.has(node);
+
 
   return (
 
     <div
+
       style={{
+
         display: "flex",
+
         flexDirection: "column",
-        gap: 20,
-        width: "100%"
+
+        alignItems: "center",
+
+        gap: 15
+
       }}
+
     >
 
-      {grid.map(
-        (row, rowIndex) => {
+      {/* NODE */}
 
-          const scope =
-            row[0];
+      <div
 
+        style={{
 
-          return (
+          minWidth: 55,
 
-            <div
-              key={rowIndex}
+          minHeight: 55,
 
-              style={{
-                border:
-                  "2px solid #222",
+          padding: 8,
 
-                borderRadius: 16,
+          display: "flex",
 
-                padding: 25,
+          alignItems: "center",
 
-                width: 700,
+          justifyContent: "center",
 
-                maxWidth: "100%",
+          borderRadius: "50%",
 
-                boxSizing: "border-box"
-              }}
-            >
+          background:
 
-              {/* =================================================
-                  SCOPE NAME
-              ================================================= */}
+            highlighted
 
-              <div
-                style={{
-                  fontWeight: "bold",
-                  fontSize: 18,
-                  marginBottom: 15
-                }}
-              >
-                {scope}
-              </div>
+              ? "#fecaca"
 
+              : "#dbeafe",
 
-              {/* =================================================
-                  VARIABLES
-              ================================================= */}
+          border:
 
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: 15
-                }}
-              >
+            highlighted
 
-                {row
-                  .slice(1)
-                  .map(
-                    (variable, index) => {
+              ? "3px solid red"
 
-                      const name =
-                        variable[0];
+              : "2px solid #222",
 
-                      const value =
-                        variable[1];
+          boxSizing: "border-box"
 
-                      const type =
-                        variable[2];
+        }}
+
+      >
+
+        {node.data}
+
+      </div>
 
 
-                      /* -----------------------------------------
-                         VARIABLE HIGHLIGHT
-                      ----------------------------------------- */
 
-                      const highlighted =
-                        indications.has(value);
+      {/* CHILDREN */}
 
+      <div
 
-                      return (
+        style={{
 
-                        <div
-                          key={index}
+          display: "flex",
 
-                          style={{
-                            minWidth: 140,
-                            minHeight: 80,
+          gap: 60,
 
-                            maxWidth: 450,
+          alignItems: "flex-start"
 
-                            padding: 12,
+        }}
 
-                            boxSizing: "border-box",
+      >
 
-                            background:
-                              highlighted
-                                ? "#fecaca"
-                                : "#dbeafe",
+        {/* LEFT */}
 
-                            border:
-                              highlighted
-                                ? "2px solid red"
-                                : "2px solid #222",
+        <div>
 
-                            borderRadius: 12
-                          }}
-                        >
+          {node.left && (
 
-                          {/* -------------------------------------
-                              VARIABLE NAME
-                          ------------------------------------- */}
+            <TreeNode
 
-                          <div
-                            style={{
-                              fontWeight: "bold",
-                              marginBottom: 8
-                            }}
-                          >
-                            {name}
-                          </div>
+              node={node.left}
+
+              indications={indications}
+
+            />
+
+          )}
+
+        </div>
 
 
-                          {/* -------------------------------------
-                              VALUE
-                          ------------------------------------- */}
+        {/* RIGHT */}
 
-                          <DisplayValue
-                            value={value}
-                            type={type}
-                            indications={indications}
-                            flashSpot={flashSpot}
-                          />
+        <div>
 
-                        </div>
+          {node.right && (
 
-                      );
+            <TreeNode
 
-                    }
-                  )}
+              node={node.right}
 
-              </div>
+              indications={indications}
 
-            </div>
+            />
 
-          );
+          )}
 
-        }
-      )}
+        </div>
+
+      </div>
 
     </div>
 
@@ -546,57 +660,435 @@ function Visualize({
 }
 
 
+
 /* =========================================================
-   SCOPE VISUAL
+   TREE VISUAL
 ========================================================= */
 
-export default function ScopeVisual({
-  generator
+function TreeVisual({
+
+  root,
+
+  indications
+
 }) {
 
-  const {
-    next,
-    grid,
-    flashSpot,
-    indications,
-    clearIndication,
-    clearAll,
-    logs
-  } =
-    useBox(generator);
+  if (!root) {
+
+    return (
+
+      <div>
+
+        Empty tree
+
+      </div>
+
+    );
+
+  }
 
 
   return (
 
     <div
+
       style={{
-        width: "100%",
+
+        display: "flex",
+
+        justifyContent: "center",
+
         padding: 20,
-        boxSizing: "border-box"
+
+        overflowX: "auto"
+
+      }}
+
+    >
+
+      <TreeNode
+
+        node={root}
+
+        indications={indications}
+
+      />
+
+    </div>
+
+  );
+
+}
+
+
+
+/* =========================================================
+   VISUALIZE
+========================================================= */
+
+function Visualize({
+  grid,
+  visuals,
+  indications,
+  flashSpot
+}) {
+  const heap = grid.find((row) => row[0] === "heap");
+
+  const stack = grid.filter((row) => row[0] !== "heap");
+
+  return (
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr 1.5fr",
+        gap: 20,
+        width: "100%",
+        alignItems: "start"
       }}
     >
 
-      {/* =====================================================
-          CONTROLS + LOGS
-      ===================================================== */}
+      {/* ================= HEAP ================= */}
 
       <div
         style={{
-          display: "flex",
-          alignItems: "flex-start",
-          gap: 15,
-          marginBottom: 20
+          border: "2px solid #222",
+          borderRadius: 16,
+          padding: 20,
+          background: "#fff",
+          minHeight: 200
         }}
       >
+        <div
+          style={{
+            fontWeight: "bold",
+            fontSize: 18,
+            marginBottom: 15
+          }}
+        >
+          Heap
+        </div>
 
-        {/* ===================================================
-            NEXT BUTTON
-        =================================================== */}
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 12
+          }}
+        >
+          {heap &&
+            heap.slice(1).map((variable, index) => {
+              const [name, value, type] = variable;
+
+              const highlighted =
+                indications.has(value);
+
+              return (
+                <div
+                  key={index}
+                  style={{
+                    minWidth: 100,
+                    minHeight: 70,
+                    padding: 12,
+                    background: highlighted
+                      ? "#fecaca"
+                      : "#dbeafe",
+                    border: highlighted
+                      ? "2px solid red"
+                      : "2px solid #222",
+                    borderRadius: 12,
+                    boxSizing: "border-box"
+                  }}
+                >
+                  <div
+                    style={{
+                      fontWeight: "bold",
+                      marginBottom: 8
+                    }}
+                  >
+                    {name}
+                  </div>
+
+                  <DisplayValue
+                    value={value}
+                    type={type}
+                    indications={indications}
+                    flashSpot={flashSpot}
+                  />
+                </div>
+              );
+            })}
+        </div>
+      </div>
+
+
+      {/* ================= FUNCTION STACK ================= */}
+
+      <div
+        style={{
+          border: "2px solid #222",
+          borderRadius: 16,
+          padding: 20,
+          background: "#fff"
+        }}
+      >
+        <div
+          style={{
+            fontWeight: "bold",
+            fontSize: 18,
+            marginBottom: 15
+          }}
+        >
+          Function Stack
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 12
+          }}
+        >
+          {stack
+            .slice()
+            .reverse()
+            .map((row, rowIndex) => {
+              const scope = row[0];
+
+              return (
+                <div
+                  key={rowIndex}
+                  style={{
+                    border: "2px solid #222",
+                    borderRadius: 12,
+                    padding: 12,
+                    background: "#dbeafe"
+                  }}
+                >
+                  <div
+                    style={{
+                      fontWeight: "bold",
+                      marginBottom: 10
+                    }}
+                  >
+                    {scope}
+                  </div>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: 10
+                    }}
+                  >
+                    {row.slice(1).map(
+                      (variable, index) => {
+                        const [
+                          name,
+                          value,
+                          type
+                        ] = variable;
+
+                        const highlighted =
+                          indications.has(value);
+
+                        return (
+                          <div
+                            key={index}
+                            style={{
+                              minWidth: 100,
+                              padding: 10,
+                              background:
+                                highlighted
+                                  ? "#fecaca"
+                                  : "#fff",
+                              border:
+                                highlighted
+                                  ? "2px solid red"
+                                  : "2px solid #222",
+                              borderRadius: 8
+                            }}
+                          >
+                            <div
+                              style={{
+                                fontWeight: "bold"
+                              }}
+                            >
+                              {name}
+                            </div>
+
+                            <DisplayValue
+                              value={value}
+                              type={type}
+                              indications={
+                                indications
+                              }
+                              flashSpot={
+                                flashSpot
+                              }
+                            />
+                          </div>
+                        );
+                      }
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+        </div>
+      </div>
+
+
+      {/* ================= VISUALS ================= */}
+
+      <div
+        style={{
+          border: "2px solid #222",
+          borderRadius: 16,
+          padding: 20,
+          background: "#fff"
+        }}
+      >
+        <div
+          style={{
+            fontWeight: "bold",
+            fontSize: 18,
+            marginBottom: 15
+          }}
+        >
+          Visuals
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 20
+          }}
+        >
+          {[...visuals.entries()].map(
+            ([element, visual]) => {
+              if (visual.type !== "tree") {
+                return null;
+              }
+
+              return (
+                <div
+                  key={element}
+                  style={{
+                    border: "2px solid #222",
+                    borderRadius: 16,
+                    padding: 15,
+                    background: "#dbeafe",
+                    overflowX: "auto"
+                  }}
+                >
+                  <div
+                    style={{
+                      fontWeight: "bold",
+                      marginBottom: 10
+                    }}
+                  >
+                    {element}
+                  </div>
+
+                  <TreeVisual
+                    root={visual.value}
+                    indications={indications}
+                  />
+                </div>
+              );
+            }
+          )}
+        </div>
+      </div>
+
+    </div>
+  );
+}
+
+
+
+/* =========================================================
+   SCOPE VISUAL
+========================================================= */
+
+export default function ScopeVisual({
+
+  generator
+
+}) {
+
+  const {
+
+    next,
+
+    grid,
+
+    visuals,
+
+    flashSpot,
+
+    indications,
+
+    clearIndication,
+
+    clearVisual,
+
+    clearAll,
+
+    logs
+
+  } =
+
+    useBox(
+      generator
+    );
+
+
+  return (
+
+    <div
+
+      style={{
+
+        width: "100%",
+
+        padding: 20,
+
+        boxSizing: "border-box"
+
+      }}
+
+    >
+
+      {/* ===================================================
+          CONTROLS + LOGS
+      =================================================== */}
+
+      <div
+
+        style={{
+
+          display: "flex",
+
+          alignItems: "flex-start",
+
+          gap: 15,
+
+          marginBottom: 20
+
+        }}
+
+      >
+
+        {/* NEXT */}
 
         <button
+
           onClick={next}
 
           style={{
+
             padding: "10px 20px",
 
             fontSize: 16,
@@ -604,20 +1096,27 @@ export default function ScopeVisual({
             cursor: "pointer",
 
             flexShrink: 0
+
           }}
+
         >
+
           NEXT
+
         </button>
 
 
-        {/* ===================================================
-            LOG
-        =================================================== */}
+
+        {/* LOG */}
 
         <div
+
           style={{
+
             display: "flex",
+
             flexDirection: "column",
+
             gap: 4,
 
             paddingTop: 5,
@@ -625,17 +1124,23 @@ export default function ScopeVisual({
             fontFamily: "monospace",
 
             fontSize: 14
+
           }}
+
         >
 
           {logs.map(
+
             (log, index) => (
 
               <div key={index}>
+
                 {log}
+
               </div>
 
             )
+
           )}
 
         </div>
@@ -643,14 +1148,21 @@ export default function ScopeVisual({
       </div>
 
 
-      {/* =====================================================
+
+      {/* ===================================================
           VISUALIZER
-      ===================================================== */}
+      =================================================== */}
 
       <Visualize
+
         grid={grid}
+
+        visuals={visuals}
+
         indications={indications}
+
         flashSpot={flashSpot}
+
       />
 
     </div>
