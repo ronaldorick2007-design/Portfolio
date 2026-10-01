@@ -1,4 +1,4 @@
-class Node {
+class TreeNode {
 
   static counter = 0;
 
@@ -7,638 +7,481 @@ class Node {
     this.data = data;
     this.left = null;
     this.right = null;
-    this.id = ++Node.counter;
+    this.id = ++TreeNode.counter;
 
     return (function* (instance) {
 
       yield {
-
         scope: "heap",
-
         name: instance.toString(),
-
         value: instance,
-
         type: "CLASS"
-
       };
 
       return instance;
 
     })(this);
-
   }
 
   toString() {
-
-    return `Node#${this.id}`;
-
+    return `TreeNode#${this.id}`;
   }
-
 }
 
 
-
-class BinarySearchTree {
+class LinkedNode {
 
   static counter = 0;
 
-  constructor() {
+  constructor(data) {
 
-    this.root = null;
-    this.id = ++BinarySearchTree.counter;
+    this.data = data;
+    this.next = null;
+    this.id = ++LinkedNode.counter;
 
     return (function* (instance) {
 
       yield {
-
         scope: "heap",
-
         name: instance.toString(),
-
         value: instance,
-
         type: "CLASS"
-
       };
 
       return instance;
 
     })(this);
-
   }
 
   toString() {
+    return `LinkedNode#${this.id}`;
+  }
+}
 
-    return `BST#${this.id}`;
 
+class LinkedList {
+
+  constructor() {
+
+    this.head = null;
+    this.tail = null;
+
+    return (function* (instance) {
+
+      yield {
+        scope: "heap",
+        name: "LinkedList",
+        value: instance,
+        type: "CLASS"
+      };
+
+      return instance;
+
+    })(this);
   }
 
 
-
-  *insert(data) {
+  *add(data) {
 
     yield {
-
       type: "function-add",
-
-      scope: this.toString() + "#insert"
-
+      scope: "LinkedList.add"
     };
 
 
-    let node =
+    const node =
+      yield* new LinkedNode(data);
 
-      yield* new Node(data);
+
+    if (this.head === null) {
+
+      this.head = node;
+      this.tail = node;
+
+    } else {
+
+      this.tail.next = node;
+      this.tail = node;
+
+    }
+
 
     yield {
-
-      scope: this.toString() + "#insert",
-
-      name: "node",
-
+      scope: "heap",
+      name: node.toString(),
       value: node,
-
-      type: "reference"
-
+      type: "CLASS"
     };
 
 
-    if (this.root === null) {
-
-      this.root = node;
-
-      yield {
-
-        scope: this.toString() + "#insert",
-
-        name: "root",
-
-        value: this.root,
-
-        type: "reference"
-
-      };
-
-
-      yield {
-
-        type: "function-rm",
-
-        scope: this.toString() + "#insert"
-
-      };
-
-      return node;
-
-    }
-
-
-    let current =
-
-      this.root;
-
     yield {
-
-      scope: this.toString() + "#insert",
-
-      name: "current",
-
-      value: current,
-
-      type: "reference"
-
+      action: "visual",
+      element: "list",
+      type: "linked-list",
+      value: this
     };
 
 
-    while (true) {
-
-      yield {
-
-        action: "indicate",
-
-        name: "current",
-
-        value: current
-
-      };
-
-
-      if (data < current.data) {
-
-        if (current.left === null) {
-
-          current.left = node;
-
-          yield {
-
-            scope: "heap",
-
-            name: current.toString(),
-
-            value: current,
-
-            type: "CLASS"
-
-          };
-
-          break;
-
-        }
-
-
-        current =
-
-          current.left;
-
-        yield {
-
-          scope: this.toString() + "#insert",
-
-          name: "current",
-
-          value: current,
-
-          type: "reference"
-
-        };
-
-      }
-
-      else {
-
-        if (current.right === null) {
-
-          current.right = node;
-
-          yield {
-
-            scope: "heap",
-
-            name: current.toString(),
-
-            value: current,
-
-            type: "CLASS"
-
-          };
-
-          break;
-
-        }
-
-
-        current =
-
-          current.right;
-
-        yield {
-
-          scope: this.toString() + "#insert",
-
-          name: "current",
-
-          value: current,
-
-          type: "reference"
-
-        };
-
-      }
-
-    }
-
-
     yield {
-
       type: "function-rm",
-
-      scope: this.toString() + "#insert"
-
+      scope: "LinkedList.add"
     };
+
 
     return node;
-
   }
 
 
-
-  *search(data) {
+  *traverse() {
 
     yield {
-
       type: "function-add",
-
-      scope: this.toString() + "#search"
-
+      scope: "LinkedList.traverse"
     };
 
 
     let current =
-
-      this.root;
+      this.head;
 
     yield {
-
-      scope: this.toString() + "#search",
-
+      scope: "LinkedList.traverse",
       name: "current",
-
       value: current,
-
       type: "reference"
-
     };
 
 
     while (current !== null) {
 
       yield {
-
         action: "indicate",
-
         name: "current",
-
         value: current
-
       };
 
 
-      if (current.data === data) {
-
-        yield {
-
-          type: "function-rm",
-
-          scope: this.toString() + "#search"
-
-        };
-
-        return current;
-
-      }
-
-
-      if (data < current.data) {
-
-        current =
-
-          current.left;
-
-        yield {
-
-          scope: this.toString() + "#search",
-
-          name: "current",
-
-          value: current,
-
-          type: "reference"
-
-        };
-
-      }
-
-      else {
-
-        current =
-
-          current.right;
-
-        yield {
-
-          scope: this.toString() + "#search",
-
-          name: "current",
-
-          value: current,
-
-          type: "reference"
-
-        };
-
-      }
-
-    }
-
-
-    yield {
-
-      type: "function-rm",
-
-      scope: this.toString() + "#search"
-
-    };
-
-    return null;
-
-  }
-
-
-
-  *inorder() {
-
-    yield {
-
-      type: "function-add",
-
-      scope: this.toString() + "#inorder"
-
-    };
-
-
-    let result = [];
-
-    yield {
-
-      scope: this.toString() + "#inorder",
-
-      name: "result",
-
-      value: result,
-
-      type: "array"
-
-    };
-
-
-    let stack = [];
-
-    yield {
-
-      scope: this.toString() + "#inorder",
-
-      name: "stack",
-
-      value: stack,
-
-      type: "array"
-
-    };
-
-
-    let current =
-
-      this.root;
-
-    yield {
-
-      scope: this.toString() + "#inorder",
-
-      name: "current",
-
-      value: current,
-
-      type: "reference"
-
-    };
-
-
-    while (current !== null || stack.length > 0) {
-
-      while (current !== null) {
-
-        stack.push(current);
-
-        yield {
-
-          scope: this.toString() + "#inorder",
-
-          name: "stack",
-
-          value: stack,
-
-          type: "array"
-
-        };
-
-
-        current =
-
-          current.left;
-
-        yield {
-
-          scope: this.toString() + "#inorder",
-
-          name: "current",
-
-          value: current,
-
-          type: "reference"
-
-        };
-
-      }
-
-
-      current =
-
-        stack.pop();
-
       yield {
-
-        scope: this.toString() + "#inorder",
-
-        name: "current",
-
-        value: current,
-
-        type: "reference"
-
-      };
-
-
-      result.push(current.data);
-
-      yield {
-
-        scope: this.toString() + "#inorder",
-
-        name: "result",
-
-        value: result,
-
-        type: "array"
-
+        action: "clear-indicate",
+        name: "current"
       };
 
 
       current =
-
-        current.right;
+        current.next;
 
       yield {
-
-        scope: this.toString() + "#inorder",
-
+        scope: "LinkedList.traverse",
         name: "current",
-
         value: current,
-
         type: "reference"
-
       };
 
     }
 
 
     yield {
-
       type: "function-rm",
-
-      scope: this.toString() + "#inorder"
-
+      scope: "LinkedList.traverse"
     };
-
-    return result;
-
   }
-
 }
 
+
+class BinaryTree {
+
+  constructor() {
+
+    this.root = null;
+
+    return (function* (instance) {
+
+      yield {
+        scope: "heap",
+        name: "BinaryTree",
+        value: instance,
+        type: "CLASS"
+      };
+
+      return instance;
+
+    })(this);
+  }
+
+
+  *build() {
+
+    yield {
+      type: "function-add",
+      scope: "BinaryTree.build"
+    };
+
+
+    const n50 =
+      yield* new TreeNode(50);
+
+    yield {
+      scope: "BinaryTree.build",
+      name: "n50",
+      value: n50,
+      type: "reference"
+    };
+
+
+    const n30 =
+      yield* new TreeNode(30);
+
+    yield {
+      scope: "BinaryTree.build",
+      name: "n30",
+      value: n30,
+      type: "reference"
+    };
+
+
+    const n70 =
+      yield* new TreeNode(70);
+
+    yield {
+      scope: "BinaryTree.build",
+      name: "n70",
+      value: n70,
+      type: "reference"
+    };
+
+
+    const n20 =
+      yield* new TreeNode(20);
+
+    yield {
+      scope: "BinaryTree.build",
+      name: "n20",
+      value: n20,
+      type: "reference"
+    };
+
+
+    const n40 =
+      yield* new TreeNode(40);
+
+    yield {
+      scope: "BinaryTree.build",
+      name: "n40",
+      value: n40,
+      type: "reference"
+    };
+
+
+    n50.left = n30;
+
+    yield {
+      scope: "heap",
+      name: n50.toString(),
+      value: n50,
+      type: "CLASS"
+    };
+
+
+    n50.right = n70;
+
+    yield {
+      scope: "heap",
+      name: n50.toString(),
+      value: n50,
+      type: "CLASS"
+    };
+
+
+    n30.left = n20;
+
+    yield {
+      scope: "heap",
+      name: n30.toString(),
+      value: n30,
+      type: "CLASS"
+    };
+
+
+    n30.right = n40;
+
+    yield {
+      scope: "heap",
+      name: n30.toString(),
+      value: n30,
+      type: "CLASS"
+    };
+
+
+    this.root = n50;
+
+
+    yield {
+      scope: "heap",
+      name: "BinaryTree",
+      value: this,
+      type: "CLASS"
+    };
+
+
+    yield {
+      action: "visual",
+      element: "tree",
+      type: "tree",
+      value: this.root
+    };
+
+
+    yield {
+      type: "function-rm",
+      scope: "BinaryTree.build"
+    };
+  }
+
+
+  *preorder() {
+
+    yield {
+      type: "function-add",
+      scope: "BinaryTree.preorder"
+    };
+
+
+    const result = [];
+
+
+    function* visit(node) {
+
+      if (node === null) {
+        return;
+      }
+
+
+      result.push(node.data);
+
+      yield {
+        action: "indicate",
+        name: "current",
+        value: node
+      };
+
+
+      yield {
+        action: "visual",
+        element: "tree",
+        type: "tree",
+        value: this.root
+      };
+
+
+      yield* visit.call(this, node.left);
+
+      yield* visit.call(this, node.right);
+    }
+
+
+    yield* visit.call(this, this.root);
+
+
+    yield {
+      scope: "BinaryTree.preorder",
+      name: "result",
+      value: result,
+      type: "array"
+    };
+
+
+    yield {
+      action: "clear-indicate",
+      name: "current"
+    };
+
+
+    yield {
+      type: "function-rm",
+      scope: "BinaryTree.preorder"
+    };
+
+
+    return result;
+  }
+}
 
 
 export function* main() {
 
   yield {
-
     type: "function-add",
-
     scope: "main"
-
   };
 
 
-  let tree =
+  // --------------------------------
+  // BUILD TREE
+  // --------------------------------
 
-    yield* new BinarySearchTree();
+  const tree =
+    yield* new BinaryTree();
+
 
   yield {
-
     scope: "main",
-
     name: "tree",
-
     value: tree,
-
     type: "reference"
-
   };
 
 
-  yield* tree.insert(50);
-
-  yield* tree.insert(30);
-
-  yield* tree.insert(70);
-
-  yield* tree.insert(20);
-
-  yield* tree.insert(40);
-
-  yield* tree.insert(60);
-
-  yield* tree.insert(80);
+  yield* tree.build();
 
 
-  let found =
+  // --------------------------------
+  // PREORDER
+  // --------------------------------
 
-    yield* tree.search(60);
+  const preorder =
+    yield* tree.preorder();
+
 
   yield {
-
     scope: "main",
-
-    name: "found",
-
-    value: found,
-
-    type: "reference"
-
-  };
-
-
-  let missing =
-
-    yield* tree.search(100);
-
-  yield {
-
-    scope: "main",
-
-    name: "missing",
-
-    value: missing,
-
-    type: "reference"
-
-  };
-
-
-  let ordered =
-
-    yield* tree.inorder();
-
-  yield {
-
-    scope: "main",
-
-    name: "ordered",
-
-    value: ordered,
-
+    name: "preorder",
+    value: preorder,
     type: "array"
-
   };
+
+
+  // --------------------------------
+  // BUILD LINKED LIST
+  // FROM PREORDER
+  // --------------------------------
+
+  const list =
+    yield* new LinkedList();
 
 
   yield {
-
-    type: "function-rm",
-
-    scope: "main"
-
+    scope: "main",
+    name: "list",
+    value: list,
+    type: "reference"
   };
 
+
+  for (const value of preorder) {
+
+    yield* list.add(value);
+
+  }
+
+
+  // --------------------------------
+  // TRAVERSE LINKED LIST
+  // --------------------------------
+
+  yield* list.traverse();
+
+
+  yield {
+    type: "function-rm",
+    scope: "main"
+  };
 }
