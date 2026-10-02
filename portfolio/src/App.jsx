@@ -3,6 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FruitDetails from "./CodeDisplay";
 import Home from "./pages/Home";
 import Header from "./components/Header";
+import Codes from "./codes";
+import ProblemDetails from "./problemDetails";
+import ParserTest from "./test";
 
 function App() {
   return (
@@ -10,9 +13,16 @@ function App() {
     <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/fruits/:id" element={<FruitDetails />} />
+        <Route path="/codes" element={<FruitDetails />} />
+        <Route path="/fields" element={<Codes />} />
+        <Route
+    path="/codes/:id"
+    element={<ProblemDetails />}
+  />
+
       </Routes>
     </BrowserRouter>
+  // <ParserTest />
   );
 }
 
