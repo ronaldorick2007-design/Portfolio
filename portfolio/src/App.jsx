@@ -1,11 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import FruitDetails from "./CodeDisplay";
 import Home from "./pages/Home";
 import Header from "./components/Header";
 import Codes from "./codes";
 import ProblemDetails from "./problemDetails";
-import ParserTest from "./test";
+import "./index.css";
 
 function App() {
   return (
@@ -13,17 +12,17 @@ function App() {
     <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/codes" element={<FruitDetails />} />
-        <Route path="/fields" element={<Codes />} />
-        <Route
-    path="/codes/:id"
-    element={<ProblemDetails />}
-  />
+        {/* <Route path="/codes" element={<FruitDetails />} /> */}
+        <Route path="/codes" element={<Codes />} />
+        <Route path="/codes/:id" element={<ProblemDetails />}/>
 
       </Routes>
     </BrowserRouter>
-  // <ParserTest />
   );
 }
 
 export default App;
+
+
+
+//{initially i this was cooler, but now it mid, so lets leave it for now...but here is the code for Home page leave the Termial or Ripplerfiled untouch for now let it be, but modify what is below, }
