@@ -7,18 +7,27 @@ import RippleField from "../components/RippleField";
 
 const GUIDE = {
   install: {
-    label: "Installation",
-    eyebrow: "01 / Set up locally",
-    title: "Get JavaLens running.",
-    description:
-      "Run the project locally to explore the examples and inspect Java execution snapshots.",
-    steps: [
-      { title: "Get the source", detail: "Clone the repository or download and extract its ZIP archive." },
-      { title: "Install dependencies", detail: "Open a terminal in the project root and run npm install." },
-      { title: "Start the app", detail: "Run npm run dev, then open the local URL printed by Vite." },
-    ],
-
-  },
+  label: "Installation",
+  eyebrow: "01 / Download & install",
+  title: "Get JavaLens for your PC.",
+  description:
+    "Download the version of JavaLens built for your operating system from the official GitHub Releases page.",
+  steps: [
+    {
+      title: "Open the releases page",
+      detail: "Click the download link below to visit the official JavaLens GitHub Releases page.",
+    },
+    {
+      title: "Choose your version",
+      detail: "Under Assets, download the installer for your operating system: Windows, macOS, or Linux.",
+    },
+    {
+      title: "Install and launch",
+      detail: "Open the downloaded installer and follow the installation instructions for your operating system.",
+    },
+  ],
+  note: "Java visualization requires a compatible JDK installed on your system.",
+},
   start: {
     label: "Quick start",
     eyebrow: "02 / First run",
@@ -45,6 +54,28 @@ const GUIDE = {
     ],
     
   },
+  contribute: {
+  label: "Contribute",
+  eyebrow: "04 / Open source",
+  title: "Help make JavaLens better.",
+  description:
+    "Found a bug or have an idea? Contributions are welcome. Feel free to explore the issues and contribute to the project.",
+  steps: [
+    {
+      title: "Find an issue",
+      detail: "Browse the project's GitHub Issues and find a bug or improvement you'd like to work on.",
+    },
+    {
+      title: "Make your changes",
+      detail: "Fork the repository, create a branch, and implement your fix or feature.",
+    },
+    {
+      title: "Submit a contribution",
+      detail: "Open a pull request describing your changes and how you tested them.",
+    },
+  ],
+  note: "Every contribution, big or small, is appreciated.",
+},
   
 };
 
@@ -175,6 +206,15 @@ function Codes() {
                     <div><h4 className="text-sm font-bold">{step.title}</h4><p className={`mt-1 text-sm leading-6 ${muted}`}>{step.detail}</p></div>
                   </li>
                 ))}
+                <a
+  href="https://github.com/ronaldorick2007-design/JavaLens/releases/tag/v0.1.0"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="mt-6 inline-flex border border-red-500 bg-red-500 px-4 py-2 text-sm font-bold text-white transition hover:bg-red-600"
+>
+  Download JavaLens
+  <span className="ml-2" aria-hidden="true">↗</span>
+</a>
               </ol>
               
               <p className={`mt-4 border-l-2 border-red-500 pl-3 text-xs leading-5 ${muted}`}>{guide.note}</p>
