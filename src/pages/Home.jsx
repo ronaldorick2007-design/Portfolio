@@ -154,7 +154,7 @@ export default function Home() {
           </div>
 
           <a
-            href="/codes"
+            href="Portfolio/codes"
             style={{ "--accent": "#89fc00" }}
             className={`${card} min-h-[260px] gap-6 text-left no-underline`}
           >
