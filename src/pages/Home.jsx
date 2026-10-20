@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import { useTheme } from "../components/ThemeProvider";
 import Terminal from "../components/Terminal";
@@ -28,8 +29,6 @@ export default function Home() {
     }
   `;
 
-  const matrix3x3 = `111\n111\n111`;
-
   return (
     <div
       className={
@@ -49,7 +48,7 @@ export default function Home() {
           {/* INTRO CONTENT LATER */}
         </div>
 
-        {/* RIGHT HALF — EMPTY */}
+        {/* RIGHT HALF */}
         <div className="h-full w-full pt-40">
           <Terminal />
         </div>
@@ -57,90 +56,87 @@ export default function Home() {
 
       <main className="px-20">
         {/* Zigzag About / Learning */}
-        
-<section className="py-10 sm:py-14">
-  <div className="space-y-16">
+        <section className="py-10 sm:py-14">
+          <div className="space-y-16">
+            {/* ABOUT : ARROW — 2:1 */}
+            <div className="flex items-center gap-8 md:gap-12">
+              <article
+                style={{ "--accent": "#f8ff2b" }}
+                className={`${card} min-h-[300px] flex-[2] gap-6 text-left`}
+              >
+                <h2 className="text-3xl font-bold after:content-['|'] after:animate-blink">
+                  About Me
+                </h2>
+                <p className="text-base leading-relaxed">
+                  Hello! I’m Ronald, a Computer Science student who enjoys
+                  building software and learning how systems work behind the
+                  scenes.
+                </p>
+                <p className="text-base leading-relaxed">
+                  I like turning ideas into practical projects, exploring
+                  algorithms, and experimenting with interface design.
+                </p>
+              </article>
 
-    {/* ABOUT : ARROW — 2:1 */}
-    <div className="flex items-center gap-8 md:gap-12">
-      <article
-        style={{ "--accent": "#f8ff2b" }}
-        className={`${card} min-h-[300px] flex-[2] gap-6 text-left`}
-      >
-        <h2 className="text-3xl font-bold after:content-['|'] after:animate-blink">
-          About Me
-        </h2>
-        <p className="text-base leading-relaxed">
-          Hello! I’m Ronald, a Computer Science student who enjoys building
-          software and learning how systems work behind the scenes.
-        </p>
-        <p className="text-base leading-relaxed">
-          I like turning ideas into practical projects, exploring algorithms,
-          and experimenting with interface design.
-        </p>
-      </article>
-
-      <div className="hidden flex-1 items-center justify-center md:flex">
-        <RippleField
-          touch={false}
-          size={18}
-          gap={12}
-          maxRadius={5}
-          speed={200}
-          color={dark ? "#52525b" : "#d4d4d8"}
-          activeColor="#f8ff2b"
-          matrix={`
+              <div className="hidden flex-1 items-center justify-center md:flex">
+                <RippleField
+                  touch={false}
+                  size={18}
+                  gap={12}
+                  maxRadius={5}
+                  speed={200}
+                  color={dark ? "#52525b" : "#d4d4d8"}
+                  activeColor="#f8ff2b"
+                  matrix={`
 00000
 01000
 11111
 01000
 00000`}
-          className="h-[138px] w-[138px] shrink-0"
-        />
-      </div>
-    </div>
+                  className="h-[138px] w-[138px] shrink-0"
+                />
+              </div>
+            </div>
 
-    {/* RING : LEARNING — 1:2 */}
-    <div className="flex items-center gap-8 md:gap-12">
-      <div className="hidden flex-1 items-center justify-center md:flex">
-        <RippleField
-          touch={false}
-          size={18}
-          gap={12}
-          maxRadius={5}
-          speed={200}
-          color={dark ? "#52525b" : "#d4d4d8"}
-          activeColor="#36deff"
-          matrix={`
+            {/* RING : LEARNING — 1:2 */}
+            <div className="flex items-center gap-8 md:gap-12">
+              <div className="hidden flex-1 items-center justify-center md:flex">
+                <RippleField
+                  touch={false}
+                  size={18}
+                  gap={12}
+                  maxRadius={5}
+                  speed={200}
+                  color={dark ? "#52525b" : "#d4d4d8"}
+                  activeColor="#36deff"
+                  matrix={`
 01110
 10001
 10001
 10001
 01110`}
-          className="h-[138px] w-[138px] shrink-0"
-        />
-      </div>
+                  className="h-[138px] w-[138px] shrink-0"
+                />
+              </div>
 
-      <article
-        style={{ "--accent": "#36deff" }}
-        className={`${card} min-h-[300px] flex-[2] gap-6 text-left`}
-      >
-        <h2 className="text-3xl font-bold after:content-['|'] after:animate-blink">
-          Currently Learning
-        </h2>
-        <ul className="space-y-3 text-base">
-          <li>— Data Structures and Algorithms</li>
-          <li>— JavaScript, Python &amp; C</li>
-          <li>— React &amp; Tailwind CSS</li>
-          <li>— Node.js, SQL &amp; Databases</li>
-          <li>— Git &amp; GitHub</li>
-        </ul>
-      </article>
-    </div>
-
-  </div>
-</section>
-
+              <article
+                style={{ "--accent": "#36deff" }}
+                className={`${card} min-h-[300px] flex-[2] gap-6 text-left`}
+              >
+                <h2 className="text-3xl font-bold after:content-['|'] after:animate-blink">
+                  Currently Learning
+                </h2>
+                <ul className="space-y-3 text-base">
+                  <li>— Data Structures and Algorithms</li>
+                  <li>— JavaScript, Python &amp; C</li>
+                  <li>— React &amp; Tailwind CSS</li>
+                  <li>— Node.js, SQL &amp; Databases</li>
+                  <li>— Git &amp; GitHub</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
 
         {/* Current project */}
         <section className="pb-14 sm:pb-20">
@@ -153,8 +149,9 @@ export default function Home() {
             </h2>
           </div>
 
-          <a
-            href="Portfolio/codes"
+          {/* FIXED: Link instead of <a href>, no /Portfolio prefix (basename adds it) */}
+          <Link
+            to="/codes"
             style={{ "--accent": "#89fc00" }}
             className={`${card} min-h-[260px] gap-6 text-left no-underline`}
           >
@@ -165,16 +162,22 @@ export default function Home() {
                 </p>
                 <h3 className="text-4xl font-black sm:text-5xl">JavaLens</h3>
               </div>
-              <span aria-hidden="true" className="text-3xl text-red-500">↗</span>
+              <span aria-hidden="true" className="text-3xl text-red-500">
+                ↗
+              </span>
             </div>
             <p className="max-w-3xl text-base leading-relaxed">
-              A Java execution visualizer that helps make program behavior easier to
-              understand by exploring variables, objects, references, and data structures step by step.
+              A Java execution visualizer that helps make program behavior
+              easier to understand by exploring variables, objects, references,
+              and data structures step by step.
             </p>
             <span className="mt-auto inline-flex w-fit items-center border-2 border-current px-4 py-3 text-sm font-bold">
-              Explore JavaLens <span className="ml-3" aria-hidden="true">→</span>
+              Explore JavaLens{" "}
+              <span className="ml-3" aria-hidden="true">
+                →
+              </span>
             </span>
-          </a>
+          </Link>
         </section>
       </main>
 
