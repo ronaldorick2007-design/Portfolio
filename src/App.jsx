@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Header from "./components/Header";
 import Codes from "./pages/Codes";
 import ProblemDetails from "./components/ProblemDetails";
+import JavaVisual from "./components/JavaVisual"
 import "./index.css";
 
 function App() {
